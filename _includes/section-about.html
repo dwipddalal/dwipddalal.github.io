@@ -1,0 +1,67 @@
+<!-- begin hero -->
+<section>
+    <!-- <div class="container" style="padding-top:30px;">
+        <h2 class="styled-heading">A Passion for Problem-Solving</h2>
+        <p>Ever since I was introduced to algorithms and mathematics, I've been captivated by the intricate dance of logic and creativity they embody. This passion has naturally led me to specialize in Artificial Intelligence (AI)—a field that I believe holds the keys to solving some of the most pressing challenges in today's world. Whether it's optimizing robotic movements or making financial markets more efficient, the thrill of crafting machine learning models to solve real-world problems is what gets me out of bed every morning.</p>
+
+        <h2 class="styled-heading">My Research Interests</h2>
+        <p>My academic journey has led me into various avenues of research, including but not limited to computer vision, natural language processing (NLP), statistical modeling and inference, and deep learning. Through these domains, I strive to build intelligent systems that can 'see', 'hear', 'read', and 'learn', augmenting human capabilities and making life simpler and more efficient.</p>
+
+        <h2 class="styled-heading">A Leader and a Collaborator</h2>
+        <p>During my 3rd year, I served as the Secretary of the Society of Machine Learning and Artificial Intelligence at IIT Gandhinagar. This role not only honed my leadership skills but also gave me invaluable experiences in collaborating with like-minded individuals. Together, we organized workshops, hackathons, and lecture series, fostering an ecosystem of learning and innovation on campus.</p>
+    </div> -->
+    <hr class="rounded">
+    <div class="container" style="padding-top:30px;">
+        <div class="row1">
+            <div class="column1 left">
+                {{ site.data.settings.about.main_content }}
+                <ul style="font-size:16px;">
+                    {% for desc in site.data.settings.about.main_content_desc %}
+                    <li class="">{{ desc }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="column1 right">
+                <div class='row'>
+                    <!-- <a class="twitter-timeline" data-width="500" data-height="500" href="https://twitter.com/praveenvnktsh?ref_src=twsrc%5Etfw">Tweets by praveenvnktsh</a> -->
+                    <!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .column1 {
+            float: left;
+            padding-right: 30px;
+        }
+
+        .left {
+            width: 60%;
+        }
+
+        .right {
+            width: 40%;
+        }
+
+        .row1:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+</section>
+<!-- end hero -->
