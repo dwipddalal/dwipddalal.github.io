@@ -3,6 +3,7 @@ layout: page
 title: Research
 permalink: /research/
 ---
+To be updated. Till then, please refer [here](https://scholar.google.com/citations?user=zrGsmv8AAAAJ&hl=en&authuser=1).
 <!-- ### Publications
 
 - Dwip Dalal*, Rwik Rana*, Varun Jain. 2021. Memory Guided Road Segmentation. Accepted at the 21st International Conference on Image Analysis and Processing, Italy.
