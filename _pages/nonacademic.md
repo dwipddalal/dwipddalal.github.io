@@ -22,7 +22,7 @@ permalink: /nonacademic/
         
         
 ---
-Under Progress. Till then, please refer [here]([linkedin.com/in/dwip-dalal-a7a440190/](https://www.linkedin.com/in/dwip-dalal-a7a440190/))
+Under Progress. Till then, please refer [here](https://www.linkedin.com/in/dwip-dalal-a7a440190/)
 
 
 <!-- ## Rubik's Cube
