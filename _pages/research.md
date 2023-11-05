@@ -15,7 +15,7 @@ permalink: /research/
    (Paper)(Demo)
 
 3. Learning Robust Deep Visual Representations from EEG Brain Recordings \
-   **Prajjwal Singh, Dwip Dalal, Gautam Vashishtha, Shanmuganathan Raman, Krishna Prasad Miyapuram** \
+   Prajwal Singh, **Dwip Dalal**, Gautam Vashishtha, Shanmuganathan Raman, Krishna Prasad Miyapuram \
    Published at the Winter Conference on Applications of Computer Vision (WACV'24) **(A)**
    (Paper)
 
