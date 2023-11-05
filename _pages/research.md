@@ -35,17 +35,18 @@ permalink: /research/
    (Paper)
 
 7. Learning to Stabilize: Comparative Analysis of Reinforcement Learning and Traditional Methods for Swirling Pendulum Control \
-   **Dwip Dalal, Shubhankar Rastogi, Harish J Palanthandalam-Madapusi** \
+   **Dwip Dalal, Shubhankar Riswadkar, Harish J Palanthandalam-Madapusi** \
    Published at IEEE Indian Control Conference
    (Paper)
 
-8. Enhancing Cameras with Conditional Diffusion Model \
-   **Dwip Dalal, Gautam Vashishtha, Prajjwal Singh, Shanmuganathan Raman** \
-   Published at the GVP'2023 workshop - Computational Cameras and Display CCD
-   (Extended Abstract + Poster)
-
-<!-- 9. VPTDrone: Video Processing Toolkit for Smart Surveillance Drone
-   **Duvip Dalal, Anirban Dasgupta**
+8. VPTDrone: Video Processing Toolkit for Smart Surveillance Drone \
+   **Dwip Dalal, Anirban Dasgupta** \
    Published at 7th joint International Conference on Data Science & Management of Data (9th ACM IKDD CODS and 27th COMAD)
-   (Paper) -->
+   (Paper)
+
+9. Enhancing Cameras with Conditional Diffusion Model \
+   **Dwip Dalal, Gautam Vashishtha, Prajwal Singh, Shanmuganathan Raman** \
+   Published at the CVPR'2023 workshop - Computational Cameras and Display CCD
+   (Extended Abstract + Poster)
+ 
 
