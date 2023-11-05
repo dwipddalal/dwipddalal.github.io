@@ -45,9 +45,5 @@ permalink: /research/
    Published at the GVP'2023 workshop - Computational Cameras and Display CCD
    (Extended Abstract + Poster)
 
-9. VPTDrone: Video Processing Toolkit for Smart Surveillance Drone
-   **Dwip Dalal, Anirban Dasgupta**
-   Published at 7th joint International Conference on Data Science & Management of Data (9th ACM IKDD CODS and 27th COMAD)
-   (Paper)
 
 
