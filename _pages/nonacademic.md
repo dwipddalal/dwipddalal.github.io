@@ -25,13 +25,13 @@ permalink: /nonacademic/
 |---|---|
 | <img src="../images/UBC.png" alt="UBC" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**ML Research Intern @ University of British Columbia, MITACS GRI**</span> |
 | <img src="../images/AIISC.png" alt="AIISC" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**NLP Research Intern @ AI Institute, University of South Carolina**</span> |
-| <img src="../images/ISRO.png" alt="ISRO" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**Research Intern @ Indian Space Research Organisation**</span> |
-| <img src="../images/TCS research.jpg" alt="TCS Research" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**Research Intern @ TCS Research & Innovation**</span> |
-| <img src="../images/DRDO.jpg" alt="DRDO" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**Research Intern @ Defence Research and Development Organisation**</span> |
-| <img src="../images/eficens.jpg" alt="Eficens" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**Machine Learning Intern @ Eficens Systems**</span> |
-| <img src="../images/avid.jpg" alt="Avid" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**Software Engineering Intern @ Avid Technology**</span> |
-| <img src="../images/snapper.jpg" alt="Snapper" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**Data Analyst Intern @ Snapper Future Tech**</span> |
-| <img src="../images/JK lakshmi.jpg" alt="JK Lakshmi" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**Project Intern @ JK Lakshmi Cement Ltd.**</span> |
+| <img src="../images/ISRO.png" alt="ISRO" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**ML Research Intern @ Physical Research Laboratory, ISRO**</span> |
+| <img src="../images/TCS research.jpg" alt="TCS Research" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**ML Research Intern @ Tata Consultancy Services - TCS Research**</span> |
+| <img src="../images/DRDO.jpg" alt="DRDO" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**AI Research Intern @ Defense Research and Development Organization**</span> |
+| <img src="../images/eficens.jpg" alt="Eficens" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**Software Engineer Intern @ Eficens Systems**</span> |
+| <img src="../images/avid.jpg" alt="Avid" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**Computer Vision Research Intern @ Aivid Techvision**</span> |
+| <img src="../images/snapper.jpg" alt="Snapper" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**Computer Vision Intern @ Necesario Innovations**</span> |
+| <img src="../images/JK lakshmi.jpg" alt="JK Lakshmi" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**Data Science Intern @ JK Lakshmi Ltd**</span> |
 
 
 
