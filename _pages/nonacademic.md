@@ -24,7 +24,12 @@ permalink: /nonacademic/
 ---
 Under Progress. Till then, please refer [here](https://www.linkedin.com/in/dwip-dalal-a7a440190/)
 
-<img src="../images/AIISC.png" alt="image_name" width="200px" style="vertical-align:top;" /> <span style="font-size: larger;">**NLP Research Intern @ AI Institute, University of South Carolina**</span>
+
+
+| | |
+|-|-|
+| <img src="../images/AIISC.png" alt="image_name" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**NLP Research Intern @ AI Institute, University of South Carolina**</span> |
+
 
 <!-- ## Rubik's Cube
 
