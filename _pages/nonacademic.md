@@ -20,12 +20,7 @@ permalink: /nonacademic/
 #         - image : ../images/iitl.png
 #           desc: "My Intra Institute TT League team."
         
-        
 ---
-Under Progress. Till then, please refer [here](https://www.linkedin.com/in/dwip-dalal-a7a440190/)
-
-
-
 | | |
 |---|---|
 | <img src="../images/UBC.png" alt="UBC" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**Research Fellow @ University of British Columbia**</span> |
