@@ -23,7 +23,7 @@ permalink: /nonacademic/
 ---
 | | |
 |---|---|
-| <img src="../images/UBC.png" alt="UBC" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**Research Fellow @ University of British Columbia**</span> |
+| <img src="../images/UBC.png" alt="UBC" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**ML Research Intern @ University of British Columbia, MITACS GRI**</span> |
 | <img src="../images/AIISC.png" alt="AIISC" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**NLP Research Intern @ AI Institute, University of South Carolina**</span> |
 | <img src="../images/ISRO.png" alt="ISRO" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**Research Intern @ Indian Space Research Organisation**</span> |
 | <img src="../images/TCS research.jpg" alt="TCS Research" width="200px" style="vertical-align:top;" /> | <span style="font-size: larger;">**Research Intern @ TCS Research & Innovation**</span> |
