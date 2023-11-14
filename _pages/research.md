@@ -25,7 +25,7 @@ permalink: /research/
    (Paper)
 
 5. ODESolvers are also Wayfinders: Neural ODEs for Multi-Agent Path Planning \
-   **Dwip Dalal**, Progyan Das \
+   **Dwip Dalal**, Progyan Das, Anirban Dasgupta \
    Published at DLDE III Workshop, NeurIPS 2023
    (Paper)
 
