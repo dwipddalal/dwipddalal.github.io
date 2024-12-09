@@ -51,7 +51,7 @@ menu__settings:
 # Hero Settings
 hero:
   hero__title: Dwip Dalal
-  hero__description: Hi there! I am a PhD student in the Electrical and Computer Engineering department at the University of Illinois Urbana-Champaign..
+  hero__description: Hi there! I am a PhD student in the Electrical and Computer Engineering department at the University of Illinois Urbana-Champaign.
   hero__description_points:
     - My research interests lie in LLMs, vision, natural language processing, generative AI, and multi-modal representation learning.
     - In a broader sense, I am excited about the mathematics and algorithms that revolve around building intelligent systems.
