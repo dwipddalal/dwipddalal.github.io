@@ -1,26 +1,697 @@
----
-layout: default
-logo: '/images/Logo.png'
-title: Dwip Dalal
-tagline: Dwip Dalal's personal website
-author:
-    name: Dwip Dalal
-carousels:
-  - images: 
-    - image: ../images/goldmedal.jpeg
-      desc: Receiving Institute Gold Medal from Director of IITGN for highest CPI in the department.
-    - image: ../images/Christopher_manning.jpeg
-      desc: Presenting my work to Professor Christopher Manning at ACL 2023 Toronto
-    - image: ../images/utga1.jfif
-      desc: Receiving Award from Director of IITGN for securing 1st rank in Undergraduate research showcase 2022
-    - image: ../images/ugta2.jfif
-      desc: Receiving Award from Director of IITGN for Undergraduate research showcase 2023
----
+<!DOCTYPE HTML "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GLG5GQ8E08"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GLG5GQ8E08');
+    </script>
 
-{% include section-hero.html %}
+    <meta name="generator" content="HTML Tidy for Linux/x86 (vers 11 February 2007), see www.w3.org">
+    <style type="text/css">
+      /* Design Credits: Jon Barron, Deepak Pathak */
+      a {
+        color: #1772d0;
+        text-decoration: none;
+      }
+      a:focus, a:hover {
+        color: #f09228;
+        text-decoration: none;
+      }
+      body, td, th {
+        font-family: 'Titillium Web', Verdana, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: 400
+      }
+      heading {
+        font-family: 'Titillium Web', Verdana, Helvetica, sans-serif;
+        font-size: 19px;
+        font-weight: 1000
+      }
+      strong {
+        font-family: 'Titillium Web', Verdana, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: 800
+      }
+      strongred {
+        font-family: 'Titillium Web', Verdana, Helvetica, sans-serif;
+        color: 'red';
+        font-size: 16px
+      }
+      sectionheading {
+        font-family: 'Titillium Web', Verdana, Helvetica, sans-serif;
+        font-size: 22px;
+        font-weight: 600
+      }
+      pageheading {
+        font-family: 'Titillium Web', Verdana, Helvetica, sans-serif;
+        font-size: 38px;
+        font-weight: 400
+      }
+    </style>
+    <!-- <link rel="icon" type="image/png" href="images/W.png"> -->
+    <script type="text/javascript" src="js/hidebib.js"></script>
+    <title>Dwip Dalal</title>
 
-{% include section-about.html %}
+    <meta name="author" content="Dwip Dalal">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% include section-projects.html %}
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+  </head>
 
-<!-- {% include section-blog.html %} -->
+<body>
+  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+    <tr style="padding:0px">
+      <td style="padding:0px">
+        <!-- ========== INTRO TABLE ========== -->
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <tr style="padding:0px">
+            <td style="padding:2.5%;width:60%;vertical-align:middle">
+              <p class="name" style="text-align: center;">
+                Dwip Dalal
+              </p>
+              <p>
+                Hi, I am Dwip Dalal, a first year PhD student in the 
+                <a href="https://vision.ai.illinois.edu/">Computer Vision and Robotics Laboratory</a>
+                at the <a href="https://illinois.edu/">University of Illinois Urbana-Champaign</a>. 
+                I am advised by <a href="https://vision.ai.illinois.edu/narendra-ahuja/">Prof. Narendra Ahuja</a>. 
+              </p>
+              <p>
+                My research interests lie in LLMs, vision, natural language processing, generative AI, 
+                and multi-modal representation learning.
+              </p>
+              <p>
+                Previously, I completed my B.Tech from Indian Institute of Technology, Gandhinagar, 
+                where I was awarded the Institute Gold medal for graduating at the top of my batch.
+              </p>
+              
+              <!-- LINKS SECTION -->
+              <p style="text-align:center">
+                <a target="_blank" href="mailto:dwip2@illinois.edu">E-mail</a> &nbsp; | &nbsp;
+                <a href="https://github.com/dwipddalal">GitHub</a> &nbsp; | &nbsp;
+                <a href="https://scholar.google.ca/citations?user=zrGsmv8AAAAJ&hl=en">Google Scholar</a> &nbsp; | &nbsp;
+                <a href="https://www.linkedin.com/in/dwip-dalal-a7a440190/"> LinkedIn </a> &nbsp; | &nbsp;
+                <a href="https://x.com/DwipDalal">X</a>
+              </p>
+            </td>
+            <td style="padding:2.5%;width:40%;max-width:40%">
+              <img style="width:80%;max-width:80%" alt="profile photo" src="images/Dwip.jpeg">
+            </td>
+          </tr>
+        </table>
+        <!-- ========== END INTRO TABLE ========== -->
+
+        <!-- ========== NEW SECTION (Affiliations, Internships, News) ========== -->
+        <h2>Internships</h2>
+        <table 
+          style="
+            width: 100%;
+            border: 0;
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin: auto;
+            text-align: center;
+          "
+        >
+          <!-- Ensure there's only ONE row -->
+          <tr style="vertical-align: top;">
+            <!-- UBC -->
+            <td style="padding: 1em;">
+              <img
+                src="images/ubc.png"
+                alt="UBC"
+                style="display: block; margin: 0 auto; max-width:80px; height:auto;"
+              >
+              <div>UBC<br>2023 Summer</div>
+            </td>
+
+            <!-- AIISC -->
+            <td style="padding: 1em;">
+              <img
+                src="images/aiisc.jpg"
+                alt="AIISC"
+                style="display: block; margin: 0 auto; max-width:80px; height:auto;"
+              >
+              <div>AIISC<br>2022-2024</div>
+            </td>
+
+            <!-- ISRO -->
+            <td style="padding: 1em;">
+              <img
+                src="images/ISRO.png"
+                alt="ISRO"
+                style="display: block; margin: 0 auto; max-width:80px; height:auto;"
+              >
+              <div>ISRO<br>Summer 2015</div>
+            </td>
+
+            <!-- TCS Research -->
+            <td style="padding: 1em;">
+              <img
+                src="images/TCS research.jpg"
+                alt="TCS Research"
+                style="display: block; margin: 0 auto; max-width:80px; height:auto;"
+              >
+              <div>TCS Research<br>Summer 2017</div>
+            </td>
+
+            <!-- DRDO -->
+            <td style="padding: 1em;">
+              <img
+                src="images/DRDO.jpg"
+                alt="DRDO"
+                style="display: block; margin: 0 auto; max-width:80px; height:auto;"
+              >
+              <div>DRDO<br>Summer 2018, 2020</div>
+            </td>
+
+            <!-- EFICENS -->
+            <td style="padding: 1em;">
+              <img
+                src="images/eficens.jpg"
+                alt="EFICENS"
+                style="display: block; margin: 0 auto; max-width:80px; height:auto;"
+              >
+              <div>EFICENS<br>Sum 2019, FA19, SP20</div>
+            </td>
+          </tr>
+        </table>
+        
+
+          <h2>News</h2> 
+          <ul> 
+            <li> <strong>Aug 2024:</strong> Awarded the Dilip and Sandhya Sarwate Graduate Fellowship</a> at UIUC for the 2024-2025 academic year, recognizing outstanding incoming graduate students in signal processing. </li>
+            <li> <strong>Jun 2024:</strong> Awarded the Institute Gold Medal at IIT Gandhinagar for achieving the highest CGPA in the discipline. </li> 
+            <li> <strong>Feb 2024:</strong> Nominated by IIT Gandhinagar for the prestigious Pre-Doctoral Research Assistant Program at Microsoft Research India. </li> 
+            <li> <strong>2023:</strong> Secured a perfect 10/10 GPA for two consecutive semesters (6th & 7th), each comprising a rigorous 26-credit course load. </li> 
+            <li> <strong>Sep 2023:</strong> Secured the 1st position out of 200 participants in a machine learning hackathon organized by SmartSense Consulting Solutions Pvt. Ltd., earning a job offer as ML Engineer II. </li> 
+            <li> <strong>Jun 2023:</strong> Received a Travel Award from IIT Gandhinagar to attend the ACL 2023 conference in Toronto. </li> 
+            <li> <strong>Jan 2023:</strong> Secured 1st rank in the Undergraduate Research Showcase at IIT Gandhinagar for research on AI-enabled on-device drones. </li> 
+            <li> <strong>Dec 2022:</strong> Awarded the Shastri Indo-Canadian Institute Scholarship for continuing research at the University of British Columbia, recognized as a "promising researcher." </li> 
+            <li> <strong>Dec 2022:</strong> Selected as a MITACS Globalink Research Fellow at the University of British Columbia under Prof. Yankai Cao and Dr. Dongsheng Xiao. </li> 
+            <li> <strong>Sep 2022:</strong> Selected for Citi Bank’s Summer Internship in the Analyst role. </li> 
+            <li> <strong>Jul 2022:</strong> Secured 1st rank in the competitive programming contest at IIT Gandhinagar, participated in by B.Tech, M.Tech, and Ph.D. students. </li> 
+            <li> <strong>Apr 2022:</strong> Selected among the Top 3 teams for Innovation-Driven Entrepreneurship (IDE) 4.0: The National Bootcamp at Bangalore, based on a proposal for using AI in intelligent business planning and financial management. </li> 
+            <li> <strong>Mar 2022:</strong> Achieved 1st rank in Hackrush’22, the flagship machine learning hackathon at IIT Gandhinagar. </li> 
+            <li> <strong>Jun 2021:</strong> Secured 1st rank in the IITGN Summer Project for building the most efficient NLP classification model. </li>
+          </ul>
+        </div>
+        <!-- ========== END NEW SECTION ========== -->
+  
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          <tr>
+          <td style="padding:20px;width:100%;vertical-align:middle">
+            <h2>Research</h2>
+            
+          </td>
+        </tr>
+      </tbody></table>
+        
+      
+      
+      
+      <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+        
+         <tr>
+          <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
+            <a href="https://shubhangb97.github.io/potential_field_DML"><img src="images/ACL.png" alt="project image" style="width:auto; height:auto; max-width:100%;" /> </a>
+          </td>
+          <td style="padding:2.5%;width:60%;vertical-align:top">
+            <h3>FACTIFY-5WQA: 5W Aspect-based Fact Verification through Question Answering</h3>
+            <br>
+            Anku Rani, SM Tonmoy, <strong>Dwip Dalal,</strong> Shreya Gautam, Megha C., Aman Chadha, Amit Sheth, Amitava Das
+            <br>
+            <em> <strong>ACL 2023 Main Conference</strong> 	 </em>
+            <br>
+            <!-- <a href="javascript:toggleblock('potential_field_abs')">abstract</a> /
+             <a href="https://shubhangb97.github.io/potential_field_DML">project page</a> / -->
+             
+            <a href="https://arxiv.org/abs/2305.04329">Paper</a> |
+            
+            <a href="https://github.com/ankuranii/acl-5W-QA?tab=readme-ov-file">project page</a>
+             
+            <br>
+
+              <!-- <p align="justify"> <i id="potential_field_abs">Deep metric learning (DML) involves training a network to learn a semantically meaningful representation space. 
+                Many current approaches mine n-tuples of examples and model interactions within each tuplets. We present a novel, compositional DML model,
+                inspired by electrostatic fields in physics that, instead of in tuples, represents the influence of each example (embedding) by a continuous
+                potential field, and superposes the fields to obtain their combined global potential field. We use attractive/repulsive potential fields to represent interactions
+                among embeddings from images of the same/different classes. Contrary to typical learning methods, where mutual influence of samples is proportional to their distance, 
+                we enforce reduction in such influence with distance, leading to a decaying field. We show that such decay helps improve performance on real world datasets with large 
+                intra-class variations and label noise. Like other proxy-based methods, we also use proxies to succinctly represent sub-populations of examples. We evaluate our method 
+                on three standard DML benchmarks- Cars-196, CUB-200-2011, and SOP datasets where it outperforms state-of-the-art baselines.</i></p> -->
+          </td>
+        </tr>
+        
+        <tr>
+          <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
+            <img src="images/WACV.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+          </td>
+          <td style="padding:2.5%;width:60%;vertical-align:top">
+            <h3>Learning Robust Deep Visual Representations from EEG Brain Recordings</h3>
+            <br>
+            Prajwal Singh, <strong>Dwip Dalal,</strong> Gautam Vashishtha, Shanmuganathan Raman, Krishna Prasad Miyapuram
+            <br>
+            <em> <strong>WACV 2024 (featured in WACV Daily and Best of WACV 2024)</strong> </em>
+            <br>
+
+            
+             
+            <a href="https://arxiv.org/abs/2310.16532">Paper</a> |
+            <a href="https://github.com/prajwalsingh/EEGStyleGAN-ADA">project page</a> |
+            <a href="https://www.rsipvision.com/WACV2024-Saturday/6/">WACV Daily</a> |
+            <a href="https://www.rsipvision.com/ComputerVisionNews-2024February/14/">Best of WACV 2024</a> 
+            
+            <!-- <a href="coming soon">video</a> / 
+             -->
+            <br>
+
+              <!-- <p align="justify"> <i id="MLR2_abs"> Vision-language models (VLMs) like CLIP have been adapted for Multi-Label Recognition (MLR) with partial annotations by leveraging prompt-learning, where positive and negative prompts 
+                are learned for each class to associate their embeddings with class presence or absence in the shared vision-text feature space. While this approach improves MLR performance by 
+                relying on VLM priors, we hypothesize that learning negative prompts may be suboptimal, as the datasets used to train VLMs lack image-caption pairs explicitly focusing on class 
+                absence. To analyze the impact of positive and negative prompt learning on MLR, we introduce PositiveCoOp and NegativeCoOp, where only one prompt is learned with VLM guidance 
+                while the other is replaced by an embedding vector learned directly in the shared feature space without relying on the text encoder. Through empirical analysis, we observe that 
+                negative prompts degrade MLR performance, and learning only positive prompts, combined with learned negative embeddings (PositiveCoOp), outperforms dual prompt learning approaches.
+                 Moreover, we quantify the performance benefits that prompt-learning offers over a simple vision-features-only baseline, observing that the baseline displays strong performance 
+                 comparable to dual prompt learning approach (DualCoOp), when the proportion of missing labels is low, while requiring half the training compute and 16 times fewer parameters. </i></p> -->
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
+            <img src="images/EMNLP.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+          </td>
+          <td style="padding:2.5%;width:60%;vertical-align:top">
+            <h3>FACTIFY3M: A Benchmark for Multimodal Fact Verification with Explainability through 5W Question-Answering </h3>
+            <br>
+            M Chakraborty, K Pahwa, A Rani, S Chatterjee, <strong>Dwip Dalal,</strong> H Dave, ... A Chadha, Amit Sheth, Amitava Das
+
+            <br>
+            <em> <strong>EMNLP 2023 Main Conference</strong> </a></em>
+            <br>
+
+            <!-- <a href="javascript:toggleblock('MLR1_abs')">abstract</a> /
+             <a href="https://shubhangb97.github.io/MLR_gcn">project page</a> / -->
+            
+             <a href="https://arxiv.org/pdf/2306.05523">Paper</a> |
+             <a href="https://arxiv.org/abs/2306.05523">Project Page</a>
+            
+            <!-- <a href="coming soon">video</a> / 
+             -->
+            <br>
+
+              <!-- <p align="justify"> <i id="MLR1_abs">Multi-label Recognition (MLR) involves the identification of multiple objects within an image. 
+                To address the additional complexity of this problem, recent works have leveraged information from vision-language models (VLMs) trained on large text-images datasets for 
+                the task. These methods learn an independent classifier for each object (class), overlooking correlations in their occurrences. Such co-occurrences can be captured from the
+                 training data as conditional probabilities between a pair of classes. We propose a framework to extend the independent classifiers by incorporating the 
+                 co-occurrence information for object pairs to improve the performance of independent classifiers. We use a Graph Convolutional Network (GCN) to enforce the 
+                 conditional probabilities between classes, by refining the initial estimates derived from image and text sources obtained using VLMs. We validate our method on four MLR
+                  datasets, where our approach outperforms all state-of-the-art methods.</i></p> -->
+          </td>
+        </tr>
+        
+
+        <tr>
+          <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
+            <img src="images/ICIP.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+          </td>
+          <td style="padding:2.5%;width:60%;vertical-align:top">
+            <h3>Single Image LDR to HDR Conversion Using Conditional Diffusion</h3>
+            <br>
+            <strong>Dwip Dalal</strong>, Gautam Vashishtha, Prajwal Singh, Shanmuganathan Raman
+
+            <br>
+            <em> <strong>International Conference on Image Processing (ICIP’23)</strong></em>
+             <b>(Oral) </b>
+            <br>
+            <!-- <a href="javascript:toggleblock('PL_UDML_abs')">abstract</a> / -->
+            <a href="https://arxiv.org/pdf/2307.02814">Paper</a> |
+            <a href="https://arxiv.org/abs/2307.02814">Project Page</a>
+            
+            <!-- <a href="coming soon">video</a> / 
+             -->
+            <br>
+
+              <!-- <p align="justify"> <i id="PL_UDML_abs"> Unsupervised deep metric learning (UDML) focuses on learning a semantic representation space
+                 using only unlabeled data. This challenging problem requires accurately estimating the similarity between data points, which is used 
+                 to supervise a deep network. For this purpose, we propose to model the high-dimensional data manifold using a piecewise-linear 
+                 approximation, with each low-dimensional linear piece approximating the data manifold in a small neighborhood of a point. 
+                 These neighborhoods are used to estimate similarity between data points. We empirically show that this similarity estimate correlates 
+                 better with the ground truth than the similarity estimates of current state-of-the-art techniques. We also show that proxies, commonly
+                  used in supervised metric learning, can be used to model the piecewise-linear manifold in an unsupervised setting, helping improve 
+                  performance. Our method outperforms existing unsupervised metric learning approaches on standard zero-shot image retrieval benchmarks.</i></p> -->
+            
+          </td>
+        </tr>
+
+              
+        <tr>
+            <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
+              <img src="images/ODE.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+            </td>
+            <td style="padding:2.5%;width:60%;vertical-align:top">
+              <h3>ODESolvers are also Wayfinders: Neural ODEs for Multi-Agent Pathplanning </h3>
+              <br>
+              <strong>Dwip Dalal*,</strong> Progyan Das*, Anirban Dasgupta
+
+              <br>
+              <em><strong>NeurIPS 2023 Workshop - Deep Learning and Differential Equations III</strong> </em>
+              <br>
+              <!-- <a href="javascript:toggleblock('ldgest_abs')">abstract</a> / -->
+              <a href="https://openreview.net/pdf?id=rnhkE2vb4r">Paper</a> |
+              <a href="https://openreview.net/forum?id=rnhkE2vb4r">abstract</a> 
+              <!-- <a href="https://arxiv.org/abs/2308.04643">arxiv</a> -->
+              <!-- <a href="coming soon">video</a> / 
+               -->
+              <br>
+
+                <!-- <p align="justify"> <i id="ldgest_abs">Gestures form an important medium of communication between humans and machines. An overwhelming
+                  majority of existing gesture recognition methods are tailored to
+                  a scenario where humans and machines are located very close
+                  to each other. This short-distance assumption does not hold
+                  true for several types of interactions, for example gesture-based
+                  interactions with a floor cleaning robot or with a drone. Methods
+                  made for short-distance recognition are unable to perform
+                  well on long-distance recognition due to gestures occupying
+                  only a small portion of the input data. Their performance is
+                  especially worse in resource constrained settings where they
+                  are not able to effectively focus their limited compute on the
+                  gesturing subject. We propose a novel, accurate and efficient
+                  method for the recognition of gestures from longer distances. It
+                  uses a dynamic neural network to select features from gesturecontaining
+                  spatial regions of the input sensor data for further
+                  processing. This helps the network focus on features important
+                  for gesture recognition while discarding background features
+                  early on, thus making it more compute efficient compared
+                  to other techniques. We demonstrate the performance of our
+                  method on the LD-ConGR long-distance dataset where it
+                  outperforms previous state-of-the-art methods on recognition
+                  accuracy and compute efficiency.</i></p> -->
+              
+            </td>
+          </tr>
+
+
+
+          <tr>
+            <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
+              <img src="images/MMT.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+            </td>
+            <td style="padding:2.5%;width:60%;vertical-align:top">
+              <h3>MMT: A Multilingual and Multi-Topic Indian Social Media Dataset</h3>
+              <br>
+              <strong>Dwip Dalal,</strong> Vivek Srivastava, Mayank Singh
+              <em><br> <strong>EACL 2023 workshop - Cross-Cultural Considerations in NLP</strong></em>
+              <br>
+             
+              <!-- <a href="javascript:toggleblock('pal_abs')">abstract</a> / -->
+              <a href="https://arxiv.org/pdf/2304.00634">Paper</a> |
+              <a href="https://arxiv.org/abs/2304.00634">abstract</a> 
+              <!-- <a href="https://github.com/shubhangb97/PAL_pretext_based_active_learning">code</a>  -->
+              <br>
+
+                <!-- <p align="justify"> <i id="pal_abs">The goal of pool-based active learning is to judiciously select a fixed-sized subset of
+                  unlabeled samples from a pool to query an oracle for their labels, in order to maximize
+                  the accuracy of a supervised learner. However, the unsaid requirement that the oracle
+                  should always assign correct labels is unreasonable for most situations. We propose an
+                  active learning technique for deep neural networks that is more robust to mislabeling than
+                  the previously proposed techniques. Previous techniques rely on the task network itself
+                  to estimate the novelty of the unlabeled samples, but learning the task (generalization)
+                  and selecting samples (out-of-distribution detection) can be conflicting goals. We use
+                  a separate network to score the unlabeled samples for selection. The scoring network
+                  relies on self-supervision for modeling the distribution of the labeled samples to reduce
+                  the dependency on potentially noisy labels. To counter the paucity of data, we also deploy
+                  another head on the scoring network for regularization via multi-task learning and use an
+                  unusual self-balancing hybrid scoring function. Furthermore, we divide each query into
+                  sub-queries before labeling to ensure that the query has diverse samples. In addition to
+                  having a higher tolerance to mislabeling of samples by the oracle, the resultant technique
+                  also produces competitive accuracy in the absence of label noise. The technique also
+                  handles the introduction of new classes on-the-fly well by temporarily increasing the
+                  sampling rate of these classes. We make our code publicly available at https://
+                  github.com/shubhangb97/PAL_pretext_based_active_learning</i></p> -->
+              
+            </td>
+          </tr>
+
+
+          <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
+            <img src="images/EMNLP.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+          </td>
+          <td style="padding:2.5%;width:60%;vertical-align:top">
+            <h3>SEPSIS: I can catch your lies - A new paradigm for Deception Detection</h3>
+            <br>
+            Anku Rani, <strong>Dwip Dalal,</strong> Shreya Gautam, Pankaj Gupta, Vinija Jain, Aman Chadha, Amit Sheth, Amitava Da
+            <br><strong><em>Arxiv, 2024</em>,</strong>
+            <br>
+            <!-- <a href="javascript:toggleblock('l1_cv_abs')">abstract</a> / -->
+            <a href="https://arxiv.org/pdf/2312.00292.pdf">Paper</a> |
+            <a href="https://arxiv.org/abs/2312.00292">abstract</a>
+            
+            <br>
+
+              <!-- <p align="justify"> <i id="l1_cv_abs">Compressed sensing (CS) involves sampling 
+                signals at rates less than their Nyquist rates and attempting to reconstruct them after sample acquisition. 
+                Most such algorithms have parameters, for example the regularization parameter in LASSO, which need to be chosen carefully for optimal 
+                performance. These parameters can be chosen based on assumptions on the noise level or signal sparsity, but this knowledge may often be 
+                unavailable. In such cases, cross validation (CV) can be used to choose these parameters in a purely data-driven fashion. Previous work 
+                analyzing the use of CV in CS has been based on the ℓ2 cross-validation error with Gaussian measurement noise. But it is well known that the ℓ2 
+                error is not robust to impulse noise and provides a poor estimate of the recovery error, failing to choose the best parameter. Here we propose 
+                using the ℓ1−CV error which provides substantial performance benefits given impulse measurement noise. Most importantly, we provide a detailed 
+                theoretical analysis and error bounds for the use of ℓ1−CV error in CS reconstruction. We show that with high probability, choosing the parameter
+                 that yields the minimum ℓ1−CV error is equivalent to choosing the minimum recovery error (which is not observable in practice). To our best 
+                 knowledge, this is the first paper which theoretically analyzes ℓ1 -based CV in CS.</i></p> -->
+            
+          </td>
+        </tr>
+
+        <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
+          <img src="images/RL.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+        </td>
+        <td style="padding:2.5%;width:60%;vertical-align:top">
+          <h3>Learning to Stabilize: Comparative Analysis of Reinforcement Learning and Traditional Methods for Swirling Pendulum Control</h3>
+          <br>
+          <strong>Dwip Dalal,</strong> Shubhankar Riswadkar, Harish J Palanthandalam-Madapusi
+          <br>  <strong><em>IEEE Indian Control Conference 2023</em></strong>
+          <br>
+          <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10442669">Paper</a> |
+          <a href="https://ieeexplore.ieee.org/abstract/document/10442669">abstract</a>
+                   
+          <br>
+
+            <!-- <p align="justify"> <i id="pcfb_abs">Principal Component Filter Bank (PCFB) is considered optimal in terms of coding gain for speciﬁcconditions. 
+              P P Vaidyanathan stated that coding gain does not necessarily always increase with the increase inthe number of bands. However, very few attempts are made 
+              in the literature to go beyond the conﬁnes of work done by P P Vaidyanathan. We present analytic proofs for the monotonicity of speciﬁc shapes of PSDs.
+               This papers also derives properties of coding gain of PCFBs, which brings the new insights on the coding gain of Principal Component Filter Banks.</i></p> -->
+          
+        </td>
+      </tr>
+
+
+
+      <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
+        <img src="images/Surrogate.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+      </td>
+      <td style="padding:2.5%;width:60%;vertical-align:top">
+        <h3>Surrogate Faithfulness: A Metric for Concept-Based Explanations</h3>
+        <br>
+        Shubham Kumar, <strong>Dwip Dalal,</strong> Narendra Ahuja
+        <br><strong><em>Arxiv, 2025</em></strong>
+        <br>
+        <!-- <a href="javascript:toggleblock('qr_abs')">abstract</a> /
+        <a href="https://arxiv.org/abs/1812.01065">arxiv</a> -->
+                 
+        <br>
+
+          <!-- <p align="justify"> <i id="qr_abs">We propose a novel algorithm for using Hopfield
+            networks to denoise QR codes. Hopfield networks have mostly been
+            used as a noise tolerant memory or to solve difficult combinatorial
+            problems. One of the major drawbacks in their use in noise tolerant
+            associative memory is their low capacity of storage, scaling only
+            linearly with the number of nodes in the network. A larger capacity
+            therefore requires a larger number of nodes, thereby reducing the
+            speed of convergence of the network in addition to increasing
+            hardware costs for acquiring more precise data to be fed to a larger
+            number of nodes. Our paper proposes a new algorithm to allow the
+            use of several Hopfield networks in parallel thereby increasing the
+            cumulative storage capacity of the system many times as compared
+            to a single Hopfield network. Our algorithm would also be much
+            faster than a larger single Hopfield network with the same total
+            capacity. This enables their use in applications like denoising QR
+            codes, which we have demonstrated in our paper. We then test our
+            network on a large set of QR code images with different types of
+            noise and demonstrate that such a system of Hopfield networks can
+            be used to denoise and recognize QR codes in real time.</i></p> -->
+        
+      </td>
+    </tr>
+
+
+    <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
+      <img src="images/Flow.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+    </td>
+    <td style="padding:2.5%;width:60%;vertical-align:top">
+      <h3>Flow Symmetrization for Parameterized Constrained Diffeomorphisms </h3>
+      <br>
+      <strong>Dwip Dalal*,</strong> Aalok Gangopadhyay*, Progyan Das*, Shanmuganathan Raman
+      <br><strong> <em>Arxiv, 2024</em> </strong>
+      <br>
+      <a href="https://arxiv.org/pdf/2312.06317">Paper</a> |
+      <a href="https://arxiv.org/abs/2312.06317">abstract</a>
+               
+      <br>
+
+        <!-- <p align="justify"> <i id="adapter_abs">We propose a novel algorithm for using Hopfield
+          networks to denoise QR codes. Hopfield networks have mostly been
+          used as a noise tolerant memory or to solve difficult combinatorial
+          problems. One of the major drawbacks in their use in noise tolerant
+          associative memory is their low capacity of storage, scaling only
+          linearly with the number of nodes in the network. A larger capacity
+          therefore requires a larger number of nodes, thereby reducing the
+          speed of convergence of the network in addition to increasing
+          hardware costs for acquiring more precise data to be fed to a larger
+          number of nodes. Our paper proposes a new algorithm to allow the
+          use of several Hopfield networks in parallel thereby increasing the
+          cumulative storage capacity of the system many times as compared
+          to a single Hopfield network. Our algorithm would also be much
+          faster than a larger single Hopfield network with the same total
+          capacity. This enables their use in applications like denoising QR
+          codes, which we have demonstrated in our paper. We then test our
+          network on a large set of QR code images with different types of
+          noise and demonstrate that such a system of Hopfield networks can
+          be used to denoise and recognize QR codes in real time.</i></p> -->
+      
+    </td>
+  </tr>
+  
+
+  <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
+    <img src="images/Camera.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+  </td>
+  <td style="padding:2.5%;width:60%;vertical-align:top">
+    <h3>Enhancing Cameras with Conditional Diffusion ModelCamer </h3>
+    <br>
+    <strong>Dwip Dalal,</strong> Gautam Vashishtha, Prajwal Singh, Shanmuganathan Raman
+    <br><strong> <em>CVPR 2023 workshop - Computational Cameras and Display CCD</em> </strong>
+    <br>
+    <!-- <a href="javascript:toggleblock('adapter_abs')">abstract</a> / -->
+    <a href="https://ccd2023.github.io/">Poster</a>
+             
+    <br>
+
+      <!-- <p align="justify"> <i id="adapter_abs">We propose a novel algorithm for using Hopfield
+        networks to denoise QR codes. Hopfield networks have mostly been
+        used as a noise tolerant memory or to solve difficult combinatorial
+        problems. One of the major drawbacks in their use in noise tolerant
+        associative memory is their low capacity of storage, scaling only
+        linearly with the number of nodes in the network. A larger capacity
+        therefore requires a larger number of nodes, thereby reducing the
+        speed of convergence of the network in addition to increasing
+        hardware costs for acquiring more precise data to be fed to a larger
+        number of nodes. Our paper proposes a new algorithm to allow the
+        use of several Hopfield networks in parallel thereby increasing the
+        cumulative storage capacity of the system many times as compared
+        to a single Hopfield network. Our algorithm would also be much
+        faster than a larger single Hopfield network with the same total
+        capacity. This enables their use in applications like denoising QR
+        codes, which we have demonstrated in our paper. We then test our
+        network on a large set of QR code images with different types of
+        noise and demonstrate that such a system of Hopfield networks can
+        be used to denoise and recognize QR codes in real time.</i></p> -->
+    
+  </td>
+</tr>
+
+
+<td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
+  <img src="images/VPTDrone.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+</td>
+<td style="padding:2.5%;width:60%;vertical-align:top">
+  <h3>VPTDrone: Video Processing Toolkit for Smart Surveillance Drone</h3>
+  <br>
+  <strong>Dwip Dalal,</strong> Anirban Dasgupta
+  <br><strong> <em>7th Joint International Conference on Data Science & Management of Data, 2024</em> </strong>
+  <br>
+  <a href="https://dl.acm.org/doi/abs/10.1145/3632410.3632495">Paper</a>
+           
+  <br>
+
+    <!-- <p align="justify"> <i id="adapter_abs">We propose a novel algorithm for using Hopfield
+      networks to denoise QR codes. Hopfield networks have mostly been
+      used as a noise tolerant memory or to solve difficult combinatorial
+      problems. One of the major drawbacks in their use in noise tolerant
+      associative memory is their low capacity of storage, scaling only
+      linearly with the number of nodes in the network. A larger capacity
+      therefore requires a larger number of nodes, thereby reducing the
+      speed of convergence of the network in addition to increasing
+      hardware costs for acquiring more precise data to be fed to a larger
+      number of nodes. Our paper proposes a new algorithm to allow the
+      use of several Hopfield networks in parallel thereby increasing the
+      cumulative storage capacity of the system many times as compared
+      to a single Hopfield network. Our algorithm would also be much
+      faster than a larger single Hopfield network with the same total
+      capacity. This enables their use in applications like denoising QR
+      codes, which we have demonstrated in our paper. We then test our
+      network on a large set of QR code images with different types of
+      noise and demonstrate that such a system of Hopfield networks can
+      be used to denoise and recognize QR codes in real time.</i></p> -->
+  
+</td>
+</tr>
+
+
+        </table>
+
+        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+          <tr>
+            <td><br>
+              <p align="right">
+                <font size="2">
+                  Template Credits: <a href="https://unnat.github.io/">Unnat</a> and <a href="https://shubhangb97.github.io//">Shubhang</a>
+                </font>
+              </p>
+            </td>
+          </tr>
+        </table>
+        <script xml:space="preserve" language="JavaScript">
+          hideblock('potential_field_abs');
+        </script>
+        <script xml:space="preserve" language="JavaScript">
+          hideblock('MLR2_abs');
+        </script>
+        <script xml:space="preserve" language="JavaScript">
+          hideblock('MLR1_abs');
+        </script>
+          <script xml:space="preserve" language="JavaScript">
+          hideblock('PL_UDML_abs');
+        </script>
+       <script xml:space="preserve" language="JavaScript">
+          hideblock('ldgest_abs');
+        </script>
+         <script xml:space="preserve" language="JavaScript">
+          hideblock('l1_cv_abs');
+        </script>
+         <script xml:space="preserve" language="JavaScript">
+          hideblock('pal_abs');
+        </script>
+        <script xml:space="preserve" language="JavaScript">
+          hideblock('pcfb_abs');
+        </script>
+        <script xml:space="preserve" language="JavaScript">
+          hideblock('qr_abs');
+        </script>
+        <script xml:space="preserve" language="JavaScript">
+          hideblock('adapter_abs');
+        </script>
+        
+        <br>
+        <br>
+        <br>
+        
+</body>
+
+</html>
+
