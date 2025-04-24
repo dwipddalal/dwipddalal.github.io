@@ -1,0 +1,64 @@
+/* Basic styles for the website */
+body {
+  font-family: 'Titillium Web', Verdana, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0px;
+}
+
+h2 {
+  margin: 20px 0;
+  color: #333;
+}
+
+a {
+  color: #1772d0;
+  text-decoration: none;
+}
+
+a:focus, a:hover {
+  color: #f09228;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+#moreButton {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+#moreButton:hover {
+  background-color: #e0e0e0;
+}
+
+ul {
+  margin-left: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  table {
+    width: 100%;
+  }
+  
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+} 
