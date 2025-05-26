@@ -16,7 +16,7 @@
     <style>
       /* typography */
       body, td, th {
-        font-family: 'Titillium Web', Verdana, Helvetica, sans-serif;
+        font-family: 'Times New Roman', Times, serif;
         font-size: 16px;
         font-weight: 400;
         line-height: 1.5;
@@ -87,9 +87,13 @@
       td {
         vertical-align: top;
         padding: 1em;
+      }
+      
+      /* Internships table specific styles */
+      .internships-table td {
         text-align: center;
       }
-      td img {
+      .internships-table td img {
         max-width: 80px;
         height: auto;
         display: block;
@@ -136,7 +140,7 @@
 
       <!-- Internships -->
       <h2>Internships</h2>
-      <table>
+      <table class="internships-table">
         <tr>
           <td>
             <img src="images/ubc.png" alt="UBC">
