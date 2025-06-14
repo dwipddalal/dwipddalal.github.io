@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: 'Helvetica Neue', sans-serif;
-      max-width: 900px;
+      max-width: 1200px;
       margin: auto;
       padding: 20px;
       line-height: 1.6;
@@ -36,6 +36,147 @@
     .abstract {
       margin-top: 40px;
     }
+    
+    /* New styles for examples section */
+    .examples {
+      margin-top: 60px;
+    }
+    
+    .examples h2 {
+      text-align: center;
+      color: #333;
+      border-bottom: 3px solid #007acc;
+      padding-bottom: 10px;
+      margin-bottom: 40px;
+    }
+    
+    .section {
+      margin-bottom: 60px;
+    }
+    
+    .section h3 {
+      color: #007acc;
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .subsection {
+      margin-bottom: 40px;
+    }
+    
+    .subsection h4 {
+      color: #444;
+      font-size: 20px;
+      margin-bottom: 15px;
+      border-left: 4px solid #007acc;
+      padding-left: 15px;
+    }
+    
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .video-container {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+    
+    .video-container:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    
+    .video-container h5 {
+      margin: 0 0 10px 0;
+      color: #333;
+      font-size: 16px;
+      text-align: center;
+    }
+    
+    .video-container video {
+      width: 100%;
+      border-radius: 4px;
+      max-height: 250px;
+    }
+    
+    .ih-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .ih-container {
+      background: #fff;
+      border: 2px solid #e9ecef;
+      border-radius: 6px;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    .ih-container h6 {
+      margin: 0 0 8px 0;
+      color: #007acc;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    
+    .ih-videos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    
+    .ih-videos video {
+      width: 100%;
+      border-radius: 3px;
+    }
+    
+    .topology-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    
+    .topology-container {
+      background: #fff;
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      padding: 15px;
+    }
+    
+    .topology-container h5 {
+      text-align: center;
+      color: #007acc;
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+    
+    .video-set {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .video-set video {
+      width: 100%;
+      border-radius: 4px;
+    }
+    
+    .video-label {
+      font-size: 12px;
+      text-align: center;
+      color: #666;
+      margin-top: 5px;
+    }
   </style>
 </head>
 <body>
@@ -64,6 +205,390 @@
   <p>
     Diffeomorphisms play a crucial role while searching for shapes with fixed topological properties, allowing for smooth deformation of template shapes. Several approaches use diffeomorphism for shape search. However, these approaches employ only unconstrained diffeomorphisms. In this work, we develop Flow Symmetrization - a method to represent a parametric family of constrained diffeomorphisms that contain additional symmetry constraints such as periodicity, rotation equivariance, and transflection equivariance. Our representation is differentiable in nature, making it suitable for gradient-based optimization approaches for shape search. As these symmetry constraints naturally arise in tiling classes, our method is ideal for representing tile shapes belonging to any tiling class. To demonstrate the efficacy of our method, we design two frameworks for addressing the challenging problems of Escherization and Density Estimation. The first framework is dedicated to the Escherization problem, where we parameterize tile shapes belonging to different isohedral classes. Given a target shape, the template tile is deformed using gradient-based optimization to resemble the target shape. The second framework focuses on density estimation in identification spaces. By leveraging the inherent link between tiling theory and identification topology, we design constrained diffeomorphisms for the plane that result in unconstrained diffeomorphisms on the identification spaces. Specifically, we perform density estimation on identification spaces such as torus, sphere, Klein bottle, and projective plane. Through results and experiments, we demonstrate that our method obtains impressive results for Escherization on the Euclidean plane and density estimation on non-Euclidean identification spaces.
   </p>
+</div>
+
+<div class="examples">
+  <h2>Examples and Results</h2>
+  
+  <div class="section">
+    <h3>Escherization Results</h3>
+    <div class="subsection">
+      <h4>Rabbit Target Shape - Multiple Isohedral Classes</h4>
+      <p>The following examples demonstrate the Escherization process for a rabbit target shape across different isohedral (IH) classes. Each class represents a different symmetry group for tiling patterns.</p>
+      
+      <div class="ih-grid">
+        <div class="ih-container">
+          <h6>IH01</h6>
+          <div class="ih-videos">
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH01/prototile.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH01/tiling.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH01/flow_with_outline.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH01/flow_vec_with_outline.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        
+        <div class="ih-container">
+          <h6>IH02</h6>
+          <div class="ih-videos">
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH02/prototile.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH02/tiling.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH02/flow_with_outline.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH02/flow_vec_with_outline.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        
+        <div class="ih-container">
+          <h6>IH03</h6>
+          <div class="ih-videos">
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH03/prototile.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH03/tiling.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH03/flow_with_outline.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH03/flow_vec_with_outline.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        
+        <div class="ih-container">
+          <h6>IH04</h6>
+          <div class="ih-videos">
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH04/prototile.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH04/tiling.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH04/flow_with_outline.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH04/flow_vec_with_outline.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        
+        <div class="ih-container">
+          <h6>IH05</h6>
+          <div class="ih-videos">
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH05/prototile.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH05/tiling.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH05/flow_with_outline.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH05/flow_vec_with_outline.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        
+        <div class="ih-container">
+          <h6>IH06</h6>
+          <div class="ih-videos">
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH06/prototile.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH06/tiling.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH06/flow_with_outline.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH06/flow_vec_with_outline.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        
+        <div class="ih-container">
+          <h6>IH21</h6>
+          <div class="ih-videos">
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH21/prototile.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH21/tiling.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH21/flow_with_outline.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH21/flow_vec_with_outline.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        
+        <div class="ih-container">
+          <h6>IH28</h6>
+          <div class="ih-videos">
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH28/prototile.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH28/tiling.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH28/flow_with_outline.mp4" type="video/mp4">
+            </video>
+            <video controls muted autoplay loop playsinline>
+              <source src="Supplementary_Videos/Escherization/Rabbit/IH28/flow_vec_with_outline.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h3>Density Estimation on Identification Spaces</h3>
+    
+    <div class="subsection">
+      <h4>6-Gaussian Mixture Distribution</h4>
+      <p>Density estimation results for a 6-Gaussian mixture distribution across different topological spaces.</p>
+      
+      <div class="topology-grid">
+        <div class="topology-container">
+          <h5>Torus</h5>
+          <div class="video-set">
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/6Gaussian/Torus/flow.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Flow Evolution</div>
+            </div>
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/6Gaussian/Torus/density_normalized.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Density (Normalized)</div>
+            </div>
+          </div>
+          <div class="video-set" style="grid-template-columns: 1fr; justify-items: center;">
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/6Gaussian/Torus/dist_samples.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Distribution Samples</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="topology-container">
+          <h5>Sphere</h5>
+          <div class="video-set">
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/6Gaussian/Sphere/flow.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Flow Evolution</div>
+            </div>
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/6Gaussian/Sphere/density_normalized.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Density (Normalized)</div>
+            </div>
+          </div>
+          <div class="video-set" style="grid-template-columns: 1fr; justify-items: center;">
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/6Gaussian/Sphere/dist_samples.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Distribution Samples</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="topology-container">
+          <h5>Klein Bottle</h5>
+          <div class="video-set">
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/6Gaussian/KleinBottle/flow.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Flow Evolution</div>
+            </div>
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/6Gaussian/KleinBottle/density_normalized.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Density (Normalized)</div>
+            </div>
+          </div>
+          <div class="video-set" style="grid-template-columns: 1fr; justify-items: center;">
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/6Gaussian/KleinBottle/dist_samples.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Distribution Samples</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="topology-container">
+          <h5>Projective Plane</h5>
+          <div class="video-set">
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/6Gaussian/ProjectiveSpace/flow.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Flow Evolution</div>
+            </div>
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/6Gaussian/ProjectiveSpace/density_normalized.mp4" type="video/mp4">
+              </source>
+              <div class="video-label">Density (Normalized)</div>
+            </div>
+          </div>
+          <div class="video-set" style="grid-template-columns: 1fr; justify-items: center;">
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/6Gaussian/ProjectiveSpace/dist_samples.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Distribution Samples</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="subsection">
+      <h4>Checkerboard Distribution</h4>
+      <p>Density estimation results for a checkerboard distribution pattern across different topological spaces.</p>
+      
+      <div class="topology-grid">
+        <div class="topology-container">
+          <h5>Torus</h5>
+          <div class="video-set">
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/Checkerboard/Torus/flow.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Flow Evolution</div>
+            </div>
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/Checkerboard/Torus/density_normalized.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Density (Normalized)</div>
+            </div>
+          </div>
+          <div class="video-set" style="grid-template-columns: 1fr; justify-items: center;">
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/Checkerboard/Torus/dist_samples.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Distribution Samples</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="topology-container">
+          <h5>Sphere</h5>
+          <div class="video-set">
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/Checkerboard/Sphere/flow.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Flow Evolution</div>
+            </div>
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/Checkerboard/Sphere/density_normalized.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Density (Normalized)</div>
+            </div>
+          </div>
+          <div class="video-set" style="grid-template-columns: 1fr; justify-items: center;">
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/Checkerboard/Sphere/dist_samples.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Distribution Samples</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="topology-container">
+          <h5>Klein Bottle</h5>
+          <div class="video-set">
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/Checkerboard/KleinBOrttle/flow.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Flow Evolution</div>
+            </div>
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/Checkerboard/KleinBOrttle/density_normalized.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Density (Normalized)</div>
+            </div>
+          </div>
+          <div class="video-set" style="grid-template-columns: 1fr; justify-items: center;">
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/Checkerboard/KleinBOrttle/dist_samples.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Distribution Samples</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="topology-container">
+          <h5>Projective Plane</h5>
+          <div class="video-set">
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/Checkerboard/Projective/flow.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Flow Evolution</div>
+            </div>
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/Checkerboard/Projective/density_normalized.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Density (Normalized)</div>
+            </div>
+          </div>
+          <div class="video-set" style="grid-template-columns: 1fr; justify-items: center;">
+            <div>
+              <video controls muted autoplay loop playsinline>
+                <source src="Supplementary_Videos/DensityEstimation/Checkerboard/Projective/dist_samples.mp4" type="video/mp4">
+              </video>
+              <div class="video-label">Distribution Samples</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 </body>
