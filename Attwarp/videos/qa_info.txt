@@ -1,0 +1,4 @@
+Dataset: textVQA
+Question: what is the alcohol content?
+Original answer: 8.0%
+Warped answer: 9.0
