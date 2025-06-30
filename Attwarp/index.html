@@ -2,429 +2,166 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Constructive Distortion: Improving MLLMs with Query-Aware Image Warping</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constructive Distortion: Improving MLLMs with Query‑Aware Image Warping</title>
   <style>
+    /* ---------- LAYOUT ---------- */
+    :root {
+      --text: #333;
+      --accent: #4A90E2;
+      --bg-light: #f8f9fa;
+      --shadow: 0 4px 20px rgba(0,0,0,.08);
+      --rad: 12px;
+    }
+    * {box-sizing:border-box; margin:0; padding:0;}
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       max-width: 1000px;
       margin: 0 auto;
       padding: 60px 20px;
       line-height: 1.6;
-      background-color: #ffffff;
-      color: #333;
+      background:#fff;
+      color: var(--text);
     }
+    h1{font-size:48px;font-weight:400;text-align:center;margin-bottom:40px;line-height:1.1;letter-spacing:-.5px;}
+    .authors, .affiliations, .contact, .conference{text-align:center;}
+    .authors{font-size:24px;color:var(--accent);line-height:1.4;margin-bottom:20px;}
+    .affiliations{font-size:18px;color:#666;margin-bottom:10px;}
+    .contact{font-size:16px;color:#888;margin-bottom:30px;}
+    .conference{font-size:20px;font-weight:500;margin-bottom:40px;}
 
-    .header {
-      text-align: center;
-      margin-bottom: 80px;
-    }
+    /* ---------- BUTTONS ---------- */
+    .button-row{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-bottom:80px;}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;background:#2d2d2d;color:#fff;border:none;border-radius:30px;text-decoration:none;font-size:16px;font-weight:500;transition:.2s;cursor:pointer;}
+    .btn:hover{background:#1a1a1a;transform:translateY(-1px);}
 
-    h1 {
-      font-size: 48px;
-      font-weight: 400;
-      margin: 0 0 40px 0;
-      color: #000000;
-      line-height: 1.1;
-      letter-spacing: -0.5px;
-    }
+    /* ---------- VIDEO GRID ---------- */
+    .video-grid-section{text-align:center;margin:80px 0;}
+    .video-grid-section h2{font-size:36px;font-weight:600;margin-bottom:50px;}
+    .video-grid{display:grid;gap:20px;max-width:1200px;margin:0 auto;
+      grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}
+    .video-item{background:#fff;border-radius:var(--rad);overflow:hidden;box-shadow:var(--shadow);border:4px solid #ff4444;transition:.3s;}
+    .video-item.video-ended{border-color:#4CAF50;}
+    .video-item:hover{transform:translateY(-5px);}
+    .video-item video{width:100%;height:auto;display:block;}
 
-    .authors {
-      font-size: 24px;
-      margin: 30px 0;
-      color: #4A90E2;
-      font-weight: 400;
-      line-height: 1.4;
-    }
+    /* ---------- ABSTRACT ---------- */
+    .abstract{background:var(--bg-light);padding:50px;border-radius:var(--rad);border-left:4px solid var(--accent);margin:80px 0;}
+    .abstract h2{font-size:28px;font-weight:600;margin-bottom:30px;}
+    .abstract p{font-size:18px;line-height:1.7;}
 
-    .affiliations {
-      font-size: 18px;
-      margin: 25px 0;
-      color: #666666;
-      font-weight: 400;
-    }
+    /* ---------- QUERY EXAMPLES ---------- */
+    .query-examples{display:grid;gap:30px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));}
+    .query-example{background:#fff;border-radius:var(--rad);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:.3s;}
+    .query-example:hover{transform:translateY(-3px);}
+    .query-text{padding:25px;background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%);} 
+    .query-text h3{font-size:16px;font-weight:600;margin-bottom:10px;}
+    .example-query{background:#e3f2fd;padding:15px;border-radius:6px;border-left:3px solid var(--accent);font-style:italic;font-size:14px;}
+    .query-video video{width:100%;display:block;}
+    .video-caption{padding:20px;font-size:14px;color:#666;background:#fff;}
 
-    .contact {
-      font-size: 16px;
-      margin: 20px 0;
-      color: #888888;
-    }
-
-    .conference {
-      font-size: 20px;
-      margin: 30px 0;
-      color: #000000;
-      font-weight: 500;
-    }
-
-    .button-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin: 40px 0 30px 0;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      padding: 15px 30px;
-      background-color: #2d2d2d;
-      color: white;
-      text-decoration: none;
-      border-radius: 30px;
-      font-size: 16px;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      border: none;
-      cursor: pointer;
-      min-width: 120px;
-      justify-content: center;
-    }
-
-    .btn:hover {
-      background-color: #1a1a1a;
-      transform: translateY(-1px);
-    }
-
-    .btn-icon {
-      margin-right: 10px;
-      font-size: 18px;
-    }
-
-    .content-section {
-      margin: 80px 0;
-    }
-
-    .abstract {
-      background-color: #f8f9fa;
-      padding: 50px;
-      border-radius: 12px;
-      margin: 60px 0;
-      border-left: 4px solid #4A90E2;
-    }
-
-    .abstract h2 {
-      margin-top: 0;
-      color: #000000;
-      font-size: 28px;
-      font-weight: 600;
-      margin-bottom: 30px;
-    }
-
-    .abstract p {
-      font-size: 18px;
-      line-height: 1.7;
-      margin-bottom: 25px;
-      color: #333;
-    }
-
-    .example-query {
-      background-color: #e3f2fd;
-      padding: 25px;
-      border-radius: 8px;
-      border-left: 4px solid #4A90E2;
-      font-style: italic;
-      margin: 25px 0;
-      font-size: 16px;
-    }
-
-    .results-gallery {
-      margin: 80px 0;
-    }
-
-    .results-gallery h2 {
-      text-align: center;
-      color: #000000;
-      font-size: 36px;
-      font-weight: 600;
-      margin-bottom: 50px;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 40px;
-      margin: 50px 0;
-    }
-
-    .gallery-item {
-      background: white;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 6px 30px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .gallery-item:hover {
-      transform: translateY(-10px);
-    }
-
-    .gallery-item img,
-    .gallery-item video {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .gallery-caption {
-      padding: 25px;
-    }
-
-    .gallery-title {
-      font-weight: 600;
-      font-size: 18px;
-      color: #000000;
-      margin-bottom: 10px;
-    }
-
-    .gallery-description {
-      font-size: 15px;
-      color: #666666;
-      line-height: 1.6;
-    }
-
-    .query-examples {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .query-example {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      height: fit-content;
-    }
-
-    .query-example:hover {
-      transform: translateY(-3px);
-    }
-
-    .query-text {
-      padding: 25px 25px 15px 25px;
-      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-      flex-shrink: 0;
-    }
-
-    .query-text h3 {
-      margin: 0 0 10px 0;
-      color: #000000;
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .example-query {
-      background-color: #e3f2fd;
-      padding: 15px;
-      border-radius: 6px;
-      border-left: 3px solid #4A90E2;
-      font-style: italic;
-      margin: 0;
-      font-size: 14px;
-    }
-
-    .query-video {
-      padding: 0;
-      position: relative;
-      flex-grow: 1;
-    }
-
-    .query-video video {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .video-caption {
-      padding: 20px 25px;
-      font-size: 14px;
-      color: #666666;
-      line-height: 1.5;
-      background: white;
-    }
-
-    .method-section {
-      background-color: #f8f9fa;
-      padding: 50px;
-      border-radius: 16px;
-      margin: 80px 0;
-    }
-
-    .method-section h2 {
-      color: #000000;
-      font-size: 36px;
-      font-weight: 600;
-      margin-bottom: 40px;
-      text-align: center;
-    }
-
-    .pipeline-steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      margin: 40px 0;
-    }
-
-    .pipeline-step {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    }
-
-    .step-number {
-      background: #4A90E2;
-      color: white;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      margin-bottom: 20px;
-      font-size: 16px;
-    }
-
-    .step-title {
-      font-weight: 600;
-      color: #000000;
-      margin-bottom: 15px;
-      font-size: 16px;
-    }
-
-    .step-description {
-      color: #666666;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .video-grid-section {
-      margin: 80px 0;
-      text-align: center;
-    }
-
-    .video-grid-section h2 {
-      color: #000000;
-      font-size: 36px;
-      font-weight: 600;
-      margin-bottom: 50px;
-    }
-
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-template-rows: repeat(3, 1fr);
-      gap: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .video-item {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, border-color 0.5s ease;
-      border: 4px solid #ff4444;
-    }
-
-    .video-item.video-ended {
-      border-color: #4CAF50;
-    }
-
-    .video-item:hover {
-      transform: translateY(-5px);
-    }
-
-    .video-item video {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 36px;
-      }
-
-      .authors {
-        font-size: 20px;
-      }
-
-      .button-row {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .btn {
-        width: 250px;
-        justify-content: center;
-      }
-
-      .abstract {
-        padding: 30px;
-      }
-
-      .method-section {
-        padding: 30px;
-      }
-
-      .query-examples {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .query-text {
-        padding: 20px 20px 10px 20px;
-      }
-
-      .query-text h3 {
-        font-size: 14px;
-      }
-
-      .example-query {
-        padding: 12px;
-        font-size: 13px;
-      }
-
-      .video-caption {
-        padding: 15px 20px;
-        font-size: 13px;
-      }
-
-      .video-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-      }
-
-      .video-grid-section h2 {
-        font-size: 28px;
-        margin-bottom: 30px;
-      }
+    /* ---------- RESPONSIVE ---------- */
+    @media(max-width:768px){
+      h1{font-size:36px;}
+      .authors{font-size:20px;}
+      .button-row{flex-direction:column;align-items:center;}
+      .btn{width:250px;justify-content:center;}
+      .abstract{padding:30px;}
     }
   </style>
 </head>
 <body>
-
-<div class="header">
-  <h1>Constructive Distortion: Multimodal LLMs with Query-Aware Image Warping</h1>
-  
+  <h1>Constructive Distortion: Multimodal LLMs with Query‑Aware Image Warping</h1>
   <div class="authors">
-    Dwip Dalal¹, Gautam Vashishtha², Utkarsh Mishra³, Jeonghwan Kim¹,<br>
-    Madhav Kanda¹, Hyeonjeong Ha¹, Svetlana Lazebnik¹, Heng Ji¹, Unnat Jain⁴
+    Dwip Dalal¹, Gautam Vashishtha², Utkarsh Mishra³, Jeonghwan Kim¹, <br>
+    Madhav Kanda¹, Hyeonjeong Ha¹, Svetlana Lazebnik¹, Heng Ji¹, Unnat Jain⁴
   </div>
-  
   <div class="affiliations">
-    ¹University of Illinois Urbana–Champaign &nbsp;&nbsp; ²Skan AI &nbsp;&nbsp; ³Texas A&M University<br>
-    ⁴University of California, Irvine
+    ¹University of Illinois Urbana–Champaign&nbsp;&nbsp;²Skan AI&nbsp;&nbsp;³Texas A&M University&nbsp;&nbsp;⁴University of California, Irvine
   </div>
-  
-  <div class="contact">
-    Correspondence to: dwip2
+  <div class="contact">Correspondence to: dwip2@illinois.edu</div>
+  <div class="conference">Under Review</div>
+
+  <!-- ---------- ACTION BUTTONS ---------- -->
+  <div class="button-row">
+    <a class="btn" href="presentation.html">📖 Presentation</a>
+    <a class="btn" href="paper.pdf">📄 Paper</a>
+    <a class="btn" href="https://github.com/dwipddalal/attention-image-warping">💻 Code</a>
+    <a class="btn" href="#results">📊 Results</a>
+    <a class="btn" href="bibtex.txt">📚 BibTeX</a>
+  </div>
+
+  <!-- ---------- VIDEO GALLERY ---------- -->
+  <section class="video-grid-section" id="videos">
+    <h2>Video Gallery</h2>
+    <div class="video-grid">
+      <!-- Repeat with your actual filenames placed in /videos/ -->
+      <div class="video-item"><video controls preload="metadata"><source src="videos/warp_anim.mp4" type="video/mp4">Your browser does not support the video tag.</video></div>
+      <div class="video-item"><video controls preload="metadata"><source src="videos/warp_anim2.mp4" type="video/mp4"></video></div>
+      <div class="video-item"><video controls preload="metadata"><source src="videos/warp_anim3.mp4" type="video/mp4"></video></div>
+      <div class="video-item"><video controls preload="metadata"><source src="videos/warp_anim4.mp4" type="video/mp4"></video></div>
+      <div class="video-item"><video controls preload="metadata"><source src="videos/1526520f65bff202_78_warp_anim.mp4" type="video/mp4"></video></div>
+    </div>
+  </section>
+
+  <!-- ---------- ABSTRACT ---------- -->
+  <section class="abstract">
+    <h2>Abstract</h2>
+    <p>
+      Fine‑grained perception and accurate spatial grounding remain persistent challenges for multimodal large language models (MLLMs). While prior work focuses on modifying model internals, we ask a different question: can we reshape the input image itself to better reflect what the model needs to see? We introduce <strong>Constructive Distortion</strong>, a test‑time image transformation that uses the model’s own cross‑modal attention to guide pixel‑space warping. By expanding regions deemed important to the current query and compressing the rest, our method reallocates spatial resolution before the image is encoded—without changing model weights. Across five benchmarks (TextVQA, GQA, DocVQA, POPE, MMMU) and two MLLMs (LLaVA, Qwen‑VL), our method consistently improves accuracy, reduces hallucination, and enhances attention localization—outperforming four strong test‑time baselines.
+    </p>
+  </section>
+
+  <!-- ---------- QUERY‑AWARE EXAMPLES ---------- -->
+  <section class="results-gallery" id="results">
+    <h2 style="text-align:center;font-size:36px;font-weight:600;margin-bottom:50px;">Query‑Aware Warping Results</h2>
+    <p style="text-align:center;font-size:18px;color:#666;margin-bottom:50px;">Each example shows how our method adaptively warps images based on the query, highlighting relevant regions while preserving spatial relationships.</p>
+    <div class="query-examples">
+      <!-- Example #1 -->
+      <div class="query-example">
+        <div class="query-text">
+          <h3>Query:</h3>
+          <div class="example-query">“On the right desk, what is to the left of the laptop?”</div>
+        </div>
+        <div class="query-video"><video controls preload="metadata"><source src="videos/warp_anim4.mp4" type="video/mp4"></video></div>
+        <div class="video-caption">Warping focuses on the left side of the laptop on the right desk.</div>
+      </div>
+      <!-- Example #2 -->
+      <div class="query-example">
+        <div class="query-text">
+          <h3>Query:</h3>
+          <div class="example-query">“What text appears on the computer screen?”</div>
+        </div>
+        <div class="query-video"><video controls preload="metadata"><source src="videos/warp_anim3.mp4" type="video/mp4"></video></div>
+        <div class="video-caption">Screen regions are emphasized to improve text readability.</div>
+      </div>
+      <!-- Example #3 -->
+      <div class="query-example">
+        <div class="query-text">
+          <h3>Query:</h3>
+          <div class="example-query">“How many people are visible in the image?”</div>
+        </div>
+        <div class="query-video"><video controls preload="metadata"><source src="videos/warp_anim2.mp4" type="video/mp4"></video></div>
+        <div class="video-caption">Regions containing people are expanded for better counting.</div>
+      </div>
+      <!-- Example #4 -->
+      <div class="query-example">
+        <div class="query-text">
+          <h3>Query:</h3>
+          <div class="example-query">“What is written on the sign in the background?”</div>
+        </div>
+        <div class="query-video"><video controls preload="metadata"><source src="videos/warp_anim.mp4" type="video/mp4"></video></div>
+        <div class="video-caption">Background sign text becomes more visible through warping.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- BORDER‑ON‑FINISH SCRIPT ---------- -->
+  <script>
+    document.querySelectorAll('.video-item video').forEach(v=>{
+      v.addEventListener('ended',()=>v.closest('.video-item').classList.add('video-ended'));
+      v.addEventListener('play',()=>v.closest('.video-item').classList.remove('video-ended'));
+    });
+  </script>
+</body>
+</html>
