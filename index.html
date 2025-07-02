@@ -1,568 +1,170 @@
-<!DOCTYPE HTML "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Dwip Dalal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GLG5GQ8E08"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-GLG5GQ8E08');
-    </script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constructive Distortion: Improving MLLMs with Query‑Aware Image Warping</title>
+  <style>
+    /* ---------- LAYOUT ---------- */
+    :root {
+      --text: #333;
+      --accent: #4A90E2;
+      --bg-light: #f8f9fa;
+      --shadow: 0 4px 20px rgba(0,0,0,.08);
+      --rad: 12px;
+    }
+    * {box-sizing:border-box; margin:0; padding:0;}
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      line-height: 1.6;
+      background:#fff;
+      color: var(--text);
+    }
+    h1{font-size:48px;font-weight:400;text-align:center;margin-bottom:40px;line-height:1.1;letter-spacing:-.5px;}
+    .authors, .affiliations, .contact, .conference{text-align:center;}
+    .authors{font-size:24px;color:var(--accent);line-height:1.4;margin-bottom:20px;}
+    .affiliations{font-size:18px;color:#666;margin-bottom:10px;}
+    .contact{font-size:16px;color:#888;margin-bottom:30px;}
+    .conference{font-size:20px;font-weight:500;margin-bottom:40px;}
 
-    <style>
-      /* typography */
-      body, td, th {
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 18px;
-        font-weight: 400;
-        line-height: 1.5;
-        margin: 0;
-        padding: 0;
-      }
-      a {
-        color: #1772d0;
-        text-decoration: none;
-      }
-      a:hover, a:focus {
-        color: #f09228;
-      }
+    /* ---------- BUTTONS ---------- */
+    .button-row{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-bottom:80px;}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;background:#2d2d2d;color:#fff;border:none;border-radius:30px;text-decoration:none;font-size:16px;font-weight:500;transition:.2s;cursor:pointer;}
+    .btn:hover{background:#1a1a1a;transform:translateY(-1px);}
 
-      /* container */
-      .container {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 1rem;
-      }
+    /* ---------- VIDEO GRID ---------- */
+    .video-grid-section{text-align:center;margin:80px 0;}
+    .video-grid-section h2{font-size:36px;font-weight:600;margin-bottom:50px;}
+    .video-grid{display:grid;gap:20px;max-width:1200px;margin:0 auto;
+      grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}
+    .video-item{background:#fff;border-radius:var(--rad);overflow:hidden;box-shadow:var(--shadow);border:4px solid #ff4444;transition:.3s;aspect-ratio:1/1;}
+    .video-item.video-ended{border-color:#4CAF50;}
+    .video-item:hover{transform:translateY(-5px);}
+    .video-item video{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;}
 
-      /* name + links */
-      .page-heading {
-        text-align: center;
-        margin-top: 0.5rem;
-        margin-bottom: 0.25rem;
-        font-size: 2em;
-      }
-      .link‐row {
-        text-align: center;
-        font-size: 0.95rem;
-        margin-bottom: 2rem;
-        white-space: nowrap;
-      }
-      .link‐row a {
-        margin: 0 0.5em;
-      }
+    /* ---------- ABSTRACT ---------- */
+    .abstract{background:var(--bg-light);padding:50px;border-radius:var(--rad);border-left:4px solid var(--accent);margin:80px 0;}
+    .abstract h2{font-size:28px;font-weight:600;margin-bottom:30px;}
+    .abstract p{font-size:18px;line-height:1.7;}
 
-      /* intro section as two columns */
-      .intro {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        margin-bottom: 2rem;
-      }
-      .intro .bio {
-        flex: 0 0 73%;
-        max-width: 73%;
-        box-sizing: border-box;
-        padding-right: 1rem;
-      }
-      .intro .photo {
-        flex: 0 0 27%;
-        max-width: 27%;
-        box-sizing: border-box;
-        text-align: right;
-      }
-      .intro .photo img {
-        max-width: 95%;
-        height: auto;
-        border-radius: 4px;
-      }
+    /* ---------- QUERY EXAMPLES ---------- */
+    .query-examples{display:grid;gap:30px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));}
+    .query-example{background:#fff;border-radius:var(--rad);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:.3s;}
+    .query-example:hover{transform:translateY(-3px);}
+    .query-text{padding:25px;background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%);} 
+    .query-text h3{font-size:16px;font-weight:600;margin-bottom:10px;}
+    .example-query{background:#e3f2fd;padding:15px;border-radius:6px;border-left:3px solid var(--accent);font-style:italic;font-size:14px;}
+    .query-video video{width:100%;display:block;}
+    .video-caption{padding:20px;font-size:14px;color:#666;background:#fff;}
 
-      /* table reset */
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 2rem;
-      }
-      td {
-        vertical-align: top;
-        padding: 1em;
-      }
-      
-      /* Internships table specific styles */
-      .internships-table td {
-        text-align: center;
-      }
-      .internships-table td img {
-        max-width: 80px;
-        height: auto;
-        display: block;
-        margin: 0 auto 0.5em;
-      }
-    </style>
-  </head>
+    /* ---------- RESPONSIVE ---------- */
+    @media(max-width:768px){
+      h1{font-size:36px;}
+      .authors{font-size:20px;}
+      .button-row{flex-direction:column;align-items:center;}
+      .btn{width:250px;justify-content:center;}
+      .abstract{padding:30px;}
+    }
+  </style>
+</head>
+<body>
+  <h1>Constructive Distortion: Multimodal LLMs with Query‑Aware Image Warping</h1>
+  <div class="authors">
+    Dwip Dalal¹, Gautam Vashishtha², Utkarsh Mishra³, Jeonghwan Kim¹, <br>
+    Madhav Kanda¹, Hyeonjeong Ha¹, Svetlana Lazebnik¹, Heng Ji¹, Unnat Jain⁴
+  </div>
+  <div class="affiliations">
+    ¹University of Illinois Urbana–Champaign&nbsp;&nbsp;²Skan AI&nbsp;&nbsp;³Texas A&M University&nbsp;&nbsp;⁴University of California, Irvine
+  </div>
+  <div class="contact">Correspondence to: dwip2@illinois.edu</div>
+  <div class="conference">Under Review</div>
 
-  <body>
-    <div class="container">
-      <!-- Name -->
-      <h2 class="page-heading">Dwip Dalal</h2>
+  <!-- ---------- ACTION BUTTONS ---------- -->
+  <div class="button-row">
+    <a class="btn" href="presentation.html">📖 Presentation</a>
+    <a class="btn" href="paper.pdf">📄 Paper</a>
+    <a class="btn" href="https://github.com/dwipddalal/attention-image-warping">💻 Code</a>
+    <a class="btn" href="#results">📊 Results</a>
+    <a class="btn" href="bibtex.txt">📚 BibTeX</a>
+  </div>
 
-      <!-- Links under name -->
-      <div class="link‐row">
-<!--         <a href="PhD_resume_3.pdf" target="_blank">CV</a> | -->
-        <a href="mailto:dwip2@illinois.edu">E‑mail</a> |
-        <a href="https://scholar.google.ca/citations?user=zrGsmv8AAAAJ&hl=en" target="_blank">Google Scholar</a> |
-        <a href="https://github.com/dwipddalal" target="_blank">GitHub</a> |
-        <a href="https://www.linkedin.com/in/dwip-dalal-a7a440190/" target="_blank">LinkedIn</a> |
-        <a href="https://x.com/DwipDalal" target="_blank">X</a>
+  <!-- ---------- VIDEO GALLERY ---------- -->
+  <section class="video-grid-section" id="videos">
+    <h2>Video Gallery</h2>
+    <div class="video-grid">
+      <!-- All videos inside videos_fixed (auto-generated list) -->
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/1526520f65bff202_78/output_runs/run_1/1526520f65bff202_78_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201462454_n508641/output_runs/run_0/201462454_n508641_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/20667979_n181355/output_runs/run_0/20667979_n181355_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201935992_n500209/output_runs/run_0/201935992_n500209_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201885221_n222297/output_runs/run_0/201885221_n222297_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201957086_n536256/output_runs/run_1/201957086_n536256_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201623664_n501609/output_runs/run_0/warp_anim2.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201492498_n9856/output_runs/run_0/warp_anim2.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201864508_n481655/output_runs/run_0/201864508_n481655_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201713529_n455563/output_runs/run_0/warp_anim2.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201952896_n525029/output_runs/run_0/201952896_n525029_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/warp_anim4.mp4" type="video/mp4"></source></video></div>
+    </div>
+  </section>
+
+  <!-- ---------- ABSTRACT ---------- -->
+  <section class="abstract">
+    <h2>Abstract</h2>
+    <p>
+      Fine‑grained perception and accurate spatial grounding remain persistent challenges for multimodal large language models (MLLMs). While prior work focuses on modifying model internals, we ask a different question: can we reshape the input image itself to better reflect what the model needs to see? We introduce <strong>Constructive Distortion</strong>, a test‑time image transformation that uses the model’s own cross‑modal attention to guide pixel‑space warping. By expanding regions deemed important to the current query and compressing the rest, our method reallocates spatial resolution before the image is encoded—without changing model weights. Across five benchmarks (TextVQA, GQA, DocVQA, POPE, MMMU) and two MLLMs (LLaVA, Qwen‑VL), our method consistently improves accuracy, reduces hallucination, and enhances attention localization—outperforming four strong test‑time baselines.
+    </p>
+  </section>
+
+  <!-- ---------- QUERY‑AWARE EXAMPLES ---------- -->
+  <section class="results-gallery" id="results">
+    <h2 style="text-align:center;font-size:36px;font-weight:600;margin-bottom:50px;">Query‑Aware Warping Results</h2>
+    <p style="text-align:center;font-size:18px;color:#666;margin-bottom:50px;">Each example shows how our method adaptively warps images based on the query, highlighting relevant regions while preserving spatial relationships.</p>
+    <div class="query-examples">
+      <!-- Example #1 -->
+      <div class="query-example">
+        <div class="query-text"><h3>Query:</h3>
+          <div class="example-query">“What is the alcohol content?”</div>
+        </div>
+        <div class="query-video"><video controls preload="metadata"><source src="videos_fixed/1526520f65bff202_78/output_runs/run_1/1526520f65bff202_78_warp_anim.mp4" type="video/mp4"></video></div>
+        <div class="video-caption">The warped view enlarges the ABV text region on the can.</div>
       </div>
-
-      <!-- Intro section -->
-      <div class="intro">
-        <div class="bio">
-          <p>
-            Hi, I am Dwip Dalal, a first‑year PhD student in Electrical and Computer Engineering
-            at the <a href="https://illinois.edu/" target="_blank">University of Illinois Urbana‑Champaign</a>. My research interests lie in  MLLMs, multi‑agents, generative AI,
-            and multi‑modal representation learning.
-<!--             I'm fortunate to be mentored by <a href="https://slazebni.cs.illinois.edu/" target="_blank">Prof. Svetlana Lazebnik</a>, <a href="https://blender.cs.illinois.edu/hengji.html" target="_blank">Prof. Heng Ji</a> and <a href="https://unnat.github.io/" target="_blank">Prof. Unnat Jain.</a> -->
-          </p>
-          <p>
-            Previously, I completed my B.Tech from <a href="https://iitgn.ac.in/" target="_blank">Indian Institute of Technology, Gandhinagar</a>,
-            where I was awarded the Institute Gold medal for graduating at the top of my discipline.
-          </p>
-          <p>
-          I'm in Seattle for my summer internship at <a href="https://www.microsoft.com/en-us/research/" target="_blank">Microsoft Research</a> — hit me up if you want to chat about cool topics!
-          </p>
+      <!-- Example #2 -->
+      <div class="query-example">
+        <div class="query-text"><h3>Query:</h3>
+          <div class="example-query">“Does the bat look white?”</div>
         </div>
-        <div class="photo">
-          <img src="images/Dwip.jpeg" alt="Dwip Dalal">
-        </div>
+        <div class="query-video"><video controls preload="metadata"><source src="videos_fixed/201462454_n508641/output_runs/run_0/201462454_n508641_warp_anim.mp4" type="video/mp4"></video></div>
+        <div class="video-caption">Warping focuses on the bat region to reveal its true color.</div>
       </div>
-
-      <!-- Internships -->
-      <h2>Internships</h2>
-      <table class="internships-table">
-        <tr>
-          <td>
-            <img src="microsoft.jpg" alt="microsoft">
-            <div>Microsoft Research<br>Summer 2025</div>
-          </td>
-          <td>
-            <img src="images/ubc.png" alt="UBC">
-            <div>UBC<br>Summer 2023</div>
-          </td>
-          <td>
-            <img src="images/aiisc.jpg" alt="AIISC">
-            <div>USC (AIISC)<br>2022‑2024</div>
-          </td>
-          <td>
-            <img src="images/ISRO.png" alt="ISRO">
-            <div>ISRO<br>Spring 2023</div>
-          </td>
-          <td>
-            <img src="images/TCS research.jpg" alt="TCS Research">
-            <div>TCS Research<br>Winter & Spring 2023</div>
-          </td>
-          <td>
-            <img src="images/eficens.jpg" alt="EFICENS">
-            <div>EFICENS<br>Summer 2022</div>
-          </td>
-        </tr>
-      </table>
-
-      <!-- News -->
-      <h2>News</h2>
-      <ul>
-        <li><strong>May 2025:</strong> Summer internship at Microsoft Research (Redmond), focusing on LLM agents and reasoning.</li>
-        <li><strong>Aug 2024:</strong> Awarded the Dilip and Sandhya Sarwate Graduate Fellowship at UIUC for the 2024‑2025 academic year.</li>
-        <li><strong>Jun 2024:</strong> Awarded the Institute Gold Medal at IIT Gandhinagar for highest CGPA.</li>
-        <li><strong>Feb 2024:</strong> Nominated by IIT Gandhinagar for the Pre‑Doctoral Research Assistant Program at Microsoft Research India.</li>
-        <li><strong>2023:</strong> Perfect 10/10 GPA for two consecutive semesters (6th & 7th).</li>
-        <li><strong>Sep 2023:</strong> 1st of 200 in SmartSense ML hackathon; job offer as ML Engineer II.</li>
-      </ul>
-        
-        <!-- Additional news hidden by default -->
-        <div id="moreNews" style="display: none;">
-          <ul>
-            <li><strong>Jun 2023:</strong> Received a Travel Award from IIT Gandhinagar to attend the ACL 2023 conference in Toronto.</li>
-            <li><strong>Jan 2023:</strong> Secured 1st rank in the Undergraduate Research Showcase at IIT Gandhinagar for research on AI-enabled on-device drones.</li>
-            <li><strong>Dec 2022:</strong> Awarded the Shastri Indo-Canadian Institute Scholarship for continuing research at the University of British Columbia, recognized as a "promising researcher."</li>
-            <li><strong>Dec 2022:</strong> Selected as a MITACS Globalink Research Fellow at the University of British Columbia under Prof. Yankai Cao and Dr. Dongsheng Xiao.</li>
-            <li><strong>Sep 2022:</strong> Selected for Citi Bank's Summer Internship in the Analyst role.</li>
-            <li><strong>Jul 2022:</strong> Secured 1st rank in the competitive programming contest at IIT Gandhinagar, participated in by B.Tech, M.Tech, and Ph.D. students.</li>
-            <li><strong>Apr 2022:</strong> Selected among the Top 3 teams for Innovation-Driven Entrepreneurship (IDE) 4.0: The National Bootcamp at Bangalore, based on a proposal for using AI in intelligent business planning and financial management.</li>
-            <li><strong>Mar 2022:</strong> Achieved 1st rank in Hackrush'22, the flagship machine learning hackathon at IIT Gandhinagar.</li>
-            <li><strong>Jun 2021:</strong> Secured 1st rank in the IITGN Summer Project for building the most efficient NLP classification model.</li>
-          </ul>
+      <!-- Example #3 -->
+      <div class="query-example">
+        <div class="query-text"><h3>Query:</h3>
+          <div class="example-query">“Is the hat made of cloth?”</div>
         </div>
+        <div class="query-video"><video controls preload="metadata"><source src="videos_fixed/201492498_n9856/output_runs/run_0/warp_anim2.mp4" type="video/mp4"></video></div>
+        <div class="video-caption">The warped animation magnifies the hat texture for better material recognition.</div>
+      </div>
+      <!-- Example #4 -->
+      <div class="query-example">
+        <div class="query-text"><h3>Query:</h3>
+          <div class="example-query">“Which color is the belt?”</div>
+        </div>
+        <div class="query-video"><video controls preload="metadata"><source src="videos_fixed/201739131_n485969/output_runs/run_0/201739131_n485969_warp_anim.mp4" type="video/mp4"></video></div>
+        <div class="video-caption">Our method highlights the belt area to disambiguate its color.</div>
+      </div>
+    </div>
+  </section>
 
-        <button id="moreButton" onclick="toggleNews()">previous news</button>
-
-        <script>
-          function toggleNews() {
-            var moreNews = document.getElementById("moreNews");
-            var btn = document.getElementById("moreButton");
-            if (moreNews.style.display === "none") {
-              moreNews.style.display = "block";
-              btn.innerText = "Hide News";
-            } else {
-              moreNews.style.display = "none";
-              btn.innerText = "More News";
-            }
-          }
-        </script>
-        <!-- ========== END NEW SECTION ========== -->
-  
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr>
-          <td style="padding:20px;width:100%;vertical-align:middle">
-            <h2>Publications</h2>
-            
-          </td>
-        </tr>
-      </tbody></table>
-        
-      
-      
-      
-      <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-        
-         <tr>
-          <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
-            <a href="https://shubhangb97.github.io/potential_field_DML"><img src="images/ACL.png" alt="project image" style="width:auto; height:auto; max-width:100%;" /> </a>
-          </td>
-          <td style="padding:2.5%;width:60%;vertical-align:top">
-            <h3>FACTIFY-5WQA: 5W Aspect-based Fact Verification through Question Answering</h3>
-            <br>
-            Anku Rani, SM Tonmoy, <strong>Dwip Dalal,</strong> Shreya Gautam, Megha C., Aman Chadha, Amit Sheth, Amitava Das
-            <br>
-            <div style="height: 0.5em;"></div>
-            <em> <strong>ACL 2023</strong> 	 </em>
-            <br>
-            <!-- <a href="javascript:toggleblock('potential_field_abs')">abstract</a> /
-             <a href="https://shubhangb97.github.io/potential_field_DML">project page</a> / -->
-             
-            <a href="https://arxiv.org/abs/2305.04329">Paper</a> |
-            
-            <a href="https://github.com/ankuranii/acl-5W-QA?tab=readme-ov-file">project page</a>
-             
-            <br>
-          </td>
-        </tr>
-        
-        <tr>
-          <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
-            <img src="images/WACV.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
-          </td>
-          <td style="padding:2.5%;width:60%;vertical-align:top">
-            <h3>Learning Robust Deep Visual Representations from EEG Brain Recordings</h3>
-            <br>
-            Prajwal Singh, <strong>Dwip Dalal,</strong> Gautam Vashishtha, Shanmuganathan Raman, Krishna Prasad Miyapuram
-            <br>
-            <div style="height: 0.5em;"></div>
-            <em> <strong>WACV 2024</strong> </em>
-            <br>
-
-            
-             
-            <a href="https://arxiv.org/abs/2310.16532">Paper</a> |
-            <a href="https://github.com/prajwalsingh/EEGStyleGAN-ADA">project page</a> |
-            <a href="https://www.rsipvision.com/WACV2024-Saturday/6/">WACV Daily</a> |
-            <a href="https://www.rsipvision.com/ComputerVisionNews-2024February/14/">Best of WACV 2024</a> 
-            
-            <!-- <a href="coming soon">video</a> / 
-             -->
-            <br>
-          </td>
-        </tr>
-
-        <tr>
-          <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
-            <img src="images/EMNLP.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
-          </td>
-          <td style="padding:2.5%;width:60%;vertical-align:top">
-            <h3>FACTIFY3M: A Benchmark for Multimodal Fact Verification with Explainability through 5W Question-Answering </h3>
-            <br>
-            M Chakraborty, K Pahwa, A Rani, S Chatterjee, <strong>Dwip Dalal,</strong> H Dave, ... A Chadha, Amit Sheth, Amitava Das
-
-            <br>
-            <div style="height: 0.5em;"></div> 
-            <em> <strong>EMNLP 2023</strong> </a></em>
-            <br>
-
-            <!-- <a href="javascript:toggleblock('MLR1_abs')">abstract</a> /
-             <a href="https://shubhangb97.github.io/MLR_gcn">project page</a> / -->
-            
-             <a href="https://arxiv.org/pdf/2306.05523">Paper</a> |
-             <a href="https://arxiv.org/abs/2306.05523">Project Page</a>
-            
-            <!-- <a href="coming soon">video</a> / 
-             -->
-            <br>
-          </td>
-        </tr>
-        
-
-        <tr>
-          <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
-            <img src="images/ICIP.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
-          </td>
-          <td style="padding:2.5%;width:60%;vertical-align:top">
-            <h3>Single Image LDR to HDR Conversion Using Conditional Diffusion</h3>
-            <br>
-            <strong>Dwip Dalal</strong>, Gautam Vashishtha, Prajwal Singh, Shanmuganathan Raman
-
-            <br>
-            <div style="height: 0.5em;"></div>
-            <em> <strong>International Conference on Image Processing (ICIP'23)</strong></em>
-             <b>(Oral) </b>
-            <br>
-            <!-- <a href="javascript:toggleblock('PL_UDML_abs')">abstract</a> / -->
-            <a href="https://arxiv.org/pdf/2307.02814">Paper</a> |   
-            <a href="https://arxiv.org/pdf/2307.02814">Project Page</a>
-            <!-- <a href="coming soon">video</a> / 
-             -->
-            <br>            
-          </td>
-        </tr>
-
-
-         <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
-            <img src="images/SEPSIS.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
-          </td>
-          <td style="padding:2.5%;width:60%;vertical-align:top">
-            <h3>SEPSIS: I can catch your lies - A new paradigm for Deception Detection</h3>
-            <br>
-            
-            Anku Rani, <strong>Dwip Dalal,</strong> Shreya Gautam, Pankaj Gupta, Vinija Jain, Aman Chadha, Amit Sheth, Amitava Das
-            
-            <div style="height: 0.5em;"></div>
-            
-            <strong><em>Arxiv, 2024</em>,</strong>
-            <br>
-            <!-- <a href="javascript:toggleblock('l1_cv_abs')">abstract</a> / -->
-            <a href="https://arxiv.org/pdf/2312.00292.pdf">Paper</a> |
-            <a href="https://arxiv.org/abs/2312.00292">abstract</a>
-            
-            <br>
-            
-          </td>
-        </tr>
-
-
-
-       <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
-        <img src="surrogte.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
-      </td>
-      <td style="padding:2.5%;width:60%;vertical-align:top">
-        <h3>Surrogate Faithfulness: A Metric for Concept-Based Explanations</h3>
-        <br>
-        Shubham Kumar, <strong>Dwip Dalal,</strong> Narendra Ahuja
-        <div style="height: 0.5em;"></div>
-        <strong><em>under review, 2025</em></strong>
-        <br>
-        <a href="https://arxiv.org/abs/2504.10833">abstract</a> |
-        <a href="https://arxiv.org/pdf/2504.10833">arxiv</a>
-                 
-        <br>        
-      </td> 
-    
-    </tr>
- 
-
-        
-    <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
-      <img src="Density_estimation.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
-    </td>
-    <td style="padding:2.5%;width:60%;vertical-align:top">
-      <h3>Flow Symmetrization for Parameterized Constrained Diffeomorphisms </h3>
-      <br>
-      <strong>Dwip Dalal*,</strong> Aalok Gangopadhyay*, Progyan Das*, Shanmuganathan Raman
-
-      <div style="height: 0.5em;"></div>
-
-      <strong> <em>Arxiv, 2024</em> </strong>
-      <br>
-      <a href="https://arxiv.org/pdf/2312.06317">Paper</a> |
-      <a href="https://arxiv.org/abs/2312.06317">Abstract</a> |
-      <a href="https://dwipddalal.github.io/FlowSymmetry/">Project Page</a>
-               
-      <br>      
-    </td>
-  </tr>
-  
-
-  <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-    <tr>
-    <td style="padding:20px;width:100%;vertical-align:middle">
-      <h2>Workshop Papers</h2>
-      
-    </td>
-  </tr>
-</tbody></table>
-  
-
-
-
-<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-
-              
-        <tr>
-            <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
-              <img src="images/ODE.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
-            </td>
-            <td style="padding:2.5%;width:60%;vertical-align:top">
-              <h3>ODESolvers are also Wayfinders: Neural ODEs for Multi-Agent Pathplanning </h3>
-              <br>
-              <strong>Dwip Dalal*,</strong> Progyan Das*, Anirban Dasgupta
-
-              <div style="height: 0.5em;"></div>
-              <em><strong>NeurIPS 2023 Workshop - Deep Learning and Differential Equations III</strong> </em>
-              <br>
-              <!-- <a href="javascript:toggleblock('ldgest_abs')">abstract</a> / -->
-              <a href="https://openreview.net/pdf?id=rnhkE2vb4r">Paper</a> |
-              <a href="https://openreview.net/forum?id=rnhkE2vb4r">abstract</a> 
-              <!-- <a href="https://arxiv.org/abs/2308.04643">arxiv</a> -->
-              <!-- <a href="coming soon">video</a> / 
-               -->
-              <br>              
-            </td>
-          </tr>
-
-
-
-          <tr>
-            <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
-              <img src="images/MMT.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
-            </td>
-            <td style="padding:2.5%;width:60%;vertical-align:top">
-              <h3>MMT: A Multilingual and Multi-Topic Indian Social Media Dataset</h3>
-              <br>
-              <strong>Dwip Dalal,</strong> Vivek Srivastava, Mayank Singh
-              <div style="height: 0.5em;"></div>
-              <em><strong>EACL 2023 workshop - Cross-Cultural Considerations in NLP</strong></em>
-              <br>
-             
-              <!-- <a href="javascript:toggleblock('pal_abs')">abstract</a> / -->
-              <a href="https://arxiv.org/pdf/2304.00634">Paper</a> |
-              <a href="https://arxiv.org/abs/2304.00634">abstract</a> 
-              <!-- <a href="https://github.com/shubhangb97/PAL_pretext_based_active_learning">code</a>  -->
-              <br>
-              
-            </td>
-          </tr>
-
-
-         
-
-        <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
-          <img src="images/RL.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
-        </td>
-        <td style="padding:2.5%;width:60%;vertical-align:top">
-          <h3>Learning to Stabilize: Comparative Analysis of Reinforcement Learning and Traditional Methods for Swirling Pendulum Control</h3>
-          <br>
-          <strong>Dwip Dalal,</strong> Shubhankar Riswadkar, Harish J Palanthandalam-Madapusi
-          <div style="height: 0.5em;"></div>
-          <strong><em>IEEE Indian Control Conference 2023</em></strong>
-          <br>
-          <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10442669">Paper</a> |
-          <a href="https://ieeexplore.ieee.org/abstract/document/10442669">abstract</a>
-                   
-          <br>          
-        </td>
-      </tr>
-
-
-
-      
-
-
-  <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
-    <img src="images/Camera.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
-  </td>
-  <td style="padding:2.5%;width:60%;vertical-align:top">
-    <h3>Enhancing Cameras with Conditional Diffusion Model</h3>
-    <br>
-    <strong>Dwip Dalal,</strong> Gautam Vashishtha, Prajwal Singh, Shanmuganathan Raman
-    <div style="height: 0.5em;"></div>
-    <strong> <em>CVPR 2023 workshop - Computational Cameras and Display CCD</em> </strong>
-    <br>
-    <!-- <a href="javascript:toggleblock('adapter_abs')">abstract</a> / -->
-    <a href="https://ccd2023.github.io/">Poster</a>
-             
-    <br>    
-  </td>
-</tr>
-
-
-<td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
-  <img src="images/VPTDrone.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
-</td>
-<td style="padding:2.5%;width:60%;vertical-align:top">
-  <h3>VPTDrone: Video Processing Toolkit for Smart Surveillance Drone</h3>
-  <br>
-  <strong>Dwip Dalal,</strong> Anirban Dasgupta
-  <div style="height: 0.5em;"></div>
-  <strong> <em>7th Joint International Conference on Data Science & Management of Data, 2024</em> </strong>
-  <br>
-  <a href="https://dl.acm.org/doi/abs/10.1145/3632410.3632495">Paper</a>
-           
-  <br>
-  
-</td>
-</tr>
-
-
-        </table>
-
-        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
-          <tr>
-            <td><br>
-              <p align="right">
-                <font size="2">
-                  Template Credits: <a href="https://unnat.github.io/">Unnat</a> and <a href="https://shubhangb97.github.io//">Shubhang</a>
-                </font>
-              </p>
-            </td>
-          </tr>
-        </table>
-        <script xml:space="preserve" language="JavaScript">
-          hideblock('potential_field_abs');
-        </script>
-        <script xml:space="preserve" language="JavaScript">
-          hideblock('MLR2_abs');
-        </script>
-        <script xml:space="preserve" language="JavaScript">
-          hideblock('MLR1_abs');
-        </script>
-          <script xml:space="preserve" language="JavaScript">
-          hideblock('PL_UDML_abs');
-        </script>
-       <script xml:space="preserve" language="JavaScript">
-          hideblock('ldgest_abs');
-        </script>
-         <script xml:space="preserve" language="JavaScript">
-          hideblock('l1_cv_abs');
-        </script>
-         <script xml:space="preserve" language="JavaScript">
-          hideblock('pal_abs');
-        </script>
-        <script xml:space="preserve" language="JavaScript">
-          hideblock('pcfb_abs');
-        </script>
-        <script xml:space="preserve" language="JavaScript">
-          hideblock('qr_abs');
-        </script>
-        <script xml:space="preserve" language="JavaScript">
-          hideblock('adapter_abs');
-        </script>
-        
-        <br>
-        <br>
-        <br>
-        
+  <!-- ---------- BORDER‑ON‑FINISH SCRIPT ---------- -->
+  <script>
+    document.querySelectorAll('.video-item video').forEach(v=>{
+      v.addEventListener('ended',()=>v.closest('.video-item').classList.add('video-ended'));
+      v.addEventListener('play',()=>v.closest('.video-item').classList.remove('video-ended'));
+    });
+  </script>
 </body>
-
 </html>
