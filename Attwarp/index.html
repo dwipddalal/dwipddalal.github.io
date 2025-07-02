@@ -40,10 +40,10 @@
     .video-grid-section h2{font-size:36px;font-weight:600;margin-bottom:50px;}
     .video-grid{display:grid;gap:20px;max-width:1200px;margin:0 auto;
       grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}
-    .video-item{background:#fff;border-radius:var(--rad);overflow:hidden;box-shadow:var(--shadow);border:4px solid #ff4444;transition:.3s;}
+    .video-item{background:#fff;border-radius:var(--rad);overflow:hidden;box-shadow:var(--shadow);border:4px solid #ff4444;transition:.3s;aspect-ratio:1/1;}
     .video-item.video-ended{border-color:#4CAF50;}
     .video-item:hover{transform:translateY(-5px);}
-    .video-item video{width:100%;height:auto;display:block;}
+    .video-item video{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;}
 
     /* ---------- ABSTRACT ---------- */
     .abstract{background:var(--bg-light);padding:50px;border-radius:var(--rad);border-left:4px solid var(--accent);margin:80px 0;}
@@ -95,12 +95,19 @@
   <section class="video-grid-section" id="videos">
     <h2>Video Gallery</h2>
     <div class="video-grid">
-      <!-- Repeat with your actual filenames placed in /videos/ -->
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos/warp_anim.mp4" type="video/mp4">Your browser does not support the video tag.</video></div>
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos/warp_anim2.mp4" type="video/mp4"></video></div>
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos/warp_anim3.mp4" type="video/mp4"></video></div>
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos/warp_anim4.mp4" type="video/mp4"></video></div>
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos/1526520f65bff202_78_warp_anim.mp4" type="video/mp4"></video></div>
+      <!-- All videos inside videos_fixed (auto-generated list) -->
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/1526520f65bff202_78/output_runs/run_1/1526520f65bff202_78_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201462454_n508641/output_runs/run_0/201462454_n508641_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/20667979_n181355/output_runs/run_0/20667979_n181355_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201935992_n500209/output_runs/run_0/201935992_n500209_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201885221_n222297/output_runs/run_0/201885221_n222297_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201957086_n536256/output_runs/run_1/201957086_n536256_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201623664_n501609/output_runs/run_0/warp_anim2.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201492498_n9856/output_runs/run_0/warp_anim2.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201864508_n481655/output_runs/run_0/201864508_n481655_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201713529_n455563/output_runs/run_0/warp_anim2.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201952896_n525029/output_runs/run_0/201952896_n525029_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/warp_anim4.mp4" type="video/mp4"></source></video></div>
     </div>
   </section>
 
@@ -119,39 +126,35 @@
     <div class="query-examples">
       <!-- Example #1 -->
       <div class="query-example">
-        <div class="query-text">
-          <h3>Query:</h3>
-          <div class="example-query">“On the right desk, what is to the left of the laptop?”</div>
+        <div class="query-text"><h3>Query:</h3>
+          <div class="example-query">“What is the alcohol content?”</div>
         </div>
-        <div class="query-video"><video controls preload="metadata"><source src="videos/warp_anim4.mp4" type="video/mp4"></video></div>
-        <div class="video-caption">Warping focuses on the left side of the laptop on the right desk.</div>
+        <div class="query-video"><video controls preload="metadata"><source src="videos_fixed/1526520f65bff202_78/output_runs/run_1/1526520f65bff202_78_warp_anim.mp4" type="video/mp4"></video></div>
+        <div class="video-caption">The warped view enlarges the ABV text region on the can.</div>
       </div>
       <!-- Example #2 -->
       <div class="query-example">
-        <div class="query-text">
-          <h3>Query:</h3>
-          <div class="example-query">“What text appears on the computer screen?”</div>
+        <div class="query-text"><h3>Query:</h3>
+          <div class="example-query">“Does the bat look white?”</div>
         </div>
-        <div class="query-video"><video controls preload="metadata"><source src="videos/warp_anim3.mp4" type="video/mp4"></video></div>
-        <div class="video-caption">Screen regions are emphasized to improve text readability.</div>
+        <div class="query-video"><video controls preload="metadata"><source src="videos_fixed/201462454_n508641/output_runs/run_0/201462454_n508641_warp_anim.mp4" type="video/mp4"></video></div>
+        <div class="video-caption">Warping focuses on the bat region to reveal its true color.</div>
       </div>
       <!-- Example #3 -->
       <div class="query-example">
-        <div class="query-text">
-          <h3>Query:</h3>
-          <div class="example-query">“How many people are visible in the image?”</div>
+        <div class="query-text"><h3>Query:</h3>
+          <div class="example-query">“Is the hat made of cloth?”</div>
         </div>
-        <div class="query-video"><video controls preload="metadata"><source src="videos/warp_anim2.mp4" type="video/mp4"></video></div>
-        <div class="video-caption">Regions containing people are expanded for better counting.</div>
+        <div class="query-video"><video controls preload="metadata"><source src="videos_fixed/201492498_n9856/output_runs/run_0/warp_anim2.mp4" type="video/mp4"></video></div>
+        <div class="video-caption">The warped animation magnifies the hat texture for better material recognition.</div>
       </div>
       <!-- Example #4 -->
       <div class="query-example">
-        <div class="query-text">
-          <h3>Query:</h3>
-          <div class="example-query">“What is written on the sign in the background?”</div>
+        <div class="query-text"><h3>Query:</h3>
+          <div class="example-query">“Which color is the belt?”</div>
         </div>
-        <div class="query-video"><video controls preload="metadata"><source src="videos/warp_anim.mp4" type="video/mp4"></video></div>
-        <div class="video-caption">Background sign text becomes more visible through warping.</div>
+        <div class="query-video"><video controls preload="metadata"><source src="videos_fixed/201739131_n485969/output_runs/run_0/201739131_n485969_warp_anim.mp4" type="video/mp4"></video></div>
+        <div class="video-caption">Our method highlights the belt area to disambiguate its color.</div>
       </div>
     </div>
   </section>
