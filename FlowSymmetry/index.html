@@ -24,7 +24,7 @@
       text-align: center;
       color: #666;
     }
-    .links {
+/*     .links {
       text-align: center;
       margin-top: 20px;
     }
@@ -32,7 +32,28 @@
       margin: 0 15px;
       text-decoration: none;
       color: #007acc;
-    }
+    } */
+     /*— Button‑style links —*/
+  .links {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .links a {
+    display: inline-block;
+    padding: 10px 24px;
+    margin: 0 12px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid #007acc;
+    border-radius: 6px;
+    background: #007acc;
+    color: #fff;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .links a:hover {
+    background: #005f99;
+    transform: translateY(-2px);
+  }
     .abstract {
       margin-top: 40px;
     }
@@ -197,8 +218,8 @@
 </p>
 
 <div class="links">
-  <a href="https://arxiv.org/abs/2312.06317">[Paper]</a>
-  <a href="https://github.com/aalok1993/FlowSym">[Code]</a>
+  <a href="https://arxiv.org/abs/2312.06317">Paper</a>
+  <a href="https://github.com/aalok1993/FlowSym">Code</a>
 </div>
 
 <div class="abstract">
