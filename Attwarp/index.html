@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Constructive Distortion: Improving MLLMs with Query‑Aware Image Warping</title>
+  <title>Constructive Distortion: Improving MLLMs with Attention‑Guided Image Warping</title>
   <style>
     /* ---------- LAYOUT ---------- */
     :root {
@@ -115,8 +115,7 @@
   <section class="abstract">
     <h2>Abstract</h2>
     <p>
-      Fine‑grained perception and accurate spatial grounding remain persistent challenges for multimodal large language models (MLLMs). While prior work focuses on modifying model internals, we ask a different question: can we reshape the input image itself to better reflect what the model needs to see? We introduce <strong>Constructive Distortion</strong>, a test‑time image transformation that uses the model’s own cross‑modal attention to guide pixel‑space warping. By expanding regions deemed important to the current query and compressing the rest, our method reallocates spatial resolution before the image is encoded—without changing model weights. Across five benchmarks (TextVQA, GQA, DocVQA, POPE, MMMU) and two MLLMs (LLaVA, Qwen‑VL), our method consistently improves accuracy, reduces hallucination, and enhances attention localization—outperforming four strong test‑time baselines.
-    </p>
+      Multimodal large language models (MLLMs) often miss small details and spatial relations in cluttered scenes, leading to errors in fine-grained perceptual grounding. We introduce AttWarp, a lightweight method that allocates more resolution to query-relevant content while compressing less informative areas, all while preserving global context. At test time, the approach uses an MLLM's cross-modal attention to perform rectilinear warping of the input image, reallocating spatial resolution toward regions the model deems important, without changing model weights or architecture. This attention-guided warping preserves all original image information but redistributes it non-uniformly, so small objects and subtle relationships become easier for the same model to read while the global layout remains intact. Across five benchmarks (TextVQA, GQA, DocVQA, POPE, MMMU) and four MLLMs (LLaVA, Qwen-VL, InternVL, and InstructBLIP), AttWarp consistently improves accuracy, strengthens compositional reasoning, and reduces hallucinations, outperforming four competitive baselines that manipulate raw images at test time. Together, these results show that attention-guided warping prioritizes information relevant to the query while preserving context, and that the same MLLMs perform better when given such warped inputs.
   </section>
 
   <!-- ---------- QUERY‑AWARE EXAMPLES ---------- -->
