@@ -79,8 +79,8 @@
   <div class="affiliations">
     ¹University of Illinois Urbana–Champaign&nbsp;&nbsp;²Skan AI&nbsp;&nbsp;³Texas A&M University&nbsp;&nbsp;⁴University of California, Irvine
   </div>
-  <div class="contact">Correspondence to: dwip2@illinois.edu</div>
-  <div class="conference">Under Review</div>
+  <!-- <div class="contact">Correspondence to: dwip2@illinois.edu</div>
+  <div class="conference">Under Review</div> -->
 
   <!-- ---------- ACTION BUTTONS ---------- -->
   <div class="button-row">
@@ -113,9 +113,9 @@
 
   <!-- ---------- ABSTRACT ---------- -->
   <section class="abstract">
-    <h2>Abstract</h2>
+    <h2>TLDR</h2>
     <p>
-      Multimodal large language models (MLLMs) often miss small details and spatial relations in cluttered scenes, leading to errors in fine-grained perceptual grounding. We introduce AttWarp, a lightweight method that allocates more resolution to query-relevant content while compressing less informative areas, all while preserving global context. At test time, the approach uses an MLLM's cross-modal attention to perform rectilinear warping of the input image, reallocating spatial resolution toward regions the model deems important, without changing model weights or architecture. This attention-guided warping preserves all original image information but redistributes it non-uniformly, so small objects and subtle relationships become easier for the same model to read while the global layout remains intact. Across five benchmarks (TextVQA, GQA, DocVQA, POPE, MMMU) and four MLLMs (LLaVA, Qwen-VL, InternVL, and InstructBLIP), AttWarp consistently improves accuracy, strengthens compositional reasoning, and reduces hallucinations, outperforming four competitive baselines that manipulate raw images at test time. Together, these results show that attention-guided warping prioritizes information relevant to the query while preserving context, and that the same MLLMs perform better when given such warped inputs.
+      MLLMs often miss small details and spatial relations in cluttered scenes, leading to errors in fine-grained perceptual grounding. We introduce AttWarp, a lightweight method that allocates more resolution to query-relevant content while compressing less informative areas, all while preserving global context. At test time, the approach uses an MLLM's cross-modal attention to perform rectilinear warping of the input image, reallocating spatial resolution toward regions the model deems important, without changing model weights or architecture. This attention-guided warping preserves all original image information but redistributes it non-uniformly, so small objects and subtle relationships become easier for the same model to read while the global layout remains intact. AttWarp consistently improves accuracy, strengthens compositional reasoning, and reduces hallucinations.
   </section>
 
   <!-- ---------- QUERY‑AWARE EXAMPLES ---------- -->
