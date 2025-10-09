@@ -162,7 +162,6 @@
   <script>
     document.querySelectorAll('.video-item video').forEach(v=>{
       v.addEventListener('ended',()=>v.closest('.video-item').classList.add('video-ended'));
-      v.addEventListener('play',()=>v.closest('.video-item').classList.remove('video-ended'));
     });
   </script>
 </body>
