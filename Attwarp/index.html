@@ -106,11 +106,12 @@
 
   <!-- ---------- ACTION BUTTONS ---------- -->
   <div class="button-row">
-    <a class="btn" href="presentation.html">📖 Presentation</a>
-    <a class="btn" href="paper.pdf">📄 Paper</a>
-    <a class="btn" href="https://github.com/dwipddalal/Attwarp">💻 Code</a>
-    <a class="btn" href="#results">📊 Results</a>
-    <a class="btn" href="bibtex.txt">📚 BibTeX</a>
+    <a class="btn" href="presentation.html">📖 Presentation</a>
+    <a class="btn" href="paper.pdf">📄 Paper</a>
+    <a class="btn" href="https://github.com/dwipddalal/Attwarp">💻 Code</a>
+    <a class="btn" href="#results">📊 Results</a>
+    <!-- CHANGED: turn BibTeX into a modal-triggering button -->
+    <button id="open-bibtex" class="btn" type="button" aria-haspopup="dialog" aria-controls="bibtex-modal">📚 BibTeX</button>
   </div>
 
   <!-- ---------- VIDEO GALLERY ---------- -->
@@ -194,10 +195,91 @@
     </div>
   </section>
 
-  <!-- ---------- BORDER‑ON‑FINISH SCRIPT ---------- -->
+  <!-- ---------- BIBTEX MODAL (NEW) ---------- -->
+  <div class="modal-backdrop" id="bibtex-modal" role="dialog" aria-modal="true" aria-labelledby="bibtex-title">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title" id="bibtex-title">BibTeX</div>
+        <div class="modal-actions">
+          <button class="icon-btn" id="copy-bib">Copy</button>
+          <button class="icon-btn" id="download-bib">Download .bib</button>
+          <button class="close-btn" id="close-bib" aria-label="Close">×</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="code-wrap">
+          <pre id="bibtex-code" style="white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-width:100%;">@article{dalal2025constructive,
+  title={Constructive Distortion: Improving MLLMs with Attention-Guided Image Warping},
+  author={Dalal, Dwip and Vashishtha, Gautam and Mishra, Utkarsh and Kim, Jeonghwan and Kanda, Madhav and Ha, Hyeonjeong and Lazebnik, Svetlana and Ji, Heng and Jain, Unnat},
+  journal={arXiv preprint arXiv:2510.09741},
+  year={2025}
+}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------- BORDER-ON-FINISH SCRIPT + BIBTEX SCRIPT ---------- -->
   <script>
+    // Mark tiles green when video ends
     document.querySelectorAll('.video-item video').forEach(v=>{
       v.addEventListener('ended',()=>v.closest('.video-item').classList.add('video-ended'));
+    });
+
+    // --- BibTeX modal logic ---
+    const openBtn = document.getElementById('open-bibtex');
+    const modal = document.getElementById('bibtex-modal');
+    const closeBtn = document.getElementById('close-bib');
+    const copyBtn = document.getElementById('copy-bib');
+    const dlBtn = document.getElementById('download-bib');
+    const codeEl = document.getElementById('bibtex-code');
+
+    function openModal(){
+      modal.style.display = 'flex';
+      // trap focus on open
+      setTimeout(()=>closeBtn.focus(), 0);
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+      openBtn.focus();
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && modal.style.display === 'flex') closeModal(); });
+
+    copyBtn.addEventListener('click', async ()=>{
+      const text = codeEl.textContent.trim();
+      try{
+        await navigator.clipboard.writeText(text);
+        copyBtn.textContent = 'Copied!';
+        setTimeout(()=>copyBtn.textContent = 'Copy', 1200);
+      }catch{
+        // Fallback: create a hidden textarea
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        copyBtn.textContent = 'Copied!';
+        setTimeout(()=>copyBtn.textContent = 'Copy', 1200);
+      }
+    });
+
+    dlBtn.addEventListener('click', ()=>{
+      const blob = new Blob([codeEl.textContent.trim() + '\n'], {type: 'text/x-bibtex'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'attwarp.bib';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
     });
   </script>
 
