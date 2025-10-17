@@ -50,15 +50,25 @@
     .abstract h2{font-size:28px;font-weight:600;margin-bottom:30px;}
     .abstract p{font-size:18px;line-height:1.7;}
 
-    /* ---------- QUERY EXAMPLES ---------- */
-    .query-examples{display:grid;gap:30px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));}
-    .query-example{background:#fff;border-radius:var(--rad);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:.3s;}
+    /* ---------- QUERY EXAMPLES CAROUSEL ---------- */
+    .carousel-container{position:relative;max-width:800px;margin:0 auto;overflow:hidden;border-radius:var(--rad);}
+    .carousel-wrapper{display:flex;transition:transform 0.5s ease-in-out;}
+    .query-example{background:#fff;border-radius:var(--rad);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:.3s;min-width:300px;margin:0 15px;}
     .query-example:hover{transform:translateY(-3px);}
-    .query-text{padding:25px;background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%);} 
+    .query-text{padding:25px;background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%);}
     .query-text h3{font-size:16px;font-weight:600;margin-bottom:10px;}
     .example-query{background:#e3f2fd;padding:15px;border-radius:6px;border-left:3px solid var(--accent);font-style:italic;font-size:14px;}
     .query-video video{width:100%;display:block;aspect-ratio:1/1;object-fit:contain;}
     .video-caption{padding:20px;font-size:14px;color:#666;background:#fff;}
+
+    /* Carousel Navigation */
+    .carousel-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:18px;color:#333;box-shadow:var(--shadow);transition:.2s;z-index:10;}
+    .carousel-nav:hover{background:#fff;transform:translateY(-50%) scale(1.1);}
+    .carousel-nav.prev{left:10px;}
+    .carousel-nav.next{right:10px;}
+    .carousel-dots{display:flex;justify-content:center;margin-top:20px;}
+    .carousel-dot{width:10px;height:10px;border-radius:50%;background:#ddd;margin:0 5px;cursor:pointer;transition:.2s;}
+    .carousel-dot.active{background:var(--accent);}
 
     /* ---------- RESPONSIVE ---------- */
     @media(max-width:768px){
@@ -67,6 +77,18 @@
       .button-row{flex-direction:column;align-items:center;}
       .btn{width:250px;justify-content:center;}
       .abstract{padding:30px;}
+
+      /* Carousel responsive */
+      .carousel-container{max-width:100%;padding:0 20px;}
+      .query-example{min-width:280px;margin:0 10px;}
+      .carousel-nav{width:35px;height:35px;font-size:16px;}
+      .carousel-nav.prev{left:5px;}
+      .carousel-nav.next{right:5px;}
+    }
+
+    @media(max-width:480px){
+      .query-example{min-width:260px;}
+      .carousel-container{padding:0 10px;}
     }
   </style>
 </head>
@@ -122,7 +144,8 @@
   <section class="results-gallery" id="results">
     <h2 style="text-align:center;font-size:36px;font-weight:600;margin-bottom:50px;">Query‑Aware Warping Results</h2>
     <p style="text-align:center;font-size:18px;color:#666;margin-bottom:50px;">Each example shows how our method adaptively warps images based on the query, highlighting relevant regions while preserving spatial relationships.</p>
-    <div class="query-examples">
+    <div class="carousel-container">
+      <div class="carousel-wrapper" id="carousel-wrapper">
       <!-- Example #1 -->
       <div class="query-example">
         <div class="query-text"><h3>Query:</h3>
@@ -155,6 +178,19 @@
         <div class="query-video"><video controls preload="metadata"><source src="videos_fixed/201739131_n485969/output_runs/run_0/201739131_n485969_warp_anim.mp4" type="video/mp4"></video></div>
         <div class="video-caption">Our method highlights the belt area to disambiguate its color.</div>
       </div>
+      </div>
+
+      <!-- Carousel Navigation -->
+      <button class="carousel-nav prev" id="prev-btn">‹</button>
+      <button class="carousel-nav next" id="next-btn">›</button>
+
+      <!-- Carousel Dots -->
+      <div class="carousel-dots" id="carousel-dots">
+        <div class="carousel-dot active" data-slide="0"></div>
+        <div class="carousel-dot" data-slide="1"></div>
+        <div class="carousel-dot" data-slide="2"></div>
+        <div class="carousel-dot" data-slide="3"></div>
+      </div>
     </div>
   </section>
 
@@ -162,6 +198,84 @@
   <script>
     document.querySelectorAll('.video-item video').forEach(v=>{
       v.addEventListener('ended',()=>v.closest('.video-item').classList.add('video-ended'));
+    });
+  </script>
+
+  <!-- ---------- CAROUSEL SCRIPT ---------- -->
+  <script>
+    class Carousel {
+      constructor() {
+        this.wrapper = document.getElementById('carousel-wrapper');
+        this.dots = document.querySelectorAll('.carousel-dot');
+        this.prevBtn = document.getElementById('prev-btn');
+        this.nextBtn = document.getElementById('next-btn');
+        this.currentSlide = 0;
+        this.totalSlides = this.dots.length;
+        this.autoPlayInterval = null;
+
+        this.init();
+      }
+
+      init() {
+        this.prevBtn.addEventListener('click', () => this.prevSlide());
+        this.nextBtn.addEventListener('click', () => this.nextSlide());
+
+        this.dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => this.goToSlide(index));
+        });
+
+        this.startAutoPlay();
+        this.updateButtons();
+      }
+
+      updateSlide() {
+        this.wrapper.style.transform = `translateX(-${this.currentSlide * 330}px)`;
+
+        this.dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === this.currentSlide);
+        });
+
+        this.updateButtons();
+      }
+
+      nextSlide() {
+        this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+        this.updateSlide();
+        this.resetAutoPlay();
+      }
+
+      prevSlide() {
+        this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+        this.updateSlide();
+        this.resetAutoPlay();
+      }
+
+      goToSlide(index) {
+        this.currentSlide = index;
+        this.updateSlide();
+        this.resetAutoPlay();
+      }
+
+      updateButtons() {
+        this.prevBtn.style.opacity = this.currentSlide === 0 ? '0.5' : '1';
+        this.nextBtn.style.opacity = this.currentSlide === this.totalSlides - 1 ? '0.5' : '1';
+      }
+
+      startAutoPlay() {
+        this.autoPlayInterval = setInterval(() => {
+          this.nextSlide();
+        }, 4000);
+      }
+
+      resetAutoPlay() {
+        clearInterval(this.autoPlayInterval);
+        this.startAutoPlay();
+      }
+    }
+
+    // Initialize carousel when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      new Carousel();
     });
   </script>
 </body>
