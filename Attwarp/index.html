@@ -35,6 +35,10 @@
     .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;background:#2d2d2d;color:#fff;border:none;border-radius:30px;text-decoration:none;font-size:16px;font-weight:500;transition:.2s;cursor:pointer;}
     .btn:hover{background:#1a1a1a;transform:translateY(-1px);}
 
+    /* ---------- ANIMATION VIDEO ---------- */
+    .animation-section{text-align:center;margin:60px 0 80px 0;}
+    .animation-section video{width:100%;max-width:900px;display:block;margin:0 auto;background:transparent;}
+
     /* ---------- VIDEO GRID ---------- */
     .video-grid-section{text-align:center;margin:80px 0;}
     .video-grid-section h2{font-size:36px;font-weight:600;margin-bottom:50px;}
@@ -107,12 +111,19 @@
   <!-- ---------- ACTION BUTTONS ---------- -->
   <div class="button-row">
     <a class="btn" href="presentation.html">📖 Presentation</a>
-    <a class="btn" href="paper.pdf">📄 Paper</a>
+    <a class="btn" href="https://arxiv.org/pdf/2510.09741">📄 Paper</a>
     <a class="btn" href="https://github.com/dwipddalal/Attwarp">💻 Code</a>
     <a class="btn" href="#results">📊 Results</a>
     <!-- CHANGED: turn BibTeX into a modal-triggering button -->
     <button id="open-bibtex" class="btn" type="button" aria-haspopup="dialog" aria-controls="bibtex-modal">📚 BibTeX</button>
   </div>
+
+  <!-- ---------- ANIMATION VIDEO ---------- -->
+  <section class="animation-section">
+    <video autoplay muted playsinline>
+      <source src="Attwarp_Vid1_cropped.mp4" type="video/mp4">
+    </video>
+  </section>
 
   <!-- ---------- VIDEO GALLERY ---------- -->
   <section class="video-grid-section" id="videos">
