@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Video Comparison - ECE 598ZZ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .page-links {
+            display: inline-flex;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .page-link {
+            padding: 6px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .page-link:hover {
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        .page-link.active {
+            background: rgba(255, 255, 255, 0.25);
+            color: #fff;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 200px repeat(6, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .task-header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            position: relative;
+        }
+
+        .model-header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .video-cell {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .video-cell:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #f8f9fa;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            color: #6c757d;
+            font-weight: bold;
+        }
+
+        .model-name {
+            padding: 10px;
+            text-align: center;
+            background: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+            font-weight: 600;
+        }
+
+        .task-descriptions {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .task-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .task-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .task-play-button {
+            margin-top: 14px;
+            padding: 8px 18px;
+            border: none;
+            border-radius: 999px;
+            background: #667eea;
+            color: #fff;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .task-play-button:hover {
+            background: #5c6bc0;
+            transform: translateY(-1px);
+        }
+
+        .task-play-button:focus-visible {
+            outline: 3px solid rgba(102, 126, 234, 0.5);
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 1200px) {
+            .comparison-grid {
+                grid-template-columns: 150px repeat(6, 1fr);
+                gap: 10px;
+            }
+
+            .video-container {
+                aspect-ratio: 16 / 9;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .model-header {
+                display: none;
+            }
+
+            .video-cell {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .video-container {
+                aspect-ratio: 16 / 9;
+                flex: 1;
+            }
+
+            .model-name {
+                border-top: none;
+                border-left: 1px solid #dee2e6;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="page-links" aria-label="Benchmark pages">
+                <a class="page-link active" href="index.html">Robotics Tasks</a>
+                <a class="page-link" href="physics.html">Physics Tasks</a>
+                <a class="page-link" href="analysis.html">Analysis Plots</a>
+            </nav>
+            <h1>🤖 Evaluating Video Diffusion model for Robotics</h1>
+            <p class="subtitle">ECE 598ZZ - Generative Modeling with Diffusion and Flow Matching Models</p>
+        </header>
+
+        <div class="comparison-grid">
+            <!-- Header Row -->
+            <div class="task-header">Task</div>
+            <div class="model-header">Grok</div>
+            <div class="model-header">Sora 2</div>
+            <div class="model-header">Veo2</div>
+            <div class="model-header">Veo3.1Fast</div>
+            <div class="model-header">Veo3.1Quality</div>
+            <div class="model-header">Wan2.1</div>
+
+            <!-- Task 1: Pour water into mug -->
+            <div class="task-header" data-task="T1">
+                <strong>T1</strong><br>
+                Pour water into mug
+                <button class="task-play-button" type="button" data-task="T1">Play task</button>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T1" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Grok/T1_Grok.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Grok</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T1" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Sora/T1_Sora2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Sora</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T1" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Veo2/T1_Veo2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Veo2</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T1" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Veo3.1Fast/T1_Veo3.1Fast.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Veo3.1Fast</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T1" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Veo3.1Quality/T1_Veo3.1Quality.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Veo3.1Quality</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T1" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Wan2.1/T1_Wan2.1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Wan2.1</div>
+            </div>
+
+            <!-- Task 2: Place spatula on pan -->
+            <div class="task-header" data-task="T2">
+                <strong>T2</strong><br>
+                Place spatula on pan
+                <button class="task-play-button" type="button" data-task="T2">Play task</button>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T2" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Grok/T2_Grok.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Grok</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T2" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Sora/T2_Sora2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Sora</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T2" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Veo2/T2_Veo2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Veo2</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T2" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Veo3.1Fast/T2_Veo3.1Fast.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Veo3.1Fast</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T2" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Veo3.1Quality/T2_Veo3.1Quality.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Veo3.1Quality</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T2" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Wan2.1/T2_Wan2.1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Wan2.1</div>
+            </div>
+
+            <!-- Task 3: Wipe crumbs off table -->
+            <div class="task-header" data-task="T3">
+                <strong>T3</strong><br>
+                Wipe crumbs off table
+                <button class="task-play-button" type="button" data-task="T3">Play task</button>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T3" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Grok/T3_Grok.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Grok</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T3" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Sora/T3_Sora2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Sora</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T3" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Veo2/T3_Veo2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Veo2</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T3" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Veo3.1Fast/T3_Veo3.1Fast.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Veo3.1Fast</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T3" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Veo3.1Quality/T3_Veo3.1Quality.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Veo3.1Quality</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T3" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Wan2.1/T3_Wan2.1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Wan2.1</div>
+            </div>
+
+            <!-- Task 4: Lift lid from pot -->
+            <div class="task-header" data-task="T4">
+                <strong>T4</strong><br>
+                Lift lid from pot
+                <button class="task-play-button" type="button" data-task="T4">Play task</button>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T4" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Grok/T4_Grok.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Grok</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T4" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Sora/T4_Sora2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Sora</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T4" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Veo2/T4_Veo2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Veo2</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T4" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Veo3.1Fast/T4_Veo3.1Fast.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Veo3.1Fast</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T4" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Veo3.1Quality/T4_Veo3.1Quality.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Veo3.1Quality</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T4" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Wan2.1/T4_Wan2.1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Wan2.1</div>
+            </div>
+
+            <!-- Task 5: Push cube to target marker -->
+            <div class="task-header" data-task="T5">
+                <strong>T5</strong><br>
+                Push cube to target marker
+                <button class="task-play-button" type="button" data-task="T5">Play task</button>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T5" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Grok/T5_Grok.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Grok</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T5" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Sora/T5_Sora2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Sora</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T5" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Veo2/T5_Veo2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Veo2</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T5" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Veo3.1Fast/T5_Veo3.1Fast.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Veo3.1Fast</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T5" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Veo3.1Quality/T5_Veo3.1Quality.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Veo3.1Quality</div>
+            </div>
+            <div class="video-cell">
+                <div class="video-container">
+                    <video data-task="T5" preload="metadata" playsinline muted>
+                        <source src="Grok_Videos/Wan2.1/T5_Wan2.1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="model-name">Wan2.1</div>
+            </div>
+        </div>
+
+        <div class="task-descriptions">
+            <h2>📋 Task Descriptions</h2>
+            <div class="task-item">
+                <div class="task-title">T1: Pour water into mug</div>
+                <p>Tabletop scene with static camera. A robot arm picks up a glass bottle, tilts it over a ceramic mug, and pours it into the mug, then returns the bottle to the table.</p>
+            </div>
+            <div class="task-item">
+                <div class="task-title">T2: Place spatula on pan</div>
+                <p>A single robotic arm on a kitchen counter picks up a metal spatula from the table and carefully places it inside a frying pan.</p>
+            </div>
+            <div class="task-item">
+                <div class="task-title">T3: Wipe crumbs off table</div>
+                <p>Top-down camera above a table. A robot arm uses a yellow sponge to wipe a line of crumbs toward the right side of the table in one smooth motion.</p>
+            </div>
+            <div class="task-item">
+                <div class="task-title">T4: Lift lid from pot</div>
+                <p>Side view of a table. A robot arm grasps the lid of a cooking pot, lifts it straight up, then moves it to the right and sets it down.</p>
+            </div>
+            <div class="task-item">
+                <div class="task-title">T5: Push cube to target marker</div>
+                <p>Top-down camera. A blue cube sits on the left of the table and a red circular marker is on the right. A robot arm uses its gripper as a pusher to push the cube across the table until it stops on top of the red marker.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const taskButtons = document.querySelectorAll('.task-play-button');
+            const videos = document.querySelectorAll('.video-container video');
+
+            // Ensure native controls stay hidden and clicks toggle pause/play
+            videos.forEach(video => {
+                video.controls = false;
+                video.preload = 'metadata';
+
+                video.addEventListener('click', event => {
+                    if (video.paused) {
+                        video.play().catch(() => {});
+                    } else {
+                        video.pause();
+                    }
+                    event.stopPropagation();
+                });
+            });
+
+            taskButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const taskId = button.dataset.task;
+                    const taskVideos = document.querySelectorAll(`video[data-task="${taskId}"]`);
+
+                    taskVideos.forEach(video => {
+                        video.pause();
+                        video.currentTime = 0;
+                        video.play().catch(err => {
+                            console.warn(`Unable to play video for ${taskId}`, err);
+                        });
+                    });
+
+                    button.textContent = 'Replay task';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

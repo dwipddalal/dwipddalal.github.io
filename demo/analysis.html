@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Analysis - Kinematics Plots - ECE 598ZZ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #1f2a37;
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .page-links {
+            display: inline-flex;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .page-link {
+            padding: 6px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .page-link:hover {
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        .page-link.active {
+            background: rgba(255, 255, 255, 0.25);
+            color: #fff;
+        }
+
+        .category-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+
+        .category-title {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 15px;
+        }
+
+        .category-label {
+            width: fit-content;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.9em;
+            background: rgba(102, 126, 234, 0.15);
+            color: #5a67d8;
+        }
+
+        .category-description {
+            color: #4a5568;
+        }
+
+        .plot-grid {
+            display: grid;
+            grid-template-columns: 150px repeat(5, 1fr);
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .task-header, .model-header, .plot-cell {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(17, 25, 40, 0.08);
+        }
+
+        .model-header {
+            padding: 12px;
+            text-align: center;
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 0.95em;
+        }
+
+        .task-header {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .task-label {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .task-code {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #5a67d8;
+        }
+
+        .task-name {
+            font-size: 0.95em;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .plot-cell {
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .plot-cell:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(17, 25, 40, 0.15);
+        }
+
+        .plot-container {
+            position: relative;
+            width: 100%;
+            background: #f8f9fa;
+        }
+
+        .plot-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .plot-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(102, 126, 234, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .plot-cell:hover .plot-overlay {
+            opacity: 1;
+        }
+
+        .plot-overlay span {
+            color: white;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .model-name {
+            padding: 8px;
+            text-align: center;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
+
+        @media (max-width: 1200px) {
+            .plot-grid {
+                grid-template-columns: 120px repeat(5, 1fr);
+                gap: 10px;
+            }
+
+            .model-header {
+                font-size: 0.85em;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .plot-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .model-header {
+                display: none;
+            }
+
+            .task-header {
+                grid-column: 1 / -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="page-links" aria-label="Benchmark pages">
+                <a class="page-link" href="index.html">Robotics Tasks</a>
+                <a class="page-link" href="physics.html">Physics Tasks</a>
+                <a class="page-link active" href="analysis.html">Analysis Plots</a>
+            </nav>
+            <h1>📊 Kinematics Analysis</h1>
+            <p class="subtitle">Position, Velocity, and Acceleration tracking for physics video</p>
+        </header>
+
+        <!-- Gravity Section -->
+        <div class="category-section" id="gravity">
+            <div class="category-title">
+                <span class="category-label">Gravity Experiments</span>
+                <p class="category-description">Tracking ball motion under Earth gravity (G1) and simulated Moon gravity (G2).</p>
+            </div>
+            <div class="plot-grid">
+                <div class="task-header">Task</div>
+                <div class="model-header">Grok Imagine</div>
+                <div class="model-header">Sora2</div>
+                <div class="model-header">Veo2</div>
+                <div class="model-header">Veo3.1Fast</div>
+                <div class="model-header">Wan2.1</div>
+
+                <!-- G1: Earth Fall -->
+                <div class="task-header">
+                    <div class="task-label">
+                        <span class="task-code">G1</span>
+                        <span class="task-name">Earth Fall</span>
+                    </div>
+                </div>
+                <a class="plot-cell" href="detail.html?video=G1_EarthFall_Grok" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis/G1_EarthFall_Grok_kinematics.png" alt="G1 Earth Fall - Grok">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Grok Imagine</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=G1_EarthFall_Sora2" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis/G1_EarthFall_Sora2_kinematics.png" alt="G1 Earth Fall - Sora2">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Sora2</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=G1_EarthFall_Veo2" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis/G1_EarthFall_Veo2_kinematics.png" alt="G1 Earth Fall - Veo2">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Veo2</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=G1_EarthFall_Veo3" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis/G1_EarthFall_Veo3_kinematics.png" alt="G1 Earth Fall - Veo3">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Veo3.1Fast</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=G1_EarthFall_Wan2.1" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis/G1_EarthFall_Wan2.1_kinematics.png" alt="G1 Earth Fall - Wan2.1">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Wan2.1</div>
+                </a>
+
+                <!-- G2: Moon Fall -->
+                <div class="task-header">
+                    <div class="task-label">
+                        <span class="task-code">G2</span>
+                        <span class="task-name">Moon Fall</span>
+                    </div>
+                </div>
+                <a class="plot-cell" href="detail.html?video=G2_MoonFall_Grok" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis/G2_MoonFall_Grok_kinematics.png" alt="G2 Moon Fall - Grok">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Grok Imagine</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=G2_MoonFall_Sora2" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis/G2_MoonFall_Sora2_kinematics.png" alt="G2 Moon Fall - Sora2">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Sora2</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=G2_MoonFall_Veo2" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis/G2_MoonFall_Veo2_kinematics.png" alt="G2 Moon Fall - Veo2">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Veo2</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=G2_MoonFall_Veo3" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis/G2_MoonFall_Veo3_kinematics.png" alt="G2 Moon Fall - Veo3">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Veo3.1Fast</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=G2_MoonFall_Wan2.1" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis/G2_MoonFall_Wan2.1_kinematics.png" alt="G2 Moon Fall - Wan2.1">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Wan2.1</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Buoyancy Section -->
+        <div class="category-section" id="buoyancy">
+            <div class="category-title">
+                <span class="category-label">Buoyancy Experiments</span>
+                <p class="category-description">Tracking object motion in water: sinking, floating, and buoyant pop-up behavior.</p>
+            </div>
+            <div class="plot-grid">
+                <div class="task-header">Task</div>
+                <div class="model-header">Grok Imagine</div>
+                <div class="model-header">Sora2</div>
+                <div class="model-header">Veo2</div>
+                <div class="model-header">Veo3.1Fast</div>
+                <div class="model-header">Wan2.1</div>
+
+                <!-- B1: Heavy Sink -->
+                <div class="task-header">
+                    <div class="task-label">
+                        <span class="task-code">B1</span>
+                        <span class="task-name">Heavy Sink</span>
+                    </div>
+                </div>
+                <a class="plot-cell" href="detail.html?video=B1_HeavySink_Grok" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis_buoyancy/B1_HeavySink_Grok_kinematics.png" alt="B1 Heavy Sink - Grok">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Grok Imagine</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=B1_HeavySink_Sora2" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis_buoyancy/B1_HeavySink_Sora2_kinematics.png" alt="B1 Heavy Sink - Sora2">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Sora2</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=B1_HeavySink_Veo2" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis_buoyancy/B1_HeavySink_Veo2_kinematics.png" alt="B1 Heavy Sink - Veo2">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Veo2</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=B1_HeavySink_Veo3" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis_buoyancy/B1_HeavySink_Veo3_kinematics.png" alt="B1 Heavy Sink - Veo3">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Veo3.1Fast</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=B1_HeavySink_Wan2.1" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis_buoyancy/B1_HeavySink_Wan2.1_kinematics.png" alt="B1 Heavy Sink - Wan2.1">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Wan2.1</div>
+                </a>
+
+                <!-- B2: Light Float -->
+                <div class="task-header">
+                    <div class="task-label">
+                        <span class="task-code">B2</span>
+                        <span class="task-name">Light Float</span>
+                    </div>
+                </div>
+                <a class="plot-cell" href="detail.html?video=B2_LightFloat_Grok" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis_buoyancy/B2_LightFloat_Grok_kinematics.png" alt="B2 Light Float - Grok">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Grok Imagine</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=B2_LightFloat_Sora2" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis_buoyancy/B2_LightFloat_Sora2_kinematics.png" alt="B2 Light Float - Sora2">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Sora2</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=B2_LightFloat_Veo2" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis_buoyancy/B2_LightFloat_Veo2_kinematics.png" alt="B2 Light Float - Veo2">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Veo2</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=B2_LightFloat_Veo3" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis_buoyancy/B2_LightFloat_Veo3_kinematics.png" alt="B2 Light Float - Veo3">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Veo3.1Fast</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=B2_LightFloat_Wan2.1" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis_buoyancy/B2_LightFloat_Wan2.1_kinematics.png" alt="B2 Light Float - Wan2.1">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Wan2.1</div>
+                </a>
+
+                <!-- B3: Pop-up -->
+                <div class="task-header">
+                    <div class="task-label">
+                        <span class="task-code">B3</span>
+                        <span class="task-name">Pop-up</span>
+                    </div>
+                </div>
+                <a class="plot-cell" href="detail.html?video=B3_PopUp_Grok" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis_buoyancy/B3_PopUp_Grok_kinematics.png" alt="B3 Pop-up - Grok">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Grok Imagine</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=B3_PopUp_Sora2" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis_buoyancy/B3_PopUp_Sora2_kinematics.png" alt="B3 Pop-up - Sora2">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Sora2</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=B3_PopUp_Veo2" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis_buoyancy/B3_PopUp_Veo2_kinematics.png" alt="B3 Pop-up - Veo2">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Veo2</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=B3_PopUp_Veo3" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis_buoyancy/B3_PopUp_Veo3_kinematics.png" alt="B3 Pop-up - Veo3">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Veo3.1Fast</div>
+                </a>
+                <a class="plot-cell" href="detail.html?video=B3_PopUp_Wan2.1" target="_blank">
+                    <div class="plot-container">
+                        <img src="analysis_buoyancy/B3_PopUp_Wan2.1_kinematics.png" alt="B3 Pop-up - Wan2.1">
+                        <div class="plot-overlay"><span>View Detail →</span></div>
+                    </div>
+                    <div class="model-name">Wan2.1</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
