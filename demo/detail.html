@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Analysis Detail - ECE 598ZZ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        .title-section h1 {
+            font-size: 1.8em;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .title-section .subtitle {
+            color: #888;
+            font-size: 0.95em;
+        }
+
+        .back-link {
+            padding: 8px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .back-link:hover {
+            background: #5a67d8;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .video-section {
+            background: #16213e;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .video-section h2 {
+            font-size: 1.1em;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+        }
+
+        .video-info {
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .info-card {
+            background: #1a1a2e;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .info-card .label {
+            font-size: 0.8em;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        .info-card .value {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .plots-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .plot-card {
+            background: #16213e;
+            border-radius: 12px;
+            padding: 15px;
+            flex: 1;
+        }
+
+        .plot-card h3 {
+            font-size: 0.95em;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .plot-canvas-container {
+            position: relative;
+            width: 100%;
+            height: 140px;
+            background: #1a1a2e;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .plot-canvas-container canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .time-display {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(102, 126, 234, 0.95);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 1.1em;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-size: 1.2em;
+            color: #888;
+        }
+
+        .error {
+            background: #dc2626;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        @media (max-width: 1200px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .plot-canvas-container {
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="loading" class="loading">Loading analysis data...</div>
+        <div id="content" style="display: none;">
+            <header>
+                <div class="title-section">
+                    <h1 id="page-title">Video Analysis</h1>
+                    <p class="subtitle" id="page-subtitle">Kinematics tracking synchronized with video playback</p>
+                </div>
+                <a href="analysis.html" class="back-link">← Back to Analysis</a>
+            </header>
+
+            <div class="main-content">
+                <div class="video-section">
+                    <h2>Video Playback</h2>
+                    <div class="video-wrapper">
+                        <video id="video" controls playsinline>
+                            <source id="video-source" src="" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <div class="info-card">
+                            <div class="label">Duration</div>
+                            <div class="value" id="duration-value">-</div>
+                        </div>
+                        <div class="info-card">
+                            <div class="label">FPS</div>
+                            <div class="value" id="fps-value">-</div>
+                        </div>
+                        <div class="info-card">
+                            <div class="label">Avg Acceleration</div>
+                            <div class="value" id="accel-value">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plots-section">
+                    <div class="plot-card">
+                        <h3>Position (Y) vs Time</h3>
+                        <div class="plot-canvas-container">
+                            <canvas id="position-canvas"></canvas>
+                        </div>
+                    </div>
+                    <div class="plot-card">
+                        <h3>Velocity (Y) vs Time</h3>
+                        <div class="plot-canvas-container">
+                            <canvas id="velocity-canvas"></canvas>
+                        </div>
+                    </div>
+                    <div class="plot-card">
+                        <h3>Acceleration (Y) vs Time</h3>
+                        <div class="plot-canvas-container">
+                            <canvas id="acceleration-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="time-display">
+                Time: <span id="current-time">0.00</span>s
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let analysisData = null;
+        let videoData = null;
+        let animationId = null;
+
+        // Get video key from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoKey = urlParams.get('video');
+
+        if (!videoKey) {
+            document.getElementById('loading').innerHTML = '<div class="error">No video specified. Use ?video=VIDEO_KEY in the URL.</div>';
+        } else {
+            loadData();
+        }
+
+        async function loadData() {
+            try {
+                const response = await fetch('analysis_data.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status} while loading analysis_data.json`);
+                }
+                analysisData = await response.json();
+                
+                if (!analysisData[videoKey]) {
+                    throw new Error(`Video "${videoKey}" not found in analysis data.`);
+                }
+                
+                videoData = analysisData[videoKey];
+                initializePage();
+            } catch (error) {
+                const isFile = window.location.protocol === 'file:';
+                if (isFile) {
+                    // Fallback: file:// mode – no fetch. Build paths from the video key and show static plots.
+                    initializeFallbackFromKey();
+                } else {
+                    const hint = '';
+                    document.getElementById('loading').innerHTML =
+                        `<div class="error">Error loading analysis data: ${error.message}<br><small>${hint}</small></div>`;
+                }
+            }
+        }
+
+        function computeVideoPathFromKey(key) {
+            // key format examples:
+            //  - G1_EarthFall_Grok
+            //  - G2_MoonFall_Sora2
+            //  - B1_HeavySink_Veo2
+            //  - B3_PopUp_Wan2.1
+            const parts = key.split('_');
+            const taskId = parts[0]; // e.g., G1, B2
+            const model = parts[parts.length - 1]; // e.g., Grok, Sora2, Veo2, Veo3, Wan2.1
+            const taskName = parts.slice(1, -1).join('_'); // e.g., EarthFall
+
+            const modelDir = `Physics/${model}`;
+            if (model === 'Grok') {
+                // Grok files don't include the task name in the filename
+                return `${modelDir}/${taskId}_Grok.mp4`;
+            }
+            return `${modelDir}/${taskId}_${taskName}_${model}.mp4`;
+        }
+
+        function computeKinematicsPngFromKey(key) {
+            // Only Gravity (G*) and Buoyancy (B*) have PNGs in repo
+            const categoryLetter = key[0];
+            const dir = categoryLetter === 'B' ? 'analysis_buoyancy' : 'analysis';
+            return `${dir}/${key}_kinematics.png`;
+        }
+
+        function initializeFallbackFromKey() {
+            // Render a static view using the PNG and computed video path (no JSON fetch)
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+
+            // Basic title info from key
+            const parts = videoKey.split('_');
+            const taskId = parts[0];
+            const taskNamePretty = parts.slice(1, -1).join(' ');
+            const model = parts[parts.length - 1];
+            document.getElementById('page-title').textContent = `${taskId}: ${taskNamePretty} - ${model}`;
+            document.getElementById('page-subtitle').textContent = `Local file mode: static kinematics image. Run a local server for interactive plots.`;
+
+            // Video
+            const videoPath = computeVideoPathFromKey(videoKey);
+            const video = document.getElementById('video');
+            document.getElementById('video-source').src = videoPath;
+            video.load();
+
+            // Replace plots with static PNG
+            const plotsSection = document.querySelector('.plots-section');
+            const pngPath = computeKinematicsPngFromKey(videoKey);
+            plotsSection.innerHTML = `
+                <div class="plot-card">
+                    <h3>Combined Kinematics (static)</h3>
+                    <div class="plot-container">
+                        <img src="${pngPath}" alt="${videoKey} kinematics">
+                    </div>
+                </div>
+            `;
+        }
+        function initializePage() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+
+            // Set page title
+            const parts = videoKey.split('_');
+            const taskId = parts[0];
+            const taskName = parts.slice(1, -1).join(' ');
+            const model = parts[parts.length - 1];
+            
+            document.getElementById('page-title').textContent = `${taskId}: ${taskName} - ${model}`;
+            document.getElementById('page-subtitle').textContent = `Category: ${videoData.category} | Task: ${videoData.task} | Model: ${videoData.model}`;
+
+            // Set video source
+            const video = document.getElementById('video');
+            document.getElementById('video-source').src = videoData.video_path;
+            video.load();
+
+            // Set info values
+            document.getElementById('duration-value').textContent = videoData.duration.toFixed(2) + 's';
+            document.getElementById('fps-value').textContent = videoData.fps;
+            document.getElementById('accel-value').textContent = videoData.avg_acceleration.toFixed(1) + ' px/s²';
+
+            // Initialize canvases
+            initCanvases();
+
+            // Start animation loop
+            video.addEventListener('play', startAnimation);
+            video.addEventListener('pause', stopAnimation);
+            video.addEventListener('seeked', updatePlots);
+            video.addEventListener('timeupdate', updateTimeDisplay);
+
+            // Initial draw
+            drawAllPlots(0);
+        }
+
+        function initCanvases() {
+            const canvases = ['position-canvas', 'velocity-canvas', 'acceleration-canvas'];
+            canvases.forEach(id => {
+                const canvas = document.getElementById(id);
+                const container = canvas.parentElement;
+                canvas.width = container.clientWidth * 2;
+                canvas.height = container.clientHeight * 2;
+                canvas.style.width = container.clientWidth + 'px';
+                canvas.style.height = container.clientHeight + 'px';
+            });
+        }
+
+        function drawPlot(canvasId, data, label, color, currentTime) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            const padding = { top: 20, right: 40, bottom: 30, left: 60 };
+
+            // Clear canvas
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillRect(0, 0, width, height);
+
+            const plotWidth = width - padding.left - padding.right;
+            const plotHeight = height - padding.top - padding.bottom;
+
+            // Find data range
+            const timeData = videoData.time;
+            const minTime = 0;
+            const maxTime = videoData.duration;
+            const minVal = Math.min(...data);
+            const maxVal = Math.max(...data);
+            const valRange = maxVal - minVal || 1;
+
+            // Scale functions
+            const scaleX = (t) => padding.left + (t / maxTime) * plotWidth;
+            const scaleY = (v) => padding.top + plotHeight - ((v - minVal) / valRange) * plotHeight;
+
+            // Draw grid lines
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 4; i++) {
+                const y = padding.top + (i / 4) * plotHeight;
+                ctx.beginPath();
+                ctx.moveTo(padding.left, y);
+                ctx.lineTo(width - padding.right, y);
+                ctx.stroke();
+            }
+
+            // Draw data line
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            for (let i = 0; i < timeData.length; i++) {
+                const x = scaleX(timeData[i]);
+                const y = scaleY(data[i]);
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.stroke();
+
+            // Draw current time indicator (red line)
+            if (currentTime >= 0 && currentTime <= maxTime) {
+                const lineX = scaleX(currentTime);
+                ctx.strokeStyle = '#ef4444';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(lineX, padding.top);
+                ctx.lineTo(lineX, height - padding.bottom);
+                ctx.stroke();
+
+                // Draw circle at intersection
+                const timeIndex = timeData.findIndex(t => t >= currentTime);
+                if (timeIndex >= 0 && timeIndex < data.length) {
+                    const yVal = data[timeIndex];
+                    ctx.fillStyle = '#ef4444';
+                    ctx.beginPath();
+                    ctx.arc(lineX, scaleY(yVal), 8, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            // Draw axes labels
+            ctx.fillStyle = '#888';
+            ctx.font = '20px sans-serif';
+            ctx.textAlign = 'right';
+            ctx.fillText(maxVal.toFixed(0), padding.left - 10, padding.top + 15);
+            ctx.fillText(minVal.toFixed(0), padding.left - 10, height - padding.bottom);
+
+            ctx.textAlign = 'center';
+            ctx.fillText('0', padding.left, height - 10);
+            ctx.fillText(maxTime.toFixed(1) + 's', width - padding.right, height - 10);
+        }
+
+        function drawAllPlots(currentTime) {
+            drawPlot('position-canvas', videoData.position, 'Position (px)', '#3b82f6', currentTime);
+            drawPlot('velocity-canvas', videoData.velocity, 'Velocity (px/s)', '#10b981', currentTime);
+            drawPlot('acceleration-canvas', videoData.acceleration, 'Acceleration (px/s²)', '#f59e0b', currentTime);
+        }
+
+        function updatePlots() {
+            const video = document.getElementById('video');
+            drawAllPlots(video.currentTime);
+        }
+
+        function updateTimeDisplay() {
+            const video = document.getElementById('video');
+            document.getElementById('current-time').textContent = video.currentTime.toFixed(2);
+        }
+
+        function startAnimation() {
+            function animate() {
+                const video = document.getElementById('video');
+                if (!video.paused) {
+                    drawAllPlots(video.currentTime);
+                    animationId = requestAnimationFrame(animate);
+                }
+            }
+            animate();
+        }
+
+        function stopAnimation() {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            initCanvases();
+            const video = document.getElementById('video');
+            drawAllPlots(video.currentTime);
+        });
+    </script>
+</body>
+</html>
+
