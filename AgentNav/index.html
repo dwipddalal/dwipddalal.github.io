@@ -3,33 +3,1381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgentNav - Autonomous Navigation Research</title>
+    <title>CityNav - City Navigation in the Wild</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-card: #ffffff;
+            --accent-primary: #2563eb;
+            --accent-secondary: #0891b2;
+            --accent-highlight: #059669;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4b5563;
+            --text-muted: #9ca3af;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'SF Pro Display', 'Doto', 'Arial', sans-serif;
-            background-color: #000;
+            font-family: 'Source Serif 4', Georgia, serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
-        /* Include header styles for proper layout */
-        .hero.is-fullheight {
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
+        /* Video Grid Hero Section - Standalone */
+        .video-hero {
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            position: relative;
         }
 
+        .video-grid {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 2px;
+        }
+
+        .video-grid video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Hero Overlay with Title */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                rgba(0, 0, 0, 0.5) 0%,
+                rgba(0, 0, 0, 0.65) 40%,
+                rgba(0, 0, 0, 0.75) 70%,
+                rgba(0, 0, 0, 0.9) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-size: clamp(4rem, 12vw, 8rem);
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            animation: fadeInScale 1.5s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Title Section - Below Videos */
+        .title-section {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: var(--bg-primary);
+        }
+
+        .project-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .project-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .project-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--text-secondary);
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .authors {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .author {
+            color: var(--text-primary);
+        }
+
+        .author sup {
+            color: var(--accent-primary);
+            font-size: 0.7rem;
+        }
+
+        .affiliations {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .equal-contrib {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .action-btn.primary {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .action-btn.primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .action-btn.secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .action-btn.secondary:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 1.5rem;
+            background: var(--accent-primary);
+            border-radius: 2px;
+        }
+
+        /* Abstract Section */
+        .abstract-content {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .abstract-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .abstract-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: var(--accent-primary);
+            font-weight: 500;
+        }
+
+        /* Demo Videos Section - 2 per row */
+        .demos-section {
+            background: var(--bg-secondary);
+        }
+
+        .demo-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .video-showcase {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .video-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .video-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 10px 40px rgba(37, 99, 235, 0.15);
+        }
+
+        .video-card video {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-card-info {
+            padding: 1rem 1.25rem;
+        }
+
+        .video-card-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Method Section */
+        .method-section {
+            background: var(--bg-secondary);
+        }
+
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .method-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .method-card:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
+        }
+
+        .method-card-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+        }
+
+        .method-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .method-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Results Tables */
+        .results-section {
+            background: var(--bg-primary);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 3rem;
+        }
+
+        .table-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .results-table th,
+        .results-table td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .results-table th {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .results-table td {
+            color: var(--text-secondary);
+        }
+
+        .results-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .results-table tr:hover td {
+            background: rgba(37, 99, 235, 0.03);
+        }
+
+        .results-table .method-name {
+            text-align: left;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .results-table .best {
+            color: var(--accent-highlight);
+            font-weight: 600;
+        }
+
+        .results-table .city-header {
+            color: var(--accent-primary);
+            font-size: 0.8rem;
+        }
+
+        /* Dataset Section */
+        .dataset-section {
+            background: var(--bg-secondary);
+        }
+
+        .dataset-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .dataset-table-wrapper {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        /* BibTeX Section */
+        .bibtex-section {
+            background: var(--bg-primary);
+        }
+
+        .bibtex-box {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .bibtex-code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            white-space: pre-wrap;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .copy-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 0;
+            background: var(--bg-secondary);
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .footer-text a {
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Task Box */
+        .task-box {
+            background: rgba(37, 99, 235, 0.05);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .task-box strong {
+            color: var(--accent-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(8, 1fr);
+            }
+
+            .video-showcase {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .abstract-content {
+                padding: 1.5rem;
+            }
+
+            .authors {
+                gap: 0.25rem 1rem;
+                font-size: 0.95rem;
+            }
+
+            .title-section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
-    <!-- Include the header -->
-    <div w3-include-html="header.html"></div>
+    <!-- Video Grid Hero - Full Screen, Standalone -->
+    <section class="video-hero">
+        <div class="video-grid">
+            <video autoplay loop muted playsinline>
+                <source src="Resources/gpt-5-One-World-Trade-Center-path-01-s2000-d150_20251209_213211_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline>
+                <source src="Resources/gpt-5-One-World-Trade-Center-path-01-s2000-d150_20251209_214915_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline>
+                <source src="Resources/gpt-5-Rockefeller-Center-path-01-s2000-d150_20251209_233455_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline>
+                <source src="Resources/gpt-5-Rockefeller-Center-path-01-s2000-d150_20251209_234256_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline>
+                <source src="Resources/gpt-5-Rockefeller-Center-path-01-s2000-d150_20251209_235229_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline>
+                <source src="Resources/gpt-5-Times-Square-path-01-s2000-d150_20251209_215920_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline>
+                <source src="Resources/gpt-5-Times-Square-path-01-s2000-d150_20251209_225804_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline>
+                <source src="Resources/gpt-5-Times-Square-path-01-s2000-d150_20251209_230657_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline>
+                <source src="Resources/gpt-5-Washington-Square-Park-path-01-s2000-d150_20251209_231646_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline>
+                <source src="Resources/gpt-5-Washington-Square-Park-path-01-s2000-d150_20251209_232658_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline>
+                <source src="Resources/gpt-5-Empire-State-Building-path-01-s2000-d150_20251210_005935_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline>
+                <source src="Resources/gpt-5-Flatiron-Building-path-01-s2000-d150_20251210_004651_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline>
+                <source src="Resources/gpt-5-Grand-Central-Terminal-path-01-s2000-d150_20251210_002247_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline>
+                <source src="Resources/gpt-5-Madison-Square-Garden-path-01-s2000-d150_20251210_003255_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline>
+                <source src="Resources/gpt-5-United-Nations-Headquarters-path-01-s2000-d1_20251210_000018_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline>
+                <source src="Resources/gpt-5-The-Met-path-01-s2000-d150_20251210_011035_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="hero-overlay">
+            <h1 class="hero-title">AgentNav</h1>
+        </div>
+    </section>
 
-    <!-- Include w3.js for HTML includes -->
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <!-- Title Section - Below Videos -->
+    <section class="title-section">
+        <!-- <h1 class="project-title">CityNav</h1> -->
+        <p class="project-subtitle">City Navigation in the Wild: Exploring Emergent Navigation from Web-Scale Knowledge in MLLMs</p>
+        
+        <div class="authors">
+            <span class="author">Dwip Dalal<sup>1,*,†</sup></span>
+            <span class="author">Utkarsh Mishra<sup>2,*</sup></span>
+            <span class="author">Narendra Ahuja<sup>1</sup></span>
+            <span class="author">Nebojsa Jojic<sup>3</sup></span>
+        </div>
+        <div class="affiliations">
+            <sup>1</sup>University of Illinois Urbana-Champaign &nbsp;&nbsp;
+            <sup>2</sup>Texas A&M University &nbsp;&nbsp;
+            <sup>3</sup>Microsoft Research, Redmond
+        </div>
+        <div class="equal-contrib">
+            <sup>*</sup>Equal contribution &nbsp;&nbsp; <sup>†</sup>Work performed during internship at Microsoft Research
+        </div>
+        
+        <div class="action-buttons">
+            <a href="#" class="action-btn primary">
+                <i class="fas fa-file-pdf"></i> Paper
+            </a>
+            <a href="#" class="action-btn secondary">
+                <i class="fab fa-github"></i> Code
+            </a>
+            <a href="#" class="action-btn secondary">
+                <i class="fas fa-database"></i> Dataset
+            </a>
+            <a href="#" class="action-btn secondary">
+                <i class="fas fa-scroll"></i> arXiv
+            </a>
+        </div>
+    </section>
+
+    <!-- Abstract Section -->
+    <section class="section" id="abstract">
+        <div class="container">
+            <h2 class="section-title">Abstract</h2>
+            <div class="abstract-content fade-in">
+                <p>
+                    Leveraging multimodal large language models (MLLMs) to develop embodied agents offers significant promise for addressing complex real-world tasks. However, current evaluation benchmarks remain predominantly language-centric or heavily reliant on simulated environments, rarely probing the nuanced, <span class="highlight">knowledge-intensive reasoning</span> essential for practical, real-world scenarios.
+                </p>
+                <p>
+                    To bridge this critical gap, we introduce the task of <span class="highlight">Sparsely Grounded Visual Navigation</span>, explicitly designed to evaluate the sequential decision-making abilities of MLLMs in challenging, knowledge-intensive real-world environments. We operationalize this task with <span class="highlight">CityNav</span>, a comprehensive benchmark encompassing <strong>four diverse global cities</strong>, specifically constructed to assess raw MLLM-driven agents in city navigation.
+                </p>
+                <p>
+                    Agents are required to rely solely on visual inputs and internal multimodal reasoning to sequentially navigate <span class="highlight">50+ decision points</span> without additional environmental annotations or specialized architectural modifications. Crucially, agents must autonomously achieve localization through interpreting city-specific cues and recognizing landmarks, perform spatial reasoning, and strategically plan and execute routes to their destinations.
+                </p>
+                <p>
+                    Through extensive evaluations, we demonstrate that current state-of-the-art MLLMs and standard reasoning techniques (e.g., Chain-of-Thought, Reflection) significantly underperform in this challenging setting. To address this, we propose <span class="highlight">Verbalization of Path (VoP)</span>, which explicitly grounds the agent's internal reasoning by probing an explicit cognitive map from the MLLM, substantially enhancing navigation success.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Task Definition -->
+    <section class="section method-section">
+        <div class="container">
+            <h2 class="section-title">The Challenge</h2>
+            <div class="task-box fade-in">
+                <strong>Sparsely Grounded Long-Range Navigation:</strong> The agent must navigate without any landmark annotations or explicit city navigation instructions, relying exclusively on images observed at each intersection. This task requires agents to leverage their intrinsic world knowledge to facilitate spatial understanding, accurate self-positioning, and sequential decision-making to reach the goal.
+            </div>
+            
+            <div class="method-grid">
+                <div class="method-card fade-in">
+                    <div class="method-card-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Knowledge-Intensive Reasoning</h3>
+                    <p>Agents must retrieve relevant knowledge, reason about spatial relationships, plan actions, execute them, and revise plans based on new visual evidence—all without external guidance.</p>
+                </div>
+                <div class="method-card fade-in">
+                    <div class="method-card-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3>Long-Range Navigation</h3>
+                    <p>Routes span approximately 2km with 50+ decision points, requiring sustained reasoning over extended sequences—far beyond existing benchmarks limited to ~350m.</p>
+                </div>
+                <div class="method-card fade-in">
+                    <div class="method-card-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Global Diversity</h3>
+                    <p>Four cities—New York, Tokyo, Vienna, São Paulo—test adaptation to diverse languages, signage systems, street layouts, and architectural styles.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Videos Section - 2 per row, 8 videos -->
+    <section class="section demos-section" id="demos">
+        <div class="container">
+            <h2 class="section-title">Navigation Demos</h2>
+            <p class="demo-intro fade-in">
+                Watch AgentNav successfully navigate to iconic landmarks using only visual observations and internal reasoning from GPT-5.
+            </p>
+            
+            <div class="video-showcase">
+                <div class="video-card fade-in">
+                    <video autoplay loop muted playsinline>
+                        <source src="Resources/gpt-5-One-World-Trade-Center-path-01-s2000-d150_20251209_213211_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-card-info">
+                        <div class="video-card-title">→ One World Trade Center</div>
+                    </div>
+                </div>
+                <div class="video-card fade-in">
+                    <video autoplay loop muted playsinline>
+                        <source src="Resources/gpt-5-Times-Square-path-01-s2000-d150_20251209_215920_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-card-info">
+                        <div class="video-card-title">→ Times Square</div>
+                    </div>
+                </div>
+                <div class="video-card fade-in">
+                    <video autoplay loop muted playsinline>
+                        <source src="Resources/gpt-5-Rockefeller-Center-path-01-s2000-d150_20251209_233455_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-card-info">
+                        <div class="video-card-title">→ Rockefeller Center</div>
+                    </div>
+                </div>
+                <div class="video-card fade-in">
+                    <video autoplay loop muted playsinline>
+                        <source src="Resources/gpt-5-Empire-State-Building-path-01-s2000-d150_20251210_005935_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-card-info">
+                        <div class="video-card-title">→ Empire State Building</div>
+                    </div>
+                </div>
+                <div class="video-card fade-in">
+                    <video autoplay loop muted playsinline>
+                        <source src="Resources/gpt-5-Grand-Central-Terminal-path-01-s2000-d150_20251210_002247_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-card-info">
+                        <div class="video-card-title">→ Grand Central Terminal</div>
+                    </div>
+                </div>
+                <div class="video-card fade-in">
+                    <video autoplay loop muted playsinline>
+                        <source src="Resources/gpt-5-Washington-Square-Park-path-01-s2000-d150_20251209_231646_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-card-info">
+                        <div class="video-card-title">→ Washington Square Park</div>
+                    </div>
+                </div>
+                <div class="video-card fade-in">
+                    <video autoplay loop muted playsinline>
+                        <source src="Resources/gpt-5-Flatiron-Building-path-01-s2000-d150_20251210_004651_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-card-info">
+                        <div class="video-card-title">→ Flatiron Building</div>
+                    </div>
+                </div>
+                <div class="video-card fade-in">
+                    <video autoplay loop muted playsinline>
+                        <source src="Resources/gpt-5-The-Met-path-01-s2000-d150_20251210_011035_filtered_24fps_compressed_240p.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-card-info">
+                        <div class="video-card-title">→ The Met</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Method Section -->
+    <section class="section" id="method">
+        <div class="container">
+            <h2 class="section-title">AgentNav: Verbalization of Path</h2>
+            <div class="abstract-content fade-in" style="margin-bottom: 2rem;">
+                <p>
+                    We propose <span class="highlight">Verbalization of Path (VoP)</span>, a mechanism designed to explicitly extract and leverage the latent world knowledge internalized by MLLMs. By prompting agents to verbalize navigation paths, VoP substantially enhances the performance of MLLM-based agents on long-range navigation tasks.
+                </p>
+            </div>
+            
+            <div class="method-grid">
+                <div class="method-card fade-in">
+                    <div class="method-card-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Destination Grounding</h3>
+                    <p>"Write the exact location of the destination" — explicitly defines the navigation goal, anchoring the agent's decision-making to a clear terminal state.</p>
+                </div>
+                <div class="method-card fade-in">
+                    <div class="method-card-icon">
+                        <i class="fas fa-crosshairs"></i>
+                    </div>
+                    <h3>Self-Positioning</h3>
+                    <p>"Write the current estimated exact location" — compels the agent to continuously estimate and update its position, serving as a precise initial condition.</p>
+                </div>
+                <div class="method-card fade-in">
+                    <div class="method-card-icon">
+                        <i class="fas fa-directions"></i>
+                    </div>
+                    <h3>Path Verbalization</h3>
+                    <p>"Write walking directions from current position to destination" — leverages the agent's world knowledge to generate actionable spatial instructions.</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 3rem; margin-bottom: 1.5rem; color: var(--text-primary);">Memory Architecture</h3>
+            <div class="method-grid">
+                <div class="method-card fade-in">
+                    <div class="method-card-icon">
+                        <i class="fas fa-memory"></i>
+                    </div>
+                    <h3>Markovian Memory</h3>
+                    <p>Agent produces memory state at each step, transforming the POMDP into a Markovian process. Eliminates need for full episodic memory, reducing computational costs ~100×.</p>
+                </div>
+                <div class="method-card fade-in">
+                    <div class="method-card-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>Decision History</h3>
+                    <p>Maintains structured record of actions chosen at each intersection. Enables reasoning about prior choices, route corrections, and avoiding repeated loops.</p>
+                </div>
+                <div class="method-card fade-in">
+                    <div class="method-card-icon">
+                        <i class="fas fa-redo"></i>
+                    </div>
+                    <h3>Previous Visit Tracking</h3>
+                    <p>Tracks visit counts for each node. As revisits increase, agent is discouraged from repeating actions—promoting exploration and preventing cyclic behavior.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dataset Section -->
+    <section class="section dataset-section" id="dataset">
+        <div class="container">
+            <h2 class="section-title">CityNav Dataset</h2>
+            
+            <div class="dataset-stats fade-in">
+                <div class="stat-card">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Global Cities</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">~2km</div>
+                    <div class="stat-label">Avg. Path Length</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">50+</div>
+                    <div class="stat-label">Decision Points</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">400</div>
+                    <div class="stat-label">Navigation Tasks</div>
+                </div>
+            </div>
+
+            <div class="dataset-table-wrapper fade-in">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>City</th>
+                            <th>Region</th>
+                            <th>Characteristics</th>
+                            <th>Distance (km)</th>
+                            <th>Decision Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="method-name">New York</td>
+                            <td>USA</td>
+                            <td style="text-align: left;">Grid-based, well-spaced, rich street signs</td>
+                            <td>1.8</td>
+                            <td>44</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name">São Paulo</td>
+                            <td>Brazil</td>
+                            <td style="text-align: left;">Non-block structure, Portuguese language</td>
+                            <td>2.0</td>
+                            <td>55</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name">Tokyo</td>
+                            <td>Japan</td>
+                            <td style="text-align: left;">Short sightlines, narrow alleys, Japanese language</td>
+                            <td>1.9</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name">Vienna</td>
+                            <td>Austria</td>
+                            <td style="text-align: left;">Road blocks from rails, German language</td>
+                            <td>2.1</td>
+                            <td>60</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="section results-section" id="results">
+        <div class="container">
+            <h2 class="section-title">Experimental Results</h2>
+            
+            <!-- Main Results Table -->
+            <div class="table-container fade-in">
+                <h3 class="table-title">AgentNav vs Base MLLM Performance</h3>
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">MLLM</th>
+                            <th rowspan="2">Config</th>
+                            <th colspan="3" class="city-header">New York</th>
+                            <th colspan="3" class="city-header">Tokyo</th>
+                            <th colspan="3" class="city-header">Vienna</th>
+                            <th colspan="3" class="city-header">São Paulo</th>
+                        </tr>
+                        <tr>
+                            <th>Succ.</th>
+                            <th>SPL</th>
+                            <th>D.A.</th>
+                            <th>Succ.</th>
+                            <th>SPL</th>
+                            <th>D.A.</th>
+                            <th>Succ.</th>
+                            <th>SPL</th>
+                            <th>D.A.</th>
+                            <th>Succ.</th>
+                            <th>SPL</th>
+                            <th>D.A.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="method-name" rowspan="2">GPT-4o</td>
+                            <td>AgentNav</td>
+                            <td class="best">88</td>
+                            <td class="best">0.539</td>
+                            <td class="best">72.9</td>
+                            <td class="best">14</td>
+                            <td class="best">0.099</td>
+                            <td class="best">40.9</td>
+                            <td class="best">26</td>
+                            <td class="best">0.170</td>
+                            <td class="best">46.3</td>
+                            <td class="best">20</td>
+                            <td class="best">0.06</td>
+                            <td class="best">43.5</td>
+                        </tr>
+                        <tr>
+                            <td>Base</td>
+                            <td>13</td>
+                            <td>0.064</td>
+                            <td>39.0</td>
+                            <td>4</td>
+                            <td>0.046</td>
+                            <td>36.8</td>
+                            <td>4</td>
+                            <td>0.031</td>
+                            <td>35.7</td>
+                            <td>3</td>
+                            <td>0.040</td>
+                            <td>34.7</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name" rowspan="2">GPT-5</td>
+                            <td>AgentNav</td>
+                            <td class="best">94</td>
+                            <td class="best">0.711</td>
+                            <td class="best">83.0</td>
+                            <td class="best">30</td>
+                            <td class="best">0.163</td>
+                            <td class="best">55.0</td>
+                            <td class="best">56</td>
+                            <td class="best">0.226</td>
+                            <td class="best">54.8</td>
+                            <td class="best">29</td>
+                            <td class="best">0.126</td>
+                            <td class="best">49.0</td>
+                        </tr>
+                        <tr>
+                            <td>Base</td>
+                            <td>54</td>
+                            <td>0.375</td>
+                            <td>56.0</td>
+                            <td>10</td>
+                            <td>0.088</td>
+                            <td>41.2</td>
+                            <td>11</td>
+                            <td>0.092</td>
+                            <td>40.7</td>
+                            <td>7</td>
+                            <td>0.051</td>
+                            <td>37.0</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name" rowspan="2">GPT-4.1</td>
+                            <td>AgentNav</td>
+                            <td class="best">92</td>
+                            <td class="best">0.557</td>
+                            <td class="best">75.3</td>
+                            <td class="best">17</td>
+                            <td class="best">0.101</td>
+                            <td class="best">43.7</td>
+                            <td class="best">32</td>
+                            <td class="best">0.182</td>
+                            <td class="best">50.0</td>
+                            <td class="best">22</td>
+                            <td class="best">0.080</td>
+                            <td class="best">44.1</td>
+                        </tr>
+                        <tr>
+                            <td>Base</td>
+                            <td>15</td>
+                            <td>0.097</td>
+                            <td>42.3</td>
+                            <td>5</td>
+                            <td>0.044</td>
+                            <td>38.8</td>
+                            <td>2</td>
+                            <td>0.037</td>
+                            <td>34.7</td>
+                            <td>5</td>
+                            <td>0.049</td>
+                            <td>35.5</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name" rowspan="2">Gemini 2.5</td>
+                            <td>AgentNav</td>
+                            <td class="best">73</td>
+                            <td class="best">0.471</td>
+                            <td class="best">74.8</td>
+                            <td class="best">17</td>
+                            <td class="best">0.066</td>
+                            <td class="best">46.9</td>
+                            <td class="best">17</td>
+                            <td class="best">0.137</td>
+                            <td class="best">46.4</td>
+                            <td class="best">12</td>
+                            <td class="best">0.085</td>
+                            <td class="best">43.7</td>
+                        </tr>
+                        <tr>
+                            <td>Base</td>
+                            <td>12</td>
+                            <td>0.060</td>
+                            <td>41.6</td>
+                            <td>8</td>
+                            <td>0.049</td>
+                            <td>40.0</td>
+                            <td>1</td>
+                            <td>0.010</td>
+                            <td>29.3</td>
+                            <td>5</td>
+                            <td>0.049</td>
+                            <td>35.8</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name" rowspan="2">Qwen 2.5 VL</td>
+                            <td>AgentNav</td>
+                            <td class="best">32</td>
+                            <td class="best">0.153</td>
+                            <td class="best">56.4</td>
+                            <td class="best">12</td>
+                            <td class="best">0.094</td>
+                            <td class="best">40.0</td>
+                            <td class="best">12</td>
+                            <td class="best">0.119</td>
+                            <td class="best">44.9</td>
+                            <td class="best">9</td>
+                            <td class="best">0.059</td>
+                            <td class="best">37.8</td>
+                        </tr>
+                        <tr>
+                            <td>Base</td>
+                            <td>7</td>
+                            <td>0.089</td>
+                            <td>35.1</td>
+                            <td>2</td>
+                            <td>0.023</td>
+                            <td>30.0</td>
+                            <td>0</td>
+                            <td>0.0</td>
+                            <td>26.1</td>
+                            <td>2</td>
+                            <td>0.011</td>
+                            <td>29.9</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Baseline Comparison Table -->
+            <div class="table-container fade-in">
+                <h3 class="table-title">Comparison with Reasoning Baselines (GPT-4.1)</h3>
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Method</th>
+                            <th colspan="3" class="city-header">New York</th>
+                            <th colspan="3" class="city-header">Tokyo</th>
+                            <th colspan="3" class="city-header">Vienna</th>
+                            <th colspan="3" class="city-header">São Paulo</th>
+                        </tr>
+                        <tr>
+                            <th>Succ.%</th>
+                            <th>SPL</th>
+                            <th>D.A.%</th>
+                            <th>Succ.%</th>
+                            <th>SPL</th>
+                            <th>D.A.%</th>
+                            <th>Succ.%</th>
+                            <th>SPL</th>
+                            <th>D.A.%</th>
+                            <th>Succ.%</th>
+                            <th>SPL</th>
+                            <th>D.A.%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="method-name">GPT-4.1</td>
+                            <td>15</td>
+                            <td>0.097</td>
+                            <td>42.3</td>
+                            <td>5</td>
+                            <td>0.044</td>
+                            <td>38.8</td>
+                            <td>2</td>
+                            <td>0.037</td>
+                            <td>34.7</td>
+                            <td>5</td>
+                            <td>0.049</td>
+                            <td>35.5</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name">Chain-of-Thought</td>
+                            <td>21</td>
+                            <td>0.173</td>
+                            <td>44.6</td>
+                            <td>9</td>
+                            <td>0.077</td>
+                            <td>41.1</td>
+                            <td>4</td>
+                            <td>0.039</td>
+                            <td>34.9</td>
+                            <td>7</td>
+                            <td>0.055</td>
+                            <td>37.9</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name">Self Reflection (4.1)</td>
+                            <td>16</td>
+                            <td>0.112</td>
+                            <td>42.9</td>
+                            <td>4</td>
+                            <td>0.040</td>
+                            <td>36.2</td>
+                            <td>3</td>
+                            <td>0.042</td>
+                            <td>36.3</td>
+                            <td>12</td>
+                            <td>0.052</td>
+                            <td>42.0</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name">Self Reflection (GPT-5)</td>
+                            <td>22</td>
+                            <td>0.168</td>
+                            <td>48.1</td>
+                            <td>8</td>
+                            <td>0.079</td>
+                            <td>41.5</td>
+                            <td>5</td>
+                            <td>0.045</td>
+                            <td>37.8</td>
+                            <td>13</td>
+                            <td>0.050</td>
+                            <td>41.6</td>
+                        </tr>
+                        <tr style="background: rgba(37, 99, 235, 0.05);">
+                            <td class="method-name"><strong>AgentNav (Ours)</strong></td>
+                            <td class="best"><strong>92</strong></td>
+                            <td class="best"><strong>0.557</strong></td>
+                            <td class="best"><strong>75.3</strong></td>
+                            <td class="best"><strong>17</strong></td>
+                            <td class="best"><strong>0.101</strong></td>
+                            <td class="best"><strong>43.7</strong></td>
+                            <td class="best"><strong>32</strong></td>
+                            <td class="best"><strong>0.182</strong></td>
+                            <td class="best"><strong>50.0</strong></td>
+                            <td class="best"><strong>22</strong></td>
+                            <td class="best"><strong>0.080</strong></td>
+                            <td class="best"><strong>44.1</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Ablation Table -->
+            <div class="table-container fade-in">
+                <h3 class="table-title">Ablation Study (New York, GPT-4.1)</h3>
+                <table class="results-table" style="max-width: 600px;">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Success (%)</th>
+                            <th>SPL</th>
+                            <th>D.A. (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="method-name">GPT-4.1 (Base)</td>
+                            <td>15</td>
+                            <td>0.097</td>
+                            <td>42.3</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name">+ Markovian Memory</td>
+                            <td>23</td>
+                            <td>0.162</td>
+                            <td>47.2</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name">+ Decision History</td>
+                            <td>29</td>
+                            <td>0.228</td>
+                            <td>55.6</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name">+ Previous Visit</td>
+                            <td>35</td>
+                            <td>0.298</td>
+                            <td>56.7</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name">+ Partial Verbalization</td>
+                            <td>66</td>
+                            <td>0.469</td>
+                            <td>63.5</td>
+                        </tr>
+                        <tr style="background: rgba(37, 99, 235, 0.05);">
+                            <td class="method-name"><strong>AgentNav (Full)</strong></td>
+                            <td class="best"><strong>92</strong></td>
+                            <td class="best"><strong>0.557</strong></td>
+                            <td class="best"><strong>75.3</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- BibTeX Section -->
+    <section class="section bibtex-section" id="bibtex">
+        <div class="container">
+            <h2 class="section-title">BibTeX</h2>
+            <div class="bibtex-box fade-in">
+                <button class="copy-btn" onclick="copyBibtex()">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+                <code class="bibtex-code">@article{dalal2025citynav,
+  title={City Navigation in the Wild: Exploring Emergent Navigation from Web-Scale Knowledge in MLLMs},
+  author={Dalal, Dwip and Mishra, Utkarsh and Ahuja, Narendra and Jojic, Nebojsa},
+  journal={arXiv preprint},
+  year={2025}
+}</code>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>. 
+                You are free to borrow the source code, we just ask that you link back to this page in the footer.
+            </p>
+        </div>
+    </footer>
+
     <script>
-        // Load the header when page loads
-        w3.includeHTML();
+        // Copy BibTeX functionality
+        function copyBibtex() {
+            const bibtex = document.querySelector('.bibtex-code').textContent;
+            navigator.clipboard.writeText(bibtex).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                }, 2000);
+            });
+        }
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
