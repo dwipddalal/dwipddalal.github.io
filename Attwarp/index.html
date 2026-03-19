@@ -77,23 +77,61 @@
 
     /* ---------- RESPONSIVE ---------- */
     @media(max-width:768px){
-      h1{font-size:36px;}
-      .authors{font-size:20px;}
-      .button-row{flex-direction:column;align-items:center;}
-      .btn{width:250px;justify-content:center;}
-      .abstract{padding:30px;}
+      body{padding:20px 10px;font-size:13px;line-height:1.4;}
+      h1{font-size:22px;margin-bottom:20px;}
+      .authors{font-size:14px;margin-bottom:10px;}
+      .affiliations{font-size:12px;margin-bottom:15px;}
+      .conference{font-size:14px;margin-bottom:20px;}
+      .conference strong{font-size:15px !important;}
+      .contact{font-size:12px;margin-bottom:15px;}
 
-      /* Carousel responsive */
-      .carousel-container{max-width:100%;padding:0 20px;}
-      .query-example{min-width:280px;margin:0 10px;}
-      .carousel-nav{width:35px;height:35px;font-size:16px;}
-      .carousel-nav.prev{left:5px;}
-      .carousel-nav.next{right:5px;}
-    }
+      /* Buttons: stay in a row, compact */
+      .button-row{gap:8px;margin-bottom:40px;}
+      .btn{padding:8px 14px;font-size:12px;gap:5px;border-radius:20px;}
 
-    @media(max-width:480px){
-      .query-example{min-width:260px;}
-      .carousel-container{padding:0 10px;}
+      /* Animation video */
+      .animation-section{margin:30px 0 40px 0;}
+
+      /* Video grid: smaller tiles */
+      .video-grid-section{margin:40px 0;}
+      .video-grid-section h2{font-size:20px;margin-bottom:25px;}
+      .video-grid{gap:8px;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));}
+      .video-item{border-width:2px;}
+
+      /* Abstract */
+      .abstract{padding:20px;margin:40px 0;}
+      .abstract h2{font-size:18px;margin-bottom:15px;}
+      .abstract p{font-size:13px;line-height:1.5;}
+
+      /* Visual comparisons */
+      .visual-comparison-section{margin:40px 0;}
+      .visual-comparison-section h2{font-size:20px;}
+      .visual-comparison-section .section-desc{font-size:13px;margin-bottom:20px;}
+      .comparison-block{margin-bottom:30px;}
+      .comparison-block h3{font-size:16px;}
+      .comparison-block .block-caption{font-size:12px;margin-bottom:15px;}
+      .comparison-image-wrapper{padding:8px;}
+
+      /* Carousel */
+      .carousel-container{max-width:100%;padding:0 10px;}
+      .query-example{min-width:240px;margin:0 8px;}
+      .query-text h3{font-size:13px;}
+      .example-query{font-size:12px;padding:10px;}
+      .video-caption{padding:12px;font-size:12px;}
+      .carousel-nav{width:30px;height:30px;font-size:14px;}
+      .carousel-nav.prev{left:2px;}
+      .carousel-nav.next{right:2px;}
+
+      /* Results gallery heading */
+      .results-gallery h2{font-size:20px !important;margin-bottom:25px !important;}
+      .results-gallery p{font-size:13px !important;margin-bottom:25px !important;}
+
+      /* Results table */
+      .results-table-section h2{font-size:20px;}
+      .results-table-section .table-caption{font-size:12px;}
+      .results-table{font-size:10px;}
+      .results-table th,.results-table td{padding:5px 3px;}
+      .results-table .section-header td{font-size:11px;padding-left:8px;}
     }
 
     /* ---------- RESULTS TABLE ---------- */
@@ -110,12 +148,6 @@
     .results-table .delta{background:#f9f9f9;font-style:italic;color:#666;}
     .results-table a{color:var(--accent);text-decoration:none;}
     .results-table a:hover{text-decoration:underline;}
-    @media(max-width:768px){
-      .results-table{font-size:12px;}
-      .results-table th,.results-table td{padding:8px 6px;}
-      .results-table-section{overflow-x:auto;}
-    }
-
     /* ---------- VISUAL COMPARISONS ---------- */
     .visual-comparison-section{margin:80px 0;}
     .visual-comparison-section h2{font-size:36px;font-weight:600;margin-bottom:20px;text-align:center;}
@@ -125,11 +157,6 @@
     .comparison-block .block-caption{font-size:16px;color:#666;margin-bottom:25px;text-align:center;max-width:800px;margin-left:auto;margin-right:auto;}
     .comparison-image-wrapper{background:#fff;border-radius:var(--rad);box-shadow:var(--shadow);overflow:hidden;padding:20px;}
     .comparison-image-wrapper img{width:100%;height:auto;display:block;border-radius:8px;}
-    @media(max-width:768px){
-      .visual-comparison-section h2{font-size:28px;}
-      .comparison-block h3{font-size:20px;}
-      .comparison-image-wrapper{padding:12px;}
-    }
   </style>
 </head>
 <body>
