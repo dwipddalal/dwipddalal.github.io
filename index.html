@@ -203,6 +203,11 @@
       table tr td[style*="width:40%"] div[style*="grid"] {
         max-width: 100%;
       }
+
+      /* Divider lines between publications on mobile */
+      table tr:has(td[style*="width:40%"]) + tr:has(td[style*="width:40%"]) {
+        border-top: 1px solid #ddd;
+      }
     }
   </style>
 </head>
