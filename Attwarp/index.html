@@ -77,7 +77,7 @@
 
     /* ---------- RESPONSIVE ---------- */
     @media(max-width:768px){
-      body{padding:20px 10px;font-size:13px;line-height:1.4;}
+      body{padding:20px 10px;font-size:13px;line-height:1.4;overflow-x:hidden;}
       h1{font-size:22px;margin-bottom:20px;}
       .authors{font-size:14px;margin-bottom:10px;}
       .affiliations{font-size:12px;margin-bottom:15px;}
@@ -126,12 +126,16 @@
       .results-gallery h2{font-size:20px !important;margin-bottom:25px !important;}
       .results-gallery p{font-size:13px !important;margin-bottom:25px !important;}
 
-      /* Results table */
+      /* Results table — scroll horizontally, prevent page overflow */
+      .results-table-section{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:40px 0;}
       .results-table-section h2{font-size:20px;}
       .results-table-section .table-caption{font-size:12px;}
-      .results-table{font-size:10px;}
-      .results-table th,.results-table td{padding:5px 3px;}
-      .results-table .section-header td{font-size:11px;padding-left:8px;}
+      .results-table{font-size:10px;min-width:500px;}
+      .results-table th,.results-table td{padding:5px 3px;white-space:nowrap;}
+      .results-table .section-header td{font-size:11px;padding-left:8px;white-space:normal;}
+
+      /* Prevent any child from expanding beyond viewport */
+      .carousel-container,.video-grid,.abstract,.comparison-image-wrapper{max-width:100%;overflow:hidden;}
     }
 
     /* ---------- RESULTS TABLE ---------- */
