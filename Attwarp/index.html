@@ -45,10 +45,10 @@
     .video-grid-section h2{font-size:36px;font-weight:600;margin-bottom:50px;}
     .video-grid{display:grid;gap:20px;max-width:1200px;margin:0 auto;
       grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}
-    .video-item{background:#111;border-radius:var(--rad);overflow:hidden;box-shadow:var(--shadow);border:4px solid #ff4444;transition:.3s;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;}
+    .video-item{background:#f0f0f0;border-radius:var(--rad);overflow:hidden;box-shadow:var(--shadow);border:4px solid #ff4444;transition:.3s;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;}
     .video-item.video-ended{border-color:#4CAF50;}
     .video-item:hover{transform:translateY(-5px);}
-    .video-item video{width:100%;height:100%;object-fit:contain;display:block;background:#111;}
+    .video-item video{width:100%;height:100%;object-fit:cover;display:block;background:#f0f0f0;}
 
     /* ---------- ABSTRACT ---------- */
     .abstract{background:var(--bg-light);padding:50px;border-radius:var(--rad);border-left:4px solid var(--accent);margin:80px 0;}
@@ -95,8 +95,9 @@
       /* Video grid: smaller tiles */
       .video-grid-section{margin:40px 0;}
       .video-grid-section h2{font-size:20px;margin-bottom:25px;}
-      .video-grid{gap:8px;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));}
+      .video-grid{gap:8px;grid-template-columns:repeat(3,1fr);}
       .video-item{border-width:2px;}
+      .video-item video{object-fit:cover;}
 
       /* Abstract */
       .abstract{padding:20px;margin:40px 0;}
@@ -199,18 +200,18 @@
     <h2>🎬 Video Gallery</h2>
     <div class="video-grid">
       <!-- All videos inside videos_fixed (auto-generated list) -->
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/1526520f65bff202_78/output_runs/run_1/1526520f65bff202_78_warp_anim.mp4" type="video/mp4"></source></video></div>
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201462454_n508641/output_runs/run_0/201462454_n508641_warp_anim.mp4" type="video/mp4"></source></video></div>
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/20667979_n181355/output_runs/run_0/20667979_n181355_warp_anim.mp4" type="video/mp4"></source></video></div>
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201935992_n500209/output_runs/run_0/201935992_n500209_warp_anim.mp4" type="video/mp4"></source></video></div>
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201885221_n222297/output_runs/run_0/201885221_n222297_warp_anim.mp4" type="video/mp4"></source></video></div>
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201957086_n536256/output_runs/run_1/201957086_n536256_warp_anim.mp4" type="video/mp4"></source></video></div>
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201623664_n501609/output_runs/run_0/warp_anim2.mp4" type="video/mp4"></source></video></div>
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201492498_n9856/output_runs/run_0/warp_anim2.mp4" type="video/mp4"></source></video></div>
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201864508_n481655/output_runs/run_0/201864508_n481655_warp_anim.mp4" type="video/mp4"></source></video></div>
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201713529_n455563/output_runs/run_0/warp_anim2.mp4" type="video/mp4"></source></video></div>
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201952896_n525029/output_runs/run_0/201952896_n525029_warp_anim.mp4" type="video/mp4"></source></video></div>
-      <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/warp_anim4.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay loop muted playsinline preload="auto"><source src="videos_fixed/1526520f65bff202_78/output_runs/run_1/1526520f65bff202_78_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay loop muted playsinline preload="auto"><source src="videos_fixed/201462454_n508641/output_runs/run_0/201462454_n508641_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay loop muted playsinline preload="auto"><source src="videos_fixed/20667979_n181355/output_runs/run_0/20667979_n181355_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay loop muted playsinline preload="auto"><source src="videos_fixed/201935992_n500209/output_runs/run_0/201935992_n500209_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay loop muted playsinline preload="auto"><source src="videos_fixed/201885221_n222297/output_runs/run_0/201885221_n222297_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay loop muted playsinline preload="auto"><source src="videos_fixed/201957086_n536256/output_runs/run_1/201957086_n536256_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay loop muted playsinline preload="auto"><source src="videos_fixed/201623664_n501609/output_runs/run_0/warp_anim2.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay loop muted playsinline preload="auto"><source src="videos_fixed/201492498_n9856/output_runs/run_0/warp_anim2.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay loop muted playsinline preload="auto"><source src="videos_fixed/201864508_n481655/output_runs/run_0/201864508_n481655_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay loop muted playsinline preload="auto"><source src="videos_fixed/201713529_n455563/output_runs/run_0/warp_anim2.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay loop muted playsinline preload="auto"><source src="videos_fixed/201952896_n525029/output_runs/run_0/201952896_n525029_warp_anim.mp4" type="video/mp4"></source></video></div>
+      <div class="video-item"><video autoplay loop muted playsinline preload="auto"><source src="videos_fixed/warp_anim4.mp4" type="video/mp4"></source></video></div>
     </div>
   </section>
 
@@ -535,6 +536,13 @@
 
   <!-- ---------- BORDER-ON-FINISH SCRIPT + BIBTEX SCRIPT ---------- -->
   <script>
+    // Force first frame to render on mobile (iOS Safari won't show it otherwise)
+    document.querySelectorAll('.video-item video').forEach(v=>{
+      v.addEventListener('loadeddata', ()=>{ v.currentTime = 0.001; });
+      // Fallback: if loadeddata already fired, nudge now
+      if(v.readyState >= 2) v.currentTime = 0.001;
+    });
+
     // Mark tiles green when video ends
     document.querySelectorAll('.video-item video').forEach(v=>{
       v.addEventListener('ended',()=>v.closest('.video-item').classList.add('video-ended'));
