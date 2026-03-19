@@ -123,90 +123,86 @@
 
     /* ===== Mobile responsive ===== */
     @media screen and (max-width: 768px) {
+      /* Zoomed-out compact feel — keep desktop layout, just scale down */
       body, td, th {
-        font-size: 16px;
+        font-size: 13px;
+        line-height: 1.4;
+      }
+
+      .container {
+        padding: 0.5rem;
       }
 
       .page-heading {
-        font-size: 1.6em;
+        font-size: 1.4em;
       }
 
       /* Allow link row to wrap */
       .link‐row {
         white-space: normal;
-        line-height: 2;
-      }
-
-      /* Stack bio and photo vertically */
-      .intro {
-        flex-direction: column-reverse;
-        align-items: center;
-      }
-
-      .intro .bio,
-      .intro .photo {
-        flex: 0 0 100%;
-        max-width: 100%;
-        padding-right: 0;
-        text-align: center;
-      }
-
-      .intro .photo {
+        font-size: 0.85rem;
+        line-height: 1.8;
         margin-bottom: 1rem;
       }
 
+      /* Keep side-by-side but tighter */
+      .intro .bio {
+        flex: 0 0 70%;
+        max-width: 70%;
+        padding-right: 0.5rem;
+      }
+
+      .intro .photo {
+        flex: 0 0 30%;
+        max-width: 30%;
+      }
+
       .intro .photo img {
-        max-width: 180px;
+        max-width: 100%;
       }
 
-      /* Internships: wrap into a grid instead of one row */
-      .internships-table,
-      .internships-table tbody,
-      .internships-table tr {
-        display: block;
-      }
-
-      .internships-table tr {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.5em;
-      }
-
+      /* Internships: compact row, allow wrapping */
       .internships-table td {
-        display: inline-block;
-        width: 28%;
-        min-width: 90px;
-        padding: 0.5em;
-        box-sizing: border-box;
+        padding: 0.4em 0.25em;
+        font-size: 11px;
       }
 
       .internships-table td img {
-        max-width: 60px;
+        max-width: 45px;
       }
 
-      /* Stack publication rows vertically */
-      table tr td[style*="width:40%"],
+      /* Keep publication image+text side by side, just smaller */
+      table tr td[style*="width:40%"] {
+        padding: 0.5em !important;
+      }
+
       table tr td[style*="width:60%"] {
-        display: block !important;
-        width: 100% !important;
-        padding: 0.5em 1em !important;
+        padding: 0.5em !important;
+        font-size: 12px;
       }
 
-      table tr td[style*="width:40%"] img,
-      table tr td[style*="width:40%"] video {
-        max-width: 100% !important;
-        width: 100% !important;
-      }
-
-      /* Grid videos in FlowSymmetry entry */
-      table tr td[style*="width:40%"] div[style*="grid"] {
-        max-width: 100%;
+      table tr td[style*="width:60%"] h3 {
+        font-size: 14px;
       }
 
       /* Divider lines between publications on mobile */
       table tr:has(td[style*="width:40%"]) + tr:has(td[style*="width:40%"]) {
         border-top: 1px solid #ddd;
+      }
+
+      /* Tighter section headings */
+      h2 {
+        font-size: 1.2em;
+      }
+
+      /* Compact news list */
+      ul {
+        padding-left: 1.2em;
+      }
+
+      ul li {
+        margin-bottom: 0.3em;
+        font-size: 13px;
       }
     }
   </style>
