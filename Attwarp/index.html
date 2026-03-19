@@ -115,8 +115,10 @@
       /* Carousel */
       .carousel-container{max-width:100%;padding:0 10px;}
       .query-example{min-width:240px;margin:0 8px;}
+      .query-text{padding:15px;}
       .query-text h3{font-size:13px;}
       .example-query{font-size:12px;padding:10px;}
+      .query-video video{aspect-ratio:auto;object-fit:cover;max-height:250px;background:#f0f0f0;}
       .video-caption{padding:12px;font-size:12px;}
       .carousel-nav{width:30px;height:30px;font-size:14px;}
       .carousel-nav.prev{left:2px;}
@@ -256,7 +258,7 @@
         <div class="query-text"><h3>Query:</h3>
           <div class="example-query">"What is the alcohol content?"</div>
         </div>
-        <div class="query-video"><video controls preload="metadata"><source src="videos_fixed/1526520f65bff202_78/output_runs/run_1/1526520f65bff202_78_warp_anim.mp4" type="video/mp4"></video></div>
+        <div class="query-video"><video autoplay loop muted playsinline preload="auto"><source src="videos_fixed/1526520f65bff202_78/output_runs/run_1/1526520f65bff202_78_warp_anim.mp4" type="video/mp4"></video></div>
         <div class="video-caption">The warped view enlarges the ABV text region on the can.</div>
       </div>
       <!-- Example #2 -->
@@ -264,7 +266,7 @@
         <div class="query-text"><h3>Query:</h3>
           <div class="example-query">"Does the bat look white?"</div>
         </div>
-        <div class="query-video"><video controls preload="metadata"><source src="videos_fixed/201462454_n508641/output_runs/run_0/201462454_n508641_warp_anim.mp4" type="video/mp4"></video></div>
+        <div class="query-video"><video autoplay loop muted playsinline preload="auto"><source src="videos_fixed/201462454_n508641/output_runs/run_0/201462454_n508641_warp_anim.mp4" type="video/mp4"></video></div>
         <div class="video-caption">Warping focuses on the bat region to reveal its true color.</div>
       </div>
       <!-- Example #3 -->
@@ -272,7 +274,7 @@
         <div class="query-text"><h3>Query:</h3>
           <div class="example-query">"Is the hat made of cloth?"</div>
         </div>
-        <div class="query-video"><video controls preload="metadata"><source src="videos_fixed/201492498_n9856/output_runs/run_0/warp_anim2.mp4" type="video/mp4"></video></div>
+        <div class="query-video"><video autoplay loop muted playsinline preload="auto"><source src="videos_fixed/201492498_n9856/output_runs/run_0/warp_anim2.mp4" type="video/mp4"></video></div>
         <div class="video-caption">The warped animation magnifies the hat texture for better material recognition.</div>
       </div>
       <!-- Example #4 -->
@@ -280,7 +282,7 @@
         <div class="query-text"><h3>Query:</h3>
           <div class="example-query">"Which color is the belt?"</div>
         </div>
-        <div class="query-video"><video controls preload="metadata"><source src="videos_fixed/201739131_n485969/output_runs/run_0/201739131_n485969_warp_anim.mp4" type="video/mp4"></video></div>
+        <div class="query-video"><video autoplay loop muted playsinline preload="auto"><source src="videos_fixed/201739131_n485969/output_runs/run_0/201739131_n485969_warp_anim.mp4" type="video/mp4"></video></div>
         <div class="video-caption">Our method highlights the belt area to disambiguate its color.</div>
       </div>
       </div>
@@ -535,6 +537,12 @@
 
   <!-- ---------- BORDER-ON-FINISH SCRIPT + BIBTEX SCRIPT ---------- -->
   <script>
+    // Force first frame to render on mobile for carousel videos
+    document.querySelectorAll('.query-video video').forEach(v=>{
+      v.addEventListener('loadeddata', ()=>{ v.currentTime = 0.001; });
+      if(v.readyState >= 2) v.currentTime = 0.001;
+    });
+
     // Mark tiles green when video ends
     document.querySelectorAll('.video-item video').forEach(v=>{
       v.addEventListener('ended',()=>v.closest('.video-item').classList.add('video-ended'));
