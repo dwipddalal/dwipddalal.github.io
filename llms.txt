@@ -1,0 +1,43 @@
+# Dwip Dalal
+
+> PhD candidate at the University of Illinois Urbana-Champaign working on vision-language-action (VLA) models, multimodal large language models, vision-language models, embodied AI, and robot learning.
+
+Homepage: https://dwipddalal.github.io/
+Google Scholar: https://scholar.google.ca/citations?user=zrGsmv8AAAAJ
+GitHub: https://github.com/dwipddalal
+
+## Current work: Anchor-Align
+
+**Generalizable VLA Finetuning via Representation Anchoring and Language-Action Alignment** (arXiv:2607.13429, July 2026). Dwip Dalal, Shivansh Patel, Chahit Jain, Jeonghwan Kim, Utkarsh Mishra, Alex Baratian, Hyeonjeong Ha, Heng Ji, Svetlana Lazebnik, Unnat Jain.
+
+Finetuning a pretrained vision-language model on robot demonstrations via behavior cloning (BC) is the standard recipe for VLA policies, but BC finetuning progressively overwrites the pretrained representations that support visual and semantic generalization. Co-training on web image-text data does not prevent this, because it applies language and action losses to separate observations, leaving language-action misalignment that standard manipulation benchmarks do not expose.
+
+Anchor-Align augments BC with two objectives:
+
+- **Vision-Language Anchoring** distills layer-wise representations from a frozen VLM copy to prevent representation drift.
+- **Language-Action Alignment** converts each action target into a discrete motion-direction label and jointly trains language and action prediction on the same robot observation.
+
+On a physical xArm7 robot, across two VLA architectures, real-robot success improves from 28% to 54% and from 37% to 60%. In simulation it improves OOD perturbation robustness, perceptual robustness, and long-horizon control on LIBERO-PRO, LIBERO-Plus, and CALVIN respectively.
+
+- [Project page](https://anchoralignvla.github.io/)
+- [Paper (arXiv)](https://arxiv.org/abs/2607.13429)
+- [Code](https://github.com/dwipddalal/Anchor-Align)
+- [Checkpoints](https://huggingface.co/Dwipz/Anchor-Align)
+
+## Selected publications
+
+- **Constructive Distortion: Improving MLLMs with Attention-Guided Image Warping** — [paper](https://arxiv.org/abs/2510.09741), [code](https://github.com/dwipddalal/AttWarp), [project page](https://dwipddalal.github.io/Attwarp/)
+- **City Navigation in the Wild: Exploring Emergent Navigation from Web-Scale Knowledge in MLLMs** — [paper](https://arxiv.org/abs/2512.15933), [code](https://github.com/Utkarsh-Mishra444/Sparsely-Grounded-Long-Range-Navigation), [project page](https://dwipddalal.github.io/AgentNav/)
+- **Compositional Reasoning via Joint Image and Language Decomposition** — [paper](https://aclanthology.org/2026.findings-eacl.304/), [project page](https://madhav-kanda.github.io/redi/)
+- **CreativityBench: Evaluating Agent Creative Reasoning via Affordance-Based Tool Repurposing** — [paper](https://arxiv.org/abs/2605.02910), [code](https://github.com/CreativityBench/CreativityBench), [project page](https://creativitybench.github.io/)
+- **FACTIFY-5WQA: 5W Aspect-based Fact Verification through Question Answering** — [paper](https://arxiv.org/abs/2305.04329), [code and dataset](https://github.com/ankuranii/acl-5W-QA)
+- **Learning Robust Deep Visual Representations from EEG Brain Recordings** — [paper](https://arxiv.org/abs/2310.16532), [code](https://github.com/dwipddalal/EEGStyleGAN-ADA)
+- **FACTIFY3M: A Benchmark for Multimodal Fact Verification with Explainability through 5W Question-Answering** — [paper](https://arxiv.org/abs/2306.05523)
+- **Single Image LDR to HDR Conversion Using Conditional Diffusion** — [paper](https://arxiv.org/abs/2307.02814)
+- **A Dataset-Centric Survey of LLM-Agents for Data Science** — [paper](https://openreview.net/pdf?id=W4hexmqgoN)
+- **Flow Symmetrization for Parameterized Constrained Diffeomorphisms** — [paper](https://arxiv.org/abs/2312.06317), [code](https://github.com/dwipddalal/FlowSym), [project page](https://dwipddalal.github.io/FlowSymmetry/)
+- **Surrogate Faithfulness: A Metric for Concept-Based Explanations** — [paper](https://arxiv.org/abs/2504.10833)
+- **ODESolvers are also Wayfinders: Neural ODEs for Multi-Agent Pathplanning** — [paper](https://openreview.net/pdf?id=rnhkE2vb4r), [code](https://github.com/dwipddalal/Constraint-flow)
+- **MMT: A Multilingual and Multi-Topic Indian Social Media Dataset** — [paper](https://arxiv.org/abs/2304.00634), [dataset](https://huggingface.co/datasets/LingoIITGN/MMT)
+- **SEPSIS: I can catch your lies - A new paradigm for Deception Detection** — [paper](https://arxiv.org/abs/2312.00292), [dataset](https://huggingface.co/datasets/ankurani/deception)
+- **VPTDrone: Video Processing Toolkit for Smart Surveillance Drone** — [paper](https://dl.acm.org/doi/abs/10.1145/3632410.3632495)
