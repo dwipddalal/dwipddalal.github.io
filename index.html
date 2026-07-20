@@ -28,6 +28,7 @@
   {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": "https://dwipddalal.github.io/#person",
     "name": "Dwip Dalal",
     "url": "https://dwipddalal.github.io/",
     "image": "https://dwipddalal.github.io/images/Dwip.jpeg",
@@ -36,10 +37,57 @@
       "@type": "Organization",
       "name": "University of Illinois Urbana-Champaign"
     },
+    "knowsAbout": [
+      "Vision-language-action models",
+      "Multimodal large language models",
+      "Vision-language models",
+      "Embodied AI",
+      "Robot learning",
+      "Robot manipulation"
+    ],
     "sameAs": [
       "https://scholar.google.ca/citations?user=zrGsmv8AAAAJ",
       "https://github.com/dwipddalal"
     ]
+  }
+  </script>
+
+  <!-- Paper: Anchor-Align -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "@id": "https://anchoralignvla.github.io/#article",
+    "headline": "Generalizable VLA Finetuning via Representation Anchoring and Language-Action Alignment",
+    "name": "Generalizable VLA Finetuning via Representation Anchoring and Language-Action Alignment",
+    "alternateName": "Anchor-Align",
+    "url": "https://anchoralignvla.github.io/",
+    "datePublished": "2026-07-15",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "abstract": "Finetuning a pretrained vision-language model (VLM) on robot demonstrations via behavior cloning (BC) has become the standard recipe for vision-language-action (VLA) policies. However, BC finetuning progressively overwrites the pretrained representations that support visual and semantic generalization. Co-training on web image-text data, a common remedy, does not prevent this; it applies language and action losses to separate observations, leaving VLAs with language-action misalignment that standard manipulation benchmarks do not expose. Anchor-Align augments BC with two objectives: Vision-Language Anchoring distills layer-wise representations from a frozen VLM copy to prevent this drift, while Language-Action Alignment converts each action target into a discrete motion-direction label and jointly trains language and action prediction on the same robot observation.",
+    "author": [
+      { "@id": "https://dwipddalal.github.io/#person" },
+      { "@type": "Person", "name": "Shivansh Patel" },
+      { "@type": "Person", "name": "Chahit Jain" },
+      { "@type": "Person", "name": "Jeonghwan Kim" },
+      { "@type": "Person", "name": "Utkarsh Mishra" },
+      { "@type": "Person", "name": "Alex Baratian" },
+      { "@type": "Person", "name": "Hyeonjeong Ha" },
+      { "@type": "Person", "name": "Heng Ji" },
+      { "@type": "Person", "name": "Svetlana Lazebnik" },
+      { "@type": "Person", "name": "Unnat Jain" }
+    ],
+    "identifier": [
+      { "@type": "PropertyValue", "propertyID": "arXiv", "value": "arXiv:2607.13429" }
+    ],
+    "sameAs": [
+      "https://arxiv.org/abs/2607.13429",
+      "https://github.com/dwipddalal/Anchor-Align",
+      "https://huggingface.co/Dwipz/Anchor-Align"
+    ],
+    "keywords": "vision-language-action model, VLA, VLA generalization, VLA finetuning, robot manipulation, behavior cloning, catastrophic forgetting, representation drift, vision-language model, robot learning, LIBERO-PRO, LIBERO-Plus, CALVIN",
+    "codeRepository": "https://github.com/dwipddalal/Anchor-Align"
   }
   </script>
 
