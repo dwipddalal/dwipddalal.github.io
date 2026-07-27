@@ -2,14 +2,14 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="City Navigation in the Wild: Exploring Emergent Navigation from Web-Scale Knowledge in MLLMs. We propose Verbalization of Path (VoP) to elicit cognitive maps from MLLMs for city-scale navigation. EACL 2026 Oral.">
-  <meta name="keywords" content="AgentNav, CityNav, city navigation, MLLM, Verbalization of Path, VoP, cognitive map, visual navigation, multimodal LLM, GPT, embodied AI, EACL 2026">
+  <meta name="description" content="Can MLLMs Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge (EACL 2026 Oral). We introduce Sparsely Grounded Visual Navigation and the CityNav benchmark on Google Street View, and propose Verbalization of Path (VoP) to elicit city-scale cognitive maps from multimodal large language models for zero-shot city navigation.">
+  <meta name="keywords" content="AgentNav, CityNav, city navigation, urban navigation, MLLM, multimodal large language models, vision-and-language navigation, Verbalization of Path, VoP, cognitive map, visual navigation, zero-shot navigation, Google Street View, embodied AI, LLM agent, EACL 2026">
   <meta name="author" content="Dwip Dalal, Utkarsh Mishra, Narendra Ahuja, Nebojsa Jojic">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
-  <meta property="og:title" content="City Navigation in the Wild: Emergent Navigation from Web-Scale Knowledge in MLLMs">
-  <meta property="og:description" content="We propose Verbalization of Path (VoP) to elicit cognitive maps from MLLMs for city-scale navigation. Accepted at EACL 2026 (Oral).">
+  <meta property="og:title" content="Can MLLMs Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge">
+  <meta property="og:description" content="EACL 2026 Oral. Verbalization of Path (VoP) elicits city-scale cognitive maps from MLLMs for zero-shot city navigation on Google Street View.">
   <meta property="og:url" content="https://dwipddalal.github.io/AgentNav/">
   <meta property="og:image" content="https://dwipddalal.github.io/images/CityNav_2.png">
   <meta property="og:image:width" content="1200">
@@ -17,17 +17,34 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="City Navigation in the Wild — EACL 2026 Oral">
-  <meta name="twitter:description" content="We propose Verbalization of Path (VoP) to elicit cognitive maps from MLLMs for city-scale navigation.">
+  <meta name="twitter:title" content="Can MLLMs Find Their Way in a City? (EACL 2026 Oral)">
+  <meta name="twitter:description" content="Verbalization of Path (VoP) elicits city-scale cognitive maps from MLLMs for zero-shot city navigation. CityNav benchmark on Google Street View.">
   <meta name="twitter:image" content="https://dwipddalal.github.io/images/CityNav_2.png">
+
+  <!-- Google Scholar / Highwire Press citation metadata -->
+  <meta name="citation_title" content="Can MLLMs Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge">
+  <meta name="citation_author" content="Dalal, Dwip">
+  <meta name="citation_author" content="Mishra, Utkarsh">
+  <meta name="citation_author" content="Ahuja, Narendra">
+  <meta name="citation_author" content="Jojic, Nebojsa">
+  <meta name="citation_publication_date" content="2026/03">
+  <meta name="citation_conference_title" content="Proceedings of the 19th Conference of the European Chapter of the Association for Computational Linguistics (Volume 1: Long Papers)">
+  <meta name="citation_publisher" content="Association for Computational Linguistics">
+  <meta name="citation_firstpage" content="8279">
+  <meta name="citation_lastpage" content="8303">
+  <meta name="citation_doi" content="10.18653/v1/2026.eacl-long.387">
+  <meta name="citation_arxiv_id" content="2512.15933">
+  <meta name="citation_pdf_url" content="https://dwipddalal.github.io/AgentNav/static/pdfs/AgentNav_EACL2026.pdf">
+  <meta name="citation_abstract_html_url" content="https://aclanthology.org/2026.eacl-long.387/">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "ScholarlyArticle",
-    "name": "City Navigation in the Wild: Exploring Emergent Navigation from Web-Scale Knowledge in MLLMs",
-    "headline": "City Navigation in the Wild: Exploring Emergent Navigation from Web-Scale Knowledge in MLLMs",
+    "name": "Can MLLMs Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge",
+    "headline": "Can MLLMs Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge",
+    "alternateName": "City Navigation in the Wild: Exploring Emergent Navigation from Web-Scale Knowledge in MLLMs",
     "author": [
       {"@type": "Person", "name": "Dwip Dalal", "affiliation": "University of Illinois Urbana-Champaign"},
       {"@type": "Person", "name": "Utkarsh Mishra", "affiliation": "Texas A&M University"},
@@ -36,15 +53,27 @@
     ],
     "url": "https://dwipddalal.github.io/AgentNav/",
     "image": "https://dwipddalal.github.io/images/CityNav_2.png",
-    "datePublished": "2026",
-    "publisher": {"@type": "Organization", "name": "EACL 2026"},
-    "description": "We propose Verbalization of Path (VoP) to elicit cognitive maps from MLLMs for city-scale navigation."
+    "datePublished": "2026-03",
+    "publisher": {"@type": "Organization", "name": "Association for Computational Linguistics"},
+    "isPartOf": {"@type": "PublicationVolume", "name": "Proceedings of the 19th Conference of the European Chapter of the Association for Computational Linguistics (Volume 1: Long Papers)"},
+    "pagination": "8279-8303",
+    "identifier": [
+      {"@type": "PropertyValue", "propertyID": "DOI", "value": "10.18653/v1/2026.eacl-long.387"},
+      {"@type": "PropertyValue", "propertyID": "arXiv", "value": "2512.15933"}
+    ],
+    "sameAs": [
+      "https://aclanthology.org/2026.eacl-long.387/",
+      "https://arxiv.org/abs/2512.15933",
+      "https://huggingface.co/papers/2512.15933",
+      "https://github.com/Utkarsh-Mishra444/Sparsely-Grounded-Long-Range-Navigation"
+    ],
+    "description": "We introduce Sparsely Grounded Visual Navigation and the CityNav benchmark, and propose Verbalization of Path (VoP) to elicit city-scale cognitive maps from multimodal large language models (MLLMs) for zero-shot city navigation."
   }
   </script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>AgentNav: City Navigation in the Wild</title>
+  <title>Can MLLMs Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge | AgentNav (EACL 2026 Oral)</title>
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -112,7 +141,7 @@
         <div class="columns is-centered">
           <div class="column has-text-centered">
             <h1 class="title is-1 publication-title">
-              City Navigation in the Wild: Exploring Emergent Navigation from Web-Scale Knowledge in MLLMs
+              Can MLLMs Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge
             </h1>
             <div class="is-size-5" style="margin-bottom: 1rem;">
               <span class="tag is-success is-medium" style="background-color: #059669; color: white; font-weight: bold;">
@@ -137,16 +166,27 @@
             <div class="column has-text-centered">
               <div class="publication-links">
                 <span class="link-block">
-                  <a href="https://arxiv.org/pdf/2512.15933"
+                  <a href="https://aclanthology.org/2026.eacl-long.387/"
                      class="external-link button is-normal is-rounded is-dark"
                      target="_blank"
                      rel="noopener noreferrer">
                     <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                     </span>
-                    <span>Paper</span>
+                    <span>Paper (EACL 2026)</span>
                   </a>
+                </span>
 
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2512.15933"
+                     class="external-link button is-normal is-rounded is-dark"
+                     target="_blank"
+                     rel="noopener noreferrer">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
                 </span>
 
                 <span class="link-block">
@@ -168,9 +208,9 @@
                 </span>
 
                 <span class="link-block">
-                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <a href="#BibTeX" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
-                      <i class="ai ai-arxiv"></i>
+                      <i class="fas fa-quote-left"></i>
                     </span>
                     <span>Bibtex</span>
                   </a>
@@ -805,11 +845,20 @@
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
-      <pre><code>@article{dalal2025city,
-  title={City Navigation in the Wild: Exploring Emergent Navigation from Web-Scale Knowledge in MLLMs},
-  author={Dalal, Dwip and Mishra, Utkarsh and Ahuja, Narendra and Jojic, Nebojsa},
-  journal={arXiv preprint arXiv:2512.15933},
-  year={2025}
+      <pre><code>@inproceedings{dalal-etal-2026-mllms,
+    title = "Can {MLLM}s Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge",
+    author = "Dalal, Dwip  and
+      Mishra, Utkarsh  and
+      Ahuja, Narendra  and
+      Jojic, Nebojsa",
+    booktitle = "Proceedings of the 19th Conference of the {E}uropean Chapter of the {A}ssociation for {C}omputational {L}inguistics (Volume 1: Long Papers)",
+    month = mar,
+    year = "2026",
+    address = "Rabat, Morocco",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.eacl-long.387/",
+    doi = "10.18653/v1/2026.eacl-long.387",
+    pages = "8279--8303"
 }</code></pre>
     </div>
   </section>
