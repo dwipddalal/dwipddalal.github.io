@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>visuals</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #0A0E14; }
+  main { max-width: 720px; margin: 0 auto; padding: 12px 8px 60px; }
+  video { display: block; width: 100%; border-radius: 10px; margin: 0 0 26px; background: #0A0E14; }
+</style>
+</head>
+<body>
+<main>
+  <video src="01_lead_teaser.mp4" controls muted playsinline preload="metadata"></video>
+  <video src="02_lead_alt_thumb_swap.mp4" controls muted loop playsinline preload="metadata"></video>
+  <video src="03_bc_forgets.mp4" controls muted loop playsinline preload="metadata"></video>
+  <video src="04_cotraining_misaligned.mp4" controls muted loop playsinline preload="metadata"></video>
+  <video src="05_anchor.mp4" controls muted loop playsinline preload="metadata"></video>
+  <video src="06_align.mp4" controls muted loop playsinline preload="metadata"></video>
+  <video src="07_one_training_step.mp4" controls muted loop playsinline preload="metadata"></video>
+  <video src="08_control_chart.mp4" controls muted loop playsinline preload="metadata"></video>
+  <video src="09_sim_numbers_chart.mp4" controls muted loop playsinline preload="metadata"></video>
+  <video src="10_sim_swap_grid.mp4" controls muted loop playsinline preload="metadata"></video>
+  <video src="11_real_robot.mp4" controls muted loop playsinline preload="metadata"></video>
+</main>
+<script>
+  const vids = document.querySelectorAll("video");
+  const io = new IntersectionObserver(entries => {
+    for (const e of entries) {
+      if (e.isIntersecting) { e.target.play().catch(() => {}); }
+      else { e.target.pause(); }
+    }
+  }, { threshold: 0.4 });
+  vids.forEach(v => io.observe(v));
+</script>
+</body>
+</html>
