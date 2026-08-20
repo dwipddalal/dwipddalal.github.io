@@ -19,7 +19,7 @@
 </style>
 </head>
 <body>
-<!-- BUILD:6a876124 -->
+<!-- BUILD:6a876147 -->
 <main>
   <section>
     <h2>Tweet 1: High-level video</h2>
@@ -50,7 +50,7 @@ Anchor-Align 🧭 finetuning a VLA without forgetting the VLM:
   </section>
   <section>
     <h2>Tweet 4: Alignment</h2>
-    <p class="tweet">Every continuous action hides a free label: its direction word (up, down, left, right, forward, back). Predict the word through the frozen vocab head on the exact frame the action head acts on; the actions stay continuous. Word-action agreement: 11.3%→65.8%.</p>
+    <p class="tweet">Co-training's losses never share a frame, so words and motion quietly disagree (0% on the swap). Fix: every action has a free direction word. Predict it on the very frame the action head acts on, through the frozen vocab head. Word-action agreement: 11.3%→65.8%.</p>
     <video src="16_arch_alignment_v3.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="06_align_v6.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="04_cotraining_misaligned_v5.mp4" controls muted loop playsinline preload="metadata"></video>
@@ -58,13 +58,13 @@ Anchor-Align 🧭 finetuning a VLA without forgetting the VLM:
   </section>
   <section>
     <h2>Tweet 5: Significance</h2>
-    <p class="tweet">The restored semantics generalize: train with the green mug, ask for the pink one at test, and Anchor-Align still does the task. Real xArm7: 28.3%→54.2% and 36.7%→60% on two different action heads. A gain that survives an action-head swap lives in the backbone, not the head.</p>
+    <p class="tweet">Does it generalize? Position-swap 2.3→22.6. LIBERO-PRO 61.0→71.9, LIBERO-Plus 85.1→90.3, best long-horizon CALVIN. Real xArm7: 28.3→54.2 and 36.7→60 on two action heads. A gain that survives an action-head swap lives in the backbone.</p>
     <video src="13_generalization_pairs_v8.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="11_real_robot_v4.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 6: Conclusions (text only)</h2>
-    <p class="tweet">The takeaway for VLA finetuning: learning actions and keeping the VLM's semantics are not at odds. Anchor to preserve the semantics; align to tie words to motion on the same observation. The same-frame tie is the piece co-training cannot give. Both together, no extra data.</p>
+    <p class="tweet">Is it just regularization? Shuffle the direction labels or swap in nonsense words: every gain collapses to baseline. The lesson for VLA finetuning: action learning and the VLM's semantics are not at odds; tie them on the same observation. Anchor + Align, no extra data.</p>
   </section>
   <hr>
   <section>
