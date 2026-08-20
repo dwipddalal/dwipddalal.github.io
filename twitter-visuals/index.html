@@ -10,7 +10,7 @@
   main { max-width: 720px; margin: 0 auto; padding: 16px 10px 60px;
          font-family: -apple-system, "Helvetica Neue", sans-serif; }
   h2 { color: #8C97A8; font-size: 14px; font-weight: 600; margin: 34px 2px 8px; }
-  .tweet { background: #121A26; color: #F4F7FA; border-radius: 12px;
+  .tweet { white-space: pre-line; background: #121A26; color: #F4F7FA; border-radius: 12px;
            padding: 14px 16px; margin: 0 0 14px; font-size: 15px;
            line-height: 1.55; }
   video { display: block; width: 100%; border-radius: 10px;
@@ -19,28 +19,41 @@
 </style>
 </head>
 <body>
-<!-- BUILD:6a875fa5 -->
+<!-- BUILD:6a8760d6 -->
 <main>
   <section>
     <h2>Tweet 1: High-level video</h2>
-    <p class="tweet">How do we make VLAs generalize beyond their demonstrations? Standard finetuning quietly destroys what the pretrained VLM knew. Anchor-Align fixes that with two losses. The full story in 2:12:</p>
+    <p class="tweet">Your VLA finetune is quietly deleting capability you already paid for. Ask for the pink mug and a standard-BC finetune grabs the green one ~90% of the time. Co-training, the usual fix, hides a second bug: on the very same frame, language and action can disagree.
+
+Anchor-Align 🧭 finetuning a VLA without forgetting the VLM. Six things you can take to your own runs:
+
+1. A diagnostic worth stealing: swap two objects and rerun the language command. Standard BC drops to 2.3%. The VLA learned the demos, not the words.
+2. Co-training is not the cure: 0% on the same swap. Its language loss and its action loss never share a frame, so words and motion never have to agree, and they quietly stop agreeing.
+3. Anchor: distill the frozen VLM's hidden states into the trainable backbone at every layer while you finetune. The whole backbone, not just the vision encoder. No extra data, no forgetting.
+4. Align: every continuous action already carries a free label, its direction word (up, down, left, right, forward, back). Predict that word through the frozen vocabulary head on the exact frame the action head acts on. Auxiliary supervision only; the actions stay continuous, nothing is discretized.
+5. A control worth running on your own: shuffle the direction labels, or swap in nonsense words, and every gain collapses back to baseline. The signal is real grounding, not extra regularization.
+6. One recipe, three losses, and it holds everywhere: position-swap 2.3→22.6, LIBERO-PRO 61.0→71.9, LIBERO-Plus 85.1→90.3, best long-horizon CALVIN, real xArm7 28.3→54.2 and 36.7→60 on two different action heads.
+
+📄🌐💻 anchoralignvla.github.io · Details in 🧵
+
+🌟 Big shout-out to @____ (VLA-Adapter) and @____ (StarVLA), whose open models this work builds on, and to everyone else growing this open VLA community. Thank you!</p>
     <video src="01_lead_teaser_v8.mp4" controls muted playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 2: Forgetting</h2>
-    <p class="tweet">Observation: catastrophic forgetting. A VLA finetuned with standard BC memorizes the demos and erodes the VLM's semantics: objects, colors, spatial relations. Change anything at test time and it breaks.</p>
+    <p class="tweet">Standard BC trains one loss: imitate the demo actions. Nothing asks the backbone to keep knowing what "pink" means, so step by step it stops knowing. Try it on your model: swap two objects, repeat the command. Score: 2.3%. The VLA remembers the demos. It forgets the world.</p>
     <video src="03_bc_forgets_v4.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="14_arch_standard_bc_v3.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 3: Anchoring</h2>
-    <p class="tweet">Fix 1: Vision-Language Anchoring. Keep a frozen copy of the pretrained VLM and pin every backbone layer to it while BC learns the policy. The representations that generalize stay intact.</p>
+    <p class="tweet">Forgetting is not a vision-encoder problem; it runs the full depth of the backbone. So pin every layer: keep a frozen copy of the VLM and distill its hidden states into the trainable backbone, layer by layer, while you finetune. No extra data, no new labels, no forgetting.</p>
     <video src="15_arch_anchoring_v3.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="05_anchor_v5.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 4: Alignment</h2>
-    <p class="tweet">Fix 2: Language-Action Alignment. On the very frame the action head acts on, the model must also say the action's direction word through the frozen vocab head. What it says now matches what it does.</p>
+    <p class="tweet">Every continuous action hides a free label: its direction word (up, down, left, right, forward, back). Predict the word through the frozen vocab head on the exact frame the action head acts on; the actions stay continuous. Word-action agreement: 11.3%→65.8%.</p>
     <video src="16_arch_alignment_v3.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="06_align_v6.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="04_cotraining_misaligned_v5.mp4" controls muted loop playsinline preload="metadata"></video>
@@ -48,13 +61,13 @@
   </section>
   <section>
     <h2>Tweet 5: Significance</h2>
-    <p class="tweet">Does it generalize? Position swap: 2.3% to 22.6%. LIBERO-Plus: 85.1% to 90.3%. Real robot: 28.3% to 54.2%. Word-action agreement: 11.3% to 65.8%. One recipe, everywhere we tested:</p>
+    <p class="tweet">The restored semantics generalize: train with the green mug, ask for the pink one at test, and Anchor-Align still does the task. Real xArm7: 28.3%→54.2% and 36.7%→60% on two different action heads. A gain that survives an action-head swap lives in the backbone, not the head.</p>
     <video src="13_generalization_pairs_v8.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="11_real_robot_v4.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 6: Conclusions (text only)</h2>
-    <p class="tweet">Takeaway: generalizable VLAs need more than imitating demonstrations. Preserve the pretrained semantics (anchor), and ground them in the actions the robot executes (align). Paper, code, and rollouts: anchoralignvla.github.io</p>
+    <p class="tweet">The takeaway for VLA finetuning: learning actions and keeping the VLM's semantics are not at odds. Anchor to preserve the semantics; align to tie words to motion on the same observation. The same-frame tie is the piece co-training cannot give. Both together, no extra data.</p>
   </section>
   <hr>
   <section>
