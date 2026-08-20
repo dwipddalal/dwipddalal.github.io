@@ -13,6 +13,7 @@
 </style>
 </head>
 <body>
+<!-- BUILD:6a872326 -->
 <main>
   <!-- T1 - high-level video -->
   <video src="01_lead_teaser_v3.mp4" controls muted playsinline preload="metadata"></video>
@@ -48,6 +49,17 @@
     }
   }, { threshold: 0.4 });
   vids.forEach(v => io.observe(v));
+</script>
+<script>
+(async () => {
+  const cur = (document.documentElement.outerHTML.match(/BUILD:([0-9a-z]+)/) || [])[1];
+  try {
+    const r = await fetch(location.pathname + "?nocache=" + Date.now(), {cache: "no-store"});
+    const t = await r.text();
+    const fresh = (t.match(/BUILD:([0-9a-z]+)/) || [])[1];
+    if (cur && fresh && cur !== fresh) { document.open(); document.write(t); document.close(); }
+  } catch (e) {}
+})();
 </script>
 </body>
 </html>
