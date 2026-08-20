@@ -22,7 +22,7 @@
 </style>
 </head>
 <body>
-<!-- BUILD:6a87694e -->
+<!-- BUILD:6a876d0f -->
 <main>
   <section>
     <h2>Tweet 1: High-level video</h2>
@@ -37,12 +37,12 @@ Anchor-Align 🧭 finetuning a VLA without forgetting the VLM:
 📄🌐💻 anchoralignvla.github.io · Details in 🧵
 
 🌟 Thanks to @____ (VLA-Adapter) and @____ (StarVLA), whose open models this builds on!</p>
-    <video src="01_lead_teaser_v8.mp4" controls muted playsinline preload="metadata"></video>
+    <video src="01_lead_teaser_v9.mp4" controls muted playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 2: Forgetting</h2>
     <p class="tweet">Standard BC trains one loss: imitate the demo actions. Nothing asks the backbone to keep knowing what "pink" means, so step by step it stops knowing. Try it on your model: swap two objects, repeat the command. Score: 2.3%. The VLA remembers the demos. It forgets the world.</p>
-    <video src="03_bc_forgets_v4.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="03_bc_forgets_v5.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="14_arch_standard_bc_v3.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
@@ -54,13 +54,13 @@ Anchor-Align 🧭 finetuning a VLA without forgetting the VLM:
     <h2>Tweet 4: Alignment</h2>
     <p class="tweet">Co-training's losses never share a frame, so words and motion quietly disagree (0% on the swap). Fix: every action has a free direction word. Predict it on the very frame the action head acts on, through the frozen vocab head. Word-action agreement: 11.3%→65.8%.</p>
     <video src="16_arch_alignment_v3.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="06_align_v6.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="06_align_v7.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 5: Significance</h2>
     <p class="tweet">Does it generalize? Position-swap 2.3→22.6. LIBERO-PRO 61.0→71.9, LIBERO-Plus 85.1→90.3, best long-horizon CALVIN. Real xArm7: 28.3→54.2 and 36.7→60 on two action heads. A gain that survives an action-head swap lives in the backbone.</p>
-    <video src="13_generalization_pairs_v8.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="11_real_robot_v4.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="13_generalization_pairs_v9.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="11_real_robot_v5.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 6: Conclusions (text only)</h2>
@@ -69,14 +69,14 @@ Anchor-Align 🧭 finetuning a VLA without forgetting the VLM:
   <hr>
   <section>
     <h2>Extras (charts for replies, references)</h2>
-    <video src="17_alignment_chart_v3.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="04_cotraining_misaligned_v5.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="05_anchor_v5.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="09_sim_numbers_chart_v2.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="10_sim_swap_grid_v3.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="08_control_chart_v3.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="17_alignment_chart_v4.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="04_cotraining_misaligned_v6.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="05_anchor_v6.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="09_sim_numbers_chart_v3.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="10_sim_swap_grid_v4.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="08_control_chart_v4.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="12_method_abstract_v11.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="07_one_training_step_v5.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="07_one_training_step_v6.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="02_lead_alt_thumb_swap.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
 </main>
