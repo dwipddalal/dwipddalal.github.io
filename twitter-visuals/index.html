@@ -19,24 +19,21 @@
 </style>
 </head>
 <body>
-<!-- BUILD:6a8760d6 -->
+<!-- BUILD:6a876124 -->
 <main>
   <section>
     <h2>Tweet 1: High-level video</h2>
-    <p class="tweet">Your VLA finetune is quietly deleting capability you already paid for. Ask for the pink mug and a standard-BC finetune grabs the green one ~90% of the time. Co-training, the usual fix, hides a second bug: on the very same frame, language and action can disagree.
+    <p class="tweet">Your VLA finetune quietly deletes capability you already paid for: ask for the pink mug, it grabs the green one.
 
-Anchor-Align 🧭 finetuning a VLA without forgetting the VLM. Six things you can take to your own runs:
+Anchor-Align 🧭 finetuning a VLA without forgetting the VLM:
 
-1. A diagnostic worth stealing: swap two objects and rerun the language command. Standard BC drops to 2.3%. The VLA learned the demos, not the words.
-2. Co-training is not the cure: 0% on the same swap. Its language loss and its action loss never share a frame, so words and motion never have to agree, and they quietly stop agreeing.
-3. Anchor: distill the frozen VLM's hidden states into the trainable backbone at every layer while you finetune. The whole backbone, not just the vision encoder. No extra data, no forgetting.
-4. Align: every continuous action already carries a free label, its direction word (up, down, left, right, forward, back). Predict that word through the frozen vocabulary head on the exact frame the action head acts on. Auxiliary supervision only; the actions stay continuous, nothing is discretized.
-5. A control worth running on your own: shuffle the direction labels, or swap in nonsense words, and every gain collapses back to baseline. The signal is real grounding, not extra regularization.
-6. One recipe, three losses, and it holds everywhere: position-swap 2.3→22.6, LIBERO-PRO 61.0→71.9, LIBERO-Plus 85.1→90.3, best long-horizon CALVIN, real xArm7 28.3→54.2 and 36.7→60 on two different action heads.
+• Anchor: distill the frozen VLM into the backbone, at every layer
+• Align: predict the action's direction word on the very frame it acts on
+• Position-swap 2.3→22.6 · real xArm7 28.3→54.2 · two different action heads
 
 📄🌐💻 anchoralignvla.github.io · Details in 🧵
 
-🌟 Big shout-out to @____ (VLA-Adapter) and @____ (StarVLA), whose open models this work builds on, and to everyone else growing this open VLA community. Thank you!</p>
+🌟 Thanks to @____ (VLA-Adapter) and @____ (StarVLA), whose open models this builds on!</p>
     <video src="01_lead_teaser_v8.mp4" controls muted playsinline preload="metadata"></video>
   </section>
   <section>
