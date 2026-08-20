@@ -19,7 +19,7 @@
 </style>
 </head>
 <body>
-<!-- BUILD:6a875c5b -->
+<!-- BUILD:6a875c7c -->
 <main>
   <section>
     <h2>Tweet 1: High-level video</h2>
@@ -30,21 +30,27 @@
     <h2>Tweet 2: Forgetting</h2>
     <p class="tweet">Observation: catastrophic forgetting. A VLA finetuned with standard BC memorizes the demos and erodes the VLM's semantics: objects, colors, spatial relations. Change anything at test time and it breaks.</p>
     <video src="03_bc_forgets_v4.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="14_arch_standard_bc_v3.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 3: Anchoring</h2>
     <p class="tweet">Fix 1: Vision-Language Anchoring. Keep a frozen copy of the pretrained VLM and pin every backbone layer to it while BC learns the policy. The representations that generalize stay intact.</p>
     <video src="15_arch_anchoring_v3.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="05_anchor_v4.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 4: Alignment</h2>
     <p class="tweet">Fix 2: Language-Action Alignment. On the very frame the action head acts on, the model must also say the action's direction word through the frozen vocab head. What it says now matches what it does.</p>
     <video src="16_arch_alignment_v3.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="06_align_v6.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="04_cotraining_misaligned_v5.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="17_alignment_chart_v3.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 5: Significance</h2>
     <p class="tweet">Does it generalize? Position swap: 2.3% to 22.6%. LIBERO-Plus: 85.1% to 90.3%. Real robot: 28.3% to 54.2%. Word-action agreement: 11.3% to 65.8%. One recipe, everywhere we tested:</p>
     <video src="13_generalization_pairs_v8.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="11_real_robot_v4.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 6: Conclusions (text only)</h2>
@@ -52,13 +58,7 @@
   </section>
   <hr>
   <section>
-    <h2>Support videos (for replies)</h2>
-    <video src="14_arch_standard_bc_v3.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="05_anchor_v4.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="06_align_v6.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="04_cotraining_misaligned_v5.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="17_alignment_chart_v3.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="11_real_robot_v4.mp4" controls muted loop playsinline preload="metadata"></video>
+    <h2>Extras (charts for replies, references)</h2>
     <video src="09_sim_numbers_chart_v2.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="10_sim_swap_grid_v3.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="08_control_chart_v3.mp4" controls muted loop playsinline preload="metadata"></video>
