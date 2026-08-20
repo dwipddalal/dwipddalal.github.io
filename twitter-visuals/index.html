@@ -22,7 +22,7 @@
 </style>
 </head>
 <body>
-<!-- BUILD:6a878a6a -->
+<!-- BUILD:6a878bde -->
 <main>
   <section>
     <h2>Tweet 1: High-level video</h2>
@@ -37,23 +37,23 @@ Anchor-Align 🧭 finetuning a VLA without forgetting the VLM:
 📄🌐💻 anchoralignvla.github.io · Details in 🧵
 
 🌟 Thanks to @____ (VLA-Adapter) and @____ (StarVLA), whose open models this builds on!</p>
-    <video src="01_lead_teaser_v9.mp4" controls muted playsinline preload="metadata"></video>
+    <video src="01_lead_teaser_v10.mp4" controls muted playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 2: Forgetting</h2>
     <p class="tweet">Standard BC trains one loss: imitate the demo actions. Nothing asks the backbone to keep knowing what "pink" means, so step by step it stops knowing. Try it on your model: swap two objects, repeat the command. Score: 2.3%. The VLA remembers the demos. It forgets the world.</p>
     <video src="03_bc_forgets_v5.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="14_arch_standard_bc_v3.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="14_arch_standard_bc_v4.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 3: Anchoring</h2>
     <p class="tweet">Forgetting is not a vision-encoder problem; it runs the full depth of the backbone. So pin every layer: keep a frozen copy of the VLM and distill its hidden states into the trainable backbone, layer by layer, while you finetune. No extra data, no new labels, no forgetting.</p>
-    <video src="15_arch_anchoring_v3.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="15_arch_anchoring_v4.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 4: Alignment</h2>
     <p class="tweet">Co-training's losses never share a frame, so words and motion quietly disagree (0% on the swap). Fix: every action has a free direction word. Predict it on the very frame the action head acts on, through the frozen vocab head. Word-action agreement: 11.3%→65.8%.</p>
-    <video src="16_arch_alignment_v3.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="16_arch_alignment_v4.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="06_align_v7.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
@@ -75,7 +75,7 @@ Anchor-Align 🧭 finetuning a VLA without forgetting the VLM:
     <video src="09_sim_numbers_chart_v3.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="10_sim_swap_grid_v4.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="08_control_chart_v4.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="12_method_abstract_v11.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="12_method_abstract_v12.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="07_one_training_step_v6.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="02_lead_alt_thumb_swap.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
