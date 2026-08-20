@@ -4,41 +4,68 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>visuals</title>
+<title>Anchor-Align thread</title>
 <style>
   html, body { margin: 0; padding: 0; background: #0A0E14; }
-  main { max-width: 720px; margin: 0 auto; padding: 12px 8px 60px; }
-  video { display: block; width: 100%; border-radius: 10px; margin: 0 0 26px; background: #0A0E14; }
-  hr { border: none; border-top: 2px solid #3B4C63; margin: 44px 0; }
+  main { max-width: 720px; margin: 0 auto; padding: 16px 10px 60px;
+         font-family: -apple-system, "Helvetica Neue", sans-serif; }
+  h2 { color: #8C97A8; font-size: 14px; font-weight: 600; margin: 34px 2px 8px; }
+  .tweet { background: #121A26; color: #F4F7FA; border-radius: 12px;
+           padding: 14px 16px; margin: 0 0 14px; font-size: 15px;
+           line-height: 1.55; }
+  video { display: block; width: 100%; border-radius: 10px;
+          margin: 0 0 14px; background: #0A0E14; }
+  hr { border: none; border-top: 2px solid #3B4C63; margin: 44px 0 8px; }
 </style>
 </head>
 <body>
-<!-- BUILD:6a875c0c -->
+<!-- BUILD:6a875c5b -->
 <main>
-  <!-- T1 - high-level video -->
-  <video src="01_lead_teaser_v7.mp4" controls muted playsinline preload="metadata"></video>
-  <!-- T2 - forgetting -->
-  <video src="03_bc_forgets_v4.mp4" controls muted loop playsinline preload="metadata"></video>
-  <!-- T3 - anchoring -->
-  <video src="15_arch_anchoring_v3.mp4" controls muted loop playsinline preload="metadata"></video>
-  <!-- T4 - alignment -->
-  <video src="06_align_v6.mp4" controls muted loop playsinline preload="metadata"></video>
-  <!-- T5 - significance -->
-  <video src="13_generalization_pairs_v8.mp4" controls muted loop playsinline preload="metadata"></video>
+  <section>
+    <h2>Tweet 1: High-level video</h2>
+    <p class="tweet">How do we make VLAs generalize beyond their demonstrations? Standard finetuning quietly destroys what the pretrained VLM knew. Anchor-Align fixes that with two losses. The full story in 2:20:</p>
+    <video src="01_lead_teaser_v7.mp4" controls muted playsinline preload="metadata"></video>
+  </section>
+  <section>
+    <h2>Tweet 2: Forgetting</h2>
+    <p class="tweet">Observation: catastrophic forgetting. A VLA finetuned with standard BC memorizes the demos and erodes the VLM's semantics: objects, colors, spatial relations. Change anything at test time and it breaks.</p>
+    <video src="03_bc_forgets_v4.mp4" controls muted loop playsinline preload="metadata"></video>
+  </section>
+  <section>
+    <h2>Tweet 3: Anchoring</h2>
+    <p class="tweet">Fix 1: Vision-Language Anchoring. Keep a frozen copy of the pretrained VLM and pin every backbone layer to it while BC learns the policy. The representations that generalize stay intact.</p>
+    <video src="15_arch_anchoring_v3.mp4" controls muted loop playsinline preload="metadata"></video>
+  </section>
+  <section>
+    <h2>Tweet 4: Alignment</h2>
+    <p class="tweet">Fix 2: Language-Action Alignment. On the very frame the action head acts on, the model must also say the action's direction word through the frozen vocab head. What it says now matches what it does.</p>
+    <video src="16_arch_alignment_v3.mp4" controls muted loop playsinline preload="metadata"></video>
+  </section>
+  <section>
+    <h2>Tweet 5: Significance</h2>
+    <p class="tweet">Does it generalize? Position swap: 2.3% to 22.6%. LIBERO-Plus: 85.1% to 90.3%. Real robot: 28.3% to 54.2%. Word-action agreement: 11.3% to 65.8%. One recipe, everywhere we tested:</p>
+    <video src="13_generalization_pairs_v8.mp4" controls muted loop playsinline preload="metadata"></video>
+  </section>
+  <section>
+    <h2>Tweet 6: Conclusions (text only)</h2>
+    <p class="tweet">Takeaway: generalizable VLAs need more than imitating demonstrations. Preserve the pretrained semantics (anchor), and ground them in the actions the robot executes (align). Paper, code, and rollouts: anchoralignvla.github.io</p>
+  </section>
   <hr>
-  <!-- not used in the tweets -->
-  <video src="14_arch_standard_bc_v3.mp4" controls muted loop playsinline preload="metadata"></video>
-  <video src="05_anchor_v4.mp4" controls muted loop playsinline preload="metadata"></video>
-  <video src="16_arch_alignment_v3.mp4" controls muted loop playsinline preload="metadata"></video>
-  <video src="04_cotraining_misaligned_v5.mp4" controls muted loop playsinline preload="metadata"></video>
-  <video src="17_alignment_chart_v3.mp4" controls muted loop playsinline preload="metadata"></video>
-  <video src="11_real_robot_v4.mp4" controls muted loop playsinline preload="metadata"></video>
-  <video src="09_sim_numbers_chart_v2.mp4" controls muted loop playsinline preload="metadata"></video>
-  <video src="10_sim_swap_grid_v3.mp4" controls muted loop playsinline preload="metadata"></video>
-  <video src="08_control_chart_v3.mp4" controls muted loop playsinline preload="metadata"></video>
-  <video src="12_method_abstract_v11.mp4" controls muted loop playsinline preload="metadata"></video>
-  <video src="07_one_training_step_v4.mp4" controls muted loop playsinline preload="metadata"></video>
-  <video src="02_lead_alt_thumb_swap.mp4" controls muted loop playsinline preload="metadata"></video>
+  <section>
+    <h2>Support videos (for replies)</h2>
+    <video src="14_arch_standard_bc_v3.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="05_anchor_v4.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="06_align_v6.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="04_cotraining_misaligned_v5.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="17_alignment_chart_v3.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="11_real_robot_v4.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="09_sim_numbers_chart_v2.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="10_sim_swap_grid_v3.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="08_control_chart_v3.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="12_method_abstract_v11.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="07_one_training_step_v4.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="02_lead_alt_thumb_swap.mp4" controls muted loop playsinline preload="metadata"></video>
+  </section>
 </main>
 <script>
   const vids = document.querySelectorAll("video");
