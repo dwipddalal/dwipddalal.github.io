@@ -23,7 +23,7 @@
 </style>
 </head>
 <body>
-<!-- BUILD:c8e5f2a6 -->
+<!-- BUILD:d9f6a3b1 -->
 <main>
   <p class="note">Second cut, 2026-08-22, after the 08-21 review: one heading per slide, no narration, standard recipe in gray, our edits in color. Thread order follows the review's tweet structure.</p>
   <section>
@@ -33,18 +33,20 @@
 🧭 We address this with Anchor-Align, a recipe that finetunes the VLA without forgetting the VLM.
 
 ⚓ Two simple losses on top of standard BC. No extra data, no extra pretraining.
-🤖 Better OOD generalization in sim and on a real xArm7, on two VLA architectures.
+🤖 Better OOD generalization in sim and on an xArm7, on two VLA architectures.
 
 📄🌐💻 anchoralignvla.github.io · 🧵👇</p>
-    <video src="01_lead_teaser_v17.mp4" controls playsinline preload="metadata"></video>
+    <video src="01_lead_teaser_v18.mp4" controls playsinline preload="metadata"></video>
     <p class="note">1:03, music bed only (no narration). A silent edition is in ~/Desktop/videos.</p>
   </section>
   <section>
     <h2>Tweet 2: reason 1, forgetting</h2>
-    <p class="tweet">Why does standard BC hurt generalization? Reason 1: finetuning forgets simple semantic concepts.
+    <p class="tweet">Why does standard BC hurt generalization? 🤔
 
-The same VLM backbone that moves to the green mug can no longer move to the pink mug when asked. It picks the green one 90% of the time. Good old catastrophic forgetting strikes again.</p>
-    <video src="03_forgetting_v6.mp4" controls muted loop playsinline preload="metadata"></video>
+Reason 1: finetuning forgets simple semantic concepts.
+
+The same VLM backbone that moves to the green mug can no longer move to the pink mug when asked. Good old catastrophic forgetting strikes again!</p>
+    <video src="03_forgetting_v7.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 3: reason 2, disjoint data</h2>
@@ -63,13 +65,13 @@ In this work, Table 1 is exclusively OOD: LIBERO-PRO (rephrased language, object
     <video src="09_sim_numbers_chart_v3.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
-    <h2>Tweet 5: real world</h2>
-    <p class="tweet">And lots of real-world evals on a UFactory xArm7: spatial rearrangement, cluttered scenes, compositional object layout, and a semantic test (train on the green mug, ask for the pink one).
+    <h2>Tweet 5: robot evals</h2>
+    <p class="tweet">And lots of evals on a UFactory xArm7: spatial rearrangement, cluttered scenes, compositional object layout, and a semantic test (train on the green mug, ask for the pink one).
 
 7 held-out tasks, 20 rollouts each, 140 trials per model, two VLA architectures (VLA-Adapter, 0.5B regression head; StarVLA, 3B flow-matching head). Mean success 28.3% → 54.2% and 36.7% → 60.0%.
 
 Massive push by the undergraduate author @chahit, and a smooth checkpoint pipeline from @dwip.</p>
-    <video src="11_real_robot_v6.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="11_robot_v7.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 6: forgetting, measured</h2>
