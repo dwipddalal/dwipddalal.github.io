@@ -50,9 +50,12 @@ The same VLM backbone that moves to the green mug can no longer move to the pink
   </section>
   <section>
     <h2>Tweet 3: reason 2, disjoint data</h2>
-    <p class="tweet">Reason 2: the VLM backbone and the action expert learn from different data. The backbone's language supervision is web image-text. The expert's action supervision is robot demos. Nothing ties a word and a motion to the same frame.
+    <p class="tweet">Reason 2: the VLM backbone and the action expert learn from different data.
+VLM backbone's supervision is web image-text.
+Action expert's action supervision is robot demos.
+Nothing ties a word and a motion to the same frame.
 
-Anchor-Align closes the gap with a simple automated transcription: every demo action becomes a direction word (left, right, up, down, forward, backward), predicted on the very frame the action head acts on.</p>
+Anchor-Align closes the gap with a simple automated transcription: every demo action becomes a direction word, predicted on every frame the action head acts.</p>
     <video src="18_disjoint_data_v7.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="16_arch_alignment_v14.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
