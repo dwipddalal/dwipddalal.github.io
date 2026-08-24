@@ -23,7 +23,7 @@
 </style>
 </head>
 <body>
-<!-- BUILD:f3a8d5c2 -->
+<!-- BUILD:a2d7e4b8 -->
 <main>
   <p class="note">Second cut, 2026-08-22, after the 08-21 review: one heading per slide, no narration, standard recipe in gray, our edits in color. Thread order follows the review's tweet structure.</p>
   <section>
@@ -36,7 +36,7 @@
 🤖 Better OOD generalization in sim and on an xArm7, on two VLA architectures.
 
 📄🌐💻 anchoralignvla.github.io · 🧵👇</p>
-    <video src="01_lead_teaser_v18.mp4" controls playsinline preload="metadata"></video>
+    <video src="01_lead_teaser_v19.mp4" controls playsinline preload="metadata"></video>
     <p class="note">1:03, music bed only (no narration). A silent edition is in ~/Desktop/videos.</p>
   </section>
   <section>
@@ -53,14 +53,19 @@ The same VLM backbone that moves to the green mug can no longer move to the pink
     <p class="tweet">Reason 2: the VLM backbone and the action expert learn from different data. The backbone's language supervision is web image-text. The expert's action supervision is robot demos. Nothing ties a word and a motion to the same frame.
 
 Anchor-Align closes the gap with a simple automated transcription: every demo action becomes a direction word (left, right, up, down, forward, backward), predicted on the very frame the action head acts on.</p>
-    <video src="18_disjoint_data_v5.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="16_arch_alignment_v10.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="18_disjoint_data_v6.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="16_arch_alignment_v11.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 4: OOD-only simulation</h2>
     <p class="tweet">We all love generalization, yet we keep testing on LIBERO (99% already, why, why, why 🫣).
 
-In this work, Table 1 is exclusively OOD: LIBERO-PRO (rephrased language, object swap, position swap) and LIBERO-Plus (camera, lighting, background, layout, initial state, language, sensor noise), plus CALVIN ABC→D for long horizons. Anchor-Align is best in every column. Position swap: 2.3% → 22.6%.</p>
+In this work, our Table 1 of sim results is exclusively OOD evaluations.
+
+1. LIBERO-PRO tests semantic generalization: rephrased language, object swap, position swap.
+2. LIBERO-Plus tests perceptual robustness across 7 axes: camera, lighting, background, layout, initial state, language, sensor noise.
+
+Some cool videos of OOD visuals 👇</p>
     <video src="10_sim_swap_grid_v5.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="09_sim_numbers_chart_v3.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
@@ -71,7 +76,7 @@ In this work, Table 1 is exclusively OOD: LIBERO-PRO (rephrased language, object
 7 held-out tasks, 20 rollouts each, 140 trials per model, two VLA architectures (VLA-Adapter, 0.5B regression head; StarVLA, 3B flow-matching head). Mean success 28.3% → 54.2% and 36.7% → 60.0%.
 
 Massive push by the undergraduate author @chahit, and a smooth checkpoint pipeline from @dwip.</p>
-    <video src="11_robot_v7.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="11_robot_v8.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 6: forgetting, measured</h2>
@@ -92,9 +97,9 @@ To ~infinity~ generalization, and beyond! 🧭</p>
   <hr>
   <section>
     <h2>Extras (support clips for replies)</h2>
-    <video src="14_arch_standard_bc_v10.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="15_arch_anchoring_v10.mp4" controls muted loop playsinline preload="metadata"></video>
-    <video src="12_method_abstract_v18.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="14_arch_standard_bc_v11.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="15_arch_anchoring_v11.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="12_method_abstract_v19.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="13_generalization_pairs_v9.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="17_alignment_chart_v5.mp4" controls muted loop playsinline preload="metadata"></video>
     <video src="08_control_chart_v5.mp4" controls muted loop playsinline preload="metadata"></video>
