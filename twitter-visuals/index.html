@@ -23,7 +23,7 @@
 </style>
 </head>
 <body>
-<!-- BUILD:f8a1b3c4 -->
+<!-- BUILD:a9b2c4d5 -->
 <main>
   <p class="note">Second cut, 2026-08-22, after the 08-21 review: one heading per slide, no narration, standard recipe in gray, our edits in color. Thread order follows the review's tweet structure.</p>
   <section>
@@ -63,8 +63,8 @@ Anchor-Align converts the continuous action targets in expert demos into discret
 
 In this work, our Table 1 of sim results is exclusively OOD evaluations.
 
-1. LIBERO-PRO tests semantic generalization: rephrased language, object swap, position swap.
-2. LIBERO-Plus tests perceptual robustness across 7 axes: camera, lighting, background, layout, initial state, language, sensor noise.
+1. LIBERO-PRO (@slc137 and team) tests semantic generalization: rephrased language, object swap, position swap.
+2. LIBERO-Plus (@xpqiu and team) tests perceptual robustness across 7 axes: camera, lighting, background, layout, initial state, language, sensor noise.
 
 Some cool videos of OOD visuals 👇</p>
     <video src="10_sim_swap_grid_v8.mp4" controls muted loop playsinline preload="metadata"></video>
@@ -73,7 +73,7 @@ Some cool videos of OOD visuals 👇</p>
     <h2>Tweet 5: robot evals</h2>
     <p class="tweet">And lots of evals on a UFactory xArm7: spatial rearrangement, cluttered scenes, compositional object layout, and a semantic test (train on the green mug, ask for the pink one).
 
-📈 7 held-out tasks, 20 rollouts each, 140 trials per model, two VLA architectures (VLA-Adapter, 0.5B regression head; StarVLA, 3B flow-matching head).
+📈 7 held-out tasks, 20 rollouts each, 140 trials per model, two VLA architectures: VLA-Adapter (@kkbllp, 0.5B regression head) and StarVLA (@JinhuiYe, 3B flow-matching head).
 
 Massive push by the undergraduate author @chahit, and a smooth checkpoint pipeline from @dwip.</p>
     <video src="11_robot_v11.mp4" controls muted loop playsinline preload="metadata"></video>
@@ -82,17 +82,17 @@ Massive push by the undergraduate author @chahit, and a smooth checkpoint pipeli
     <h2>Tweet 6: forgetting, measured</h2>
     <p class="tweet">"Catastrophic forgetting" is the boogeyman many works throw punches at, but few back the claim. Let's do better.
 
-Two measurements: visual reasoning (GQA) during finetuning, and per-layer language preservation (text-token CKA to the pretrained VLM). Standard BC loses 94% of its GQA accuracy, and its CKA collapses in the output layers (0.34 at layer 24). With anchoring, every layer stays near the pretrained VLM.</p>
+Two measurements: visual reasoning (GQA) during finetuning, and per-layer language preservation (text-token CKA, @skornblith's similarity measure, against the pretrained VLM). Standard BC loses 94% of its GQA accuracy, and its CKA collapses in the output layers (0.34 at layer 24). With anchoring, every layer stays near the pretrained VLM.</p>
     <video src="19_forgetting_analysis_v3.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 7: community (text only)</h2>
-    <p class="tweet">Big shout-out to the community efforts that made this open, fundamental research possible: VLA-Adapter (@____), StarVLA (@____), LIBERO-PRO, LIBERO-Plus, CALVIN, LeRobot, GELLO.
+    <p class="tweet">Where this goes: VLAs that keep their VLM's understanding while they learn to act, so finetuning adds skills without subtracting knowledge. Anchor-Align is one step: same data, two new losses, better generalization. Next, anchoring for longer horizons and new embodiments.
 
-Paper, code, models, data: anchoralignvla.github.io
-Try it, break it, tell us what to fix.
+🌐 anchoralignvla.github.io
+📄 arXiv: [link]
 
-To ~infinity~ generalization, and beyond! 🧭</p>
+Try it on your VLA and tell us what breaks.</p>
   </section>
   <hr>
   <section>
