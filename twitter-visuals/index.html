@@ -23,7 +23,7 @@
 </style>
 </head>
 <body>
-<!-- BUILD:e3f6a8b9 -->
+<!-- BUILD:f4a7b9c0 -->
 <main>
   <p class="note">Second cut, 2026-08-22, after the 08-21 review: one heading per slide, no narration, standard recipe in gray, our edits in color. Thread order follows the review's tweet structure.</p>
   <section>
@@ -36,7 +36,7 @@
 🤖 Better OOD generalization in sim and on an xArm7, on two VLA architectures.
 
 📄🌐💻 anchoralignvla.github.io · 🧵👇</p>
-    <video src="01_lead_teaser_v35.mp4" controls playsinline preload="metadata"></video>
+    <video src="01_lead_teaser_v36.mp4" controls playsinline preload="metadata"></video>
     <p class="note">1:03, music bed only (no narration). A silent edition is in ~/Desktop/videos.</p>
   </section>
   <section>
@@ -67,7 +67,7 @@ In this work, our Table 1 of sim results is exclusively OOD evaluations.
 2. LIBERO-Plus (@xpqiu and team) tests perceptual robustness across 7 axes: camera, lighting, background, layout, initial state, language, sensor noise.
 
 Some cool videos of OOD visuals 👇</p>
-    <video src="10_sim_swap_grid_v9.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="10_sim_swap_grid_v10.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 5: robot evals</h2>
@@ -76,7 +76,7 @@ Some cool videos of OOD visuals 👇</p>
 📈 7 held-out tasks, 20 rollouts each, 140 trials per model, two VLA architectures: VLA-Adapter (@kkbllp, 0.5B regression head) and StarVLA (@JinhuiYe, 3B flow-matching head).
 
 Massive push by the undergraduate author @chahit, and a smooth checkpoint pipeline from @dwip.</p>
-    <video src="11_robot_v12.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="11_robot_v13.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 6: forgetting, measured</h2>
@@ -85,7 +85,7 @@ Massive push by the undergraduate author @chahit, and a smooth checkpoint pipeli
 1. Visual reasoning: we keep asking the VLM questions about images (GQA) while it finetunes on robot demos. Standard BC loses 94% of its accuracy. With anchoring, most of it stays.
 
 2. Language preservation, layer by layer: CKA (@skornblith's similarity measure) scores how close each layer's activations stay to the pretrained VLM's on the same text; 1.0 means unchanged. Standard BC drifts hardest in the output layers (0.34 at layer 24). With anchoring, every layer stays near the pretrained VLM.</p>
-    <video src="19_forgetting_analysis_v4.mp4" controls muted loop playsinline preload="metadata"></video>
+    <video src="19_forgetting_analysis_v5.mp4" controls muted loop playsinline preload="metadata"></video>
   </section>
   <section>
     <h2>Tweet 7: community (text only)</h2>
