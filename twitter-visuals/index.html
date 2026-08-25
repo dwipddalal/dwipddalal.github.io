@@ -23,7 +23,7 @@
 </style>
 </head>
 <body>
-<!-- BUILD:a9b8e06b -->
+<!-- BUILD:c169d54a -->
 <main>
   <p class="note">Second cut, 2026-08-22, after the 08-21 review: one heading per slide, no narration, standard recipe in gray, our edits in color. Thread order follows the review's tweet structure.</p>
   <section>
@@ -98,7 +98,9 @@ Try it on your VLA and tell us what breaks.</p>
   </section>
   <section>
     <h2>LinkedIn (one video, not part of the thread)</h2>
-    <p class="tweet">We need to preserve and utilize the VLM priors to improve the generalizability of our VLAs.</p>
+    <p class="tweet">“If you want a VLA to generalize, collect more diverse robot demonstrations.” But VLAs already inherit a VLM trained on massive and diverse visual-language data. The real problem is that standard behavior-cloning finetuning often overwrites this knowledge. In our experiments, the VLM backbone lost 94% of its visual-reasoning accuracy. At the same time, language understanding comes from web pretraining while action learning comes from robot demonstrations, so the two are never supervised on the same observation.
+
+<strong>Anchor-Align</strong> addresses both problems with two simple losses added to standard BC. One preserves the pretrained VLM’s knowledge; the other trains language and action predictions together on the same robot demonstrations. No extra data and no extra pretraining. The result is stronger out-of-distribution generalization across LIBERO-PRO, LIBERO-Plus, and real-world xArm7 experiments on two VLA architectures. Paper, code, checkpoints, and data: <strong>anchoralignvla.github.io</strong></p>
     <video src="20_linkedin_v4.mp4" controls playsinline preload="metadata"></video>
     <p class="note">2:13. The forgetting panel from tweet 2 in front of the film. Where the evaluation-breadth card used to be, the tweet-5 robot clip runs, then the tweet-4 sim block from its OOD beat, under the heading "We also focus on OOD evals in Simulation". The score now runs under the panel too, and the thumbnail is the Anchor-Align card. The thread clips are unchanged.</p>
   </section>
