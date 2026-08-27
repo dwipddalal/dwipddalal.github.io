@@ -19,6 +19,8 @@ Anchor-Align augments BC with two objectives:
 
 On a physical xArm7 robot, across two VLA architectures, real-robot success improves from 28% to 54% and from 37% to 60%. In simulation it improves OOD perturbation robustness, perceptual robustness, and long-horizon control on LIBERO-PRO, LIBERO-Plus, and CALVIN respectively.
 
+Topics: vision-language-action models, robot learning, robot manipulation, continual learning, catastrophic forgetting, out-of-distribution generalization, language-action alignment, behavior cloning, imitation learning, knowledge distillation.
+
 - [Project page](https://anchoralignvla.github.io/)
 - [Paper (arXiv)](https://arxiv.org/abs/2607.13429)
 - [Code](https://github.com/dwipddalal/Anchor-Align)
