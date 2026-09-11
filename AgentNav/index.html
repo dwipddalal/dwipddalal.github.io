@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="Can MLLMs Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge (EACL 2026 Oral). We introduce Sparsely Grounded Visual Navigation and the CityNav benchmark on Google Street View, and propose Verbalization of Path (VoP) to elicit city-scale cognitive maps from multimodal large language models for zero-shot city navigation.">
+  <meta name="description" content="CityNav and AgentNav: MLLM visual navigation on Google Street View with Verbalization of Path. EACL 2026 Oral; preprint: City Navigation in the Wild.">
   <meta name="keywords" content="AgentNav, CityNav, city navigation, urban navigation, MLLM, multimodal large language models, vision-and-language navigation, Verbalization of Path, VoP, cognitive map, visual navigation, zero-shot navigation, Google Street View, embodied AI, LLM agent, EACL 2026">
   <meta name="author" content="Dwip Dalal, Utkarsh Mishra, Narendra Ahuja, Nebojsa Jojic">
+  <link rel="canonical" href="https://dwipddalal.github.io/AgentNav/">
+  <link rel="alternate" type="application/pdf" href="https://dwipddalal.github.io/AgentNav/static/pdfs/AgentNav_EACL2026_web.pdf" title="EACL 2026 paper PDF">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="alternate" type="application/x-bibtex" href="citation.bib" title="EACL 2026 BibTeX citation">
+  <link rel="alternate" type="application/x-research-info-systems" href="citation.ris" title="EACL 2026 RIS citation">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
@@ -12,14 +17,16 @@
   <meta property="og:description" content="EACL 2026 Oral. Verbalization of Path (VoP) elicits city-scale cognitive maps from MLLMs for zero-shot city navigation on Google Street View.">
   <meta property="og:url" content="https://dwipddalal.github.io/AgentNav/">
   <meta property="og:image" content="https://dwipddalal.github.io/images/CityNav_2.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="2648">
+  <meta property="og:image:height" content="1356">
+  <meta property="og:image:alt" content="CityNav visual navigation task and AgentNav route planning in a city">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Can MLLMs Find Their Way in a City? (EACL 2026 Oral)">
   <meta name="twitter:description" content="Verbalization of Path (VoP) elicits city-scale cognitive maps from MLLMs for zero-shot city navigation. CityNav benchmark on Google Street View.">
   <meta name="twitter:image" content="https://dwipddalal.github.io/images/CityNav_2.png">
+  <meta name="twitter:image:alt" content="CityNav visual navigation task and AgentNav route planning in a city">
 
   <!-- Google Scholar / Highwire Press citation metadata -->
   <meta name="citation_title" content="Can MLLMs Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge">
@@ -27,53 +34,248 @@
   <meta name="citation_author" content="Mishra, Utkarsh">
   <meta name="citation_author" content="Ahuja, Narendra">
   <meta name="citation_author" content="Jojic, Nebojsa">
-  <meta name="citation_publication_date" content="2026/03">
+  <meta name="citation_publication_date" content="2026">
   <meta name="citation_conference_title" content="Proceedings of the 19th Conference of the European Chapter of the Association for Computational Linguistics (Volume 1: Long Papers)">
   <meta name="citation_publisher" content="Association for Computational Linguistics">
+  <meta name="citation_isbn" content="979-8-89176-380-7">
   <meta name="citation_firstpage" content="8279">
   <meta name="citation_lastpage" content="8303">
   <meta name="citation_doi" content="10.18653/v1/2026.eacl-long.387">
   <meta name="citation_arxiv_id" content="2512.15933">
-  <meta name="citation_pdf_url" content="https://dwipddalal.github.io/AgentNav/static/pdfs/AgentNav_EACL2026.pdf">
-  <meta name="citation_abstract_html_url" content="https://aclanthology.org/2026.eacl-long.387/">
+  <meta name="citation_pdf_url" content="https://dwipddalal.github.io/AgentNav/static/pdfs/AgentNav_EACL2026_web.pdf">
+  <meta name="citation_abstract_html_url" content="https://dwipddalal.github.io/AgentNav/">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ScholarlyArticle",
-    "name": "Can MLLMs Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge",
-    "headline": "Can MLLMs Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge",
-    "alternateName": "City Navigation in the Wild: Exploring Emergent Navigation from Web-Scale Knowledge in MLLMs",
-    "author": [
-      {"@type": "Person", "name": "Dwip Dalal", "affiliation": "University of Illinois Urbana-Champaign"},
-      {"@type": "Person", "name": "Utkarsh Mishra", "affiliation": "Texas A&M University"},
-      {"@type": "Person", "name": "Narendra Ahuja", "affiliation": "University of Illinois Urbana-Champaign"},
-      {"@type": "Person", "name": "Nebojsa Jojic", "affiliation": "Microsoft Research"}
-    ],
-    "url": "https://dwipddalal.github.io/AgentNav/",
-    "image": "https://dwipddalal.github.io/images/CityNav_2.png",
-    "datePublished": "2026-03",
-    "publisher": {"@type": "Organization", "name": "Association for Computational Linguistics"},
-    "isPartOf": {"@type": "PublicationVolume", "name": "Proceedings of the 19th Conference of the European Chapter of the Association for Computational Linguistics (Volume 1: Long Papers)"},
-    "pagination": "8279-8303",
-    "identifier": [
-      {"@type": "PropertyValue", "propertyID": "DOI", "value": "10.18653/v1/2026.eacl-long.387"},
-      {"@type": "PropertyValue", "propertyID": "arXiv", "value": "2512.15933"}
-    ],
-    "sameAs": [
-      "https://aclanthology.org/2026.eacl-long.387/",
-      "https://arxiv.org/abs/2512.15933",
-      "https://huggingface.co/papers/2512.15933",
-      "https://github.com/Utkarsh-Mishra444/Sparsely-Grounded-Long-Range-Navigation"
-    ],
-    "description": "We introduce Sparsely Grounded Visual Navigation and the CityNav benchmark, and propose Verbalization of Path (VoP) to elicit city-scale cognitive maps from multimodal large language models (MLLMs) for zero-shot city navigation."
-  }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://dwipddalal.github.io/AgentNav/#webpage",
+      "url": "https://dwipddalal.github.io/AgentNav/",
+      "name": "Can MLLMs Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge",
+      "inLanguage": "en",
+      "mainEntity": {
+        "@id": "https://dwipddalal.github.io/AgentNav/#article"
+      },
+      "dateModified": "2026-09-10"
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://dwipddalal.github.io/AgentNav/#article",
+      "name": "Can MLLMs Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge",
+      "headline": "Can MLLMs Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge",
+      "alternateName": "City Navigation in the Wild: Exploring Emergent Navigation from Web-Scale Knowledge in MLLMs",
+      "author": [
+        {
+          "@type": "Person",
+          "@id": "https://dwipddalal.github.io/#person",
+          "name": "Dwip Dalal",
+          "url": "https://dwipddalal.github.io/",
+          "affiliation": {
+            "@type": "Organization",
+            "name": "University of Illinois Urbana-Champaign"
+          }
+        },
+        {
+          "@type": "Person",
+          "name": "Utkarsh Mishra",
+          "affiliation": {
+            "@type": "Organization",
+            "name": "Texas A&M University"
+          }
+        },
+        {
+          "@type": "Person",
+          "name": "Narendra Ahuja",
+          "affiliation": {
+            "@type": "Organization",
+            "name": "University of Illinois Urbana-Champaign"
+          }
+        },
+        {
+          "@type": "Person",
+          "name": "Nebojsa Jojic",
+          "affiliation": {
+            "@type": "Organization",
+            "name": "Microsoft Research"
+          }
+        }
+      ],
+      "url": "https://dwipddalal.github.io/AgentNav/",
+      "mainEntityOfPage": {
+        "@id": "https://dwipddalal.github.io/AgentNav/#webpage"
+      },
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "application/pdf",
+        "contentUrl": "https://dwipddalal.github.io/AgentNav/static/pdfs/AgentNav_EACL2026_web.pdf"
+      },
+      "image": "https://dwipddalal.github.io/images/CityNav_2.png",
+      "datePublished": "2026-03",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Association for Computational Linguistics"
+      },
+      "isPartOf": {
+        "@type": "PublicationVolume",
+        "name": "Proceedings of the 19th Conference of the European Chapter of the Association for Computational Linguistics (Volume 1: Long Papers)"
+      },
+      "pagination": "8279-8303",
+      "identifier": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "DOI",
+          "value": "10.18653/v1/2026.eacl-long.387"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "arXiv",
+          "value": "2512.15933"
+        }
+      ],
+      "sameAs": [
+        "https://aclanthology.org/2026.eacl-long.387/",
+        "https://doi.org/10.18653/v1/2026.eacl-long.387",
+        "https://arxiv.org/abs/2512.15933",
+        "https://huggingface.co/papers/2512.15933"
+      ],
+      "description": "We introduce Sparsely Grounded Visual Navigation and the CityNav benchmark, and propose Verbalization of Path (VoP) to elicit city-scale cognitive maps from multimodal large language models (MLLMs) for zero-shot city navigation.",
+      "keywords": [
+        "CityNav",
+        "AgentNav",
+        "Sparsely Grounded Visual Navigation",
+        "Verbalization of Path",
+        "multimodal large language models",
+        "visual navigation",
+        "city navigation",
+        "long-range navigation",
+        "Google Maps Street View",
+        "spatial reasoning",
+        "cognitive maps",
+        "zero-shot navigation",
+        "embodied AI"
+      ],
+      "abstract": "Leveraging multimodal large language models (MLLMs) to develop embodied agents offers significant promise for addressing complex real-world tasks. However, current evaluation benchmarks remain predominantly language-centric or heavily reliant on simulated environments, rarely probing the nuanced, knowledge-intensive reasoning essential for practical, real-world scenarios.\n\nTo bridge this critical gap, we introduce the task of Sparsely Grounded Visual Navigation, explicitly designed to evaluate the sequential decision-making abilities of MLLMs in challenging, knowledge-intensive real-world environments. We operationalize this task with CityNav, a comprehensive benchmark encompassing four diverse global cities, specifically constructed to assess raw MLLM-driven agents in city navigation.\n\nAgents are required to rely solely on visual inputs and internal multimodal reasoning to sequentially navigate 50+ decision points without additional environmental annotations or specialized architectural modifications. Crucially, agents must autonomously achieve localization through interpreting city-specific cues and recognizing landmarks, perform spatial reasoning, and strategically plan and execute routes to their destinations.\n\nThrough extensive evaluations, we demonstrate that current state-of-the-art MLLMs and standard reasoning techniques (e.g., Chain-of-Thought, Reflection) significantly underperform in this challenging setting. To address this, we propose Verbalization of Path (VoP), which explicitly grounds the agent's internal reasoning by probing an explicit cognitive map from the MLLM, substantially enhancing navigation success.",
+      "about": [
+        {
+          "@id": "https://dwipddalal.github.io/AgentNav/#citynav"
+        },
+        {
+          "@id": "https://github.com/Utkarsh-Mishra444/Sparsely-Grounded-Long-Range-Navigation#software"
+        },
+        {
+          "@type": "Thing",
+          "name": "Visual navigation"
+        },
+        {
+          "@type": "Thing",
+          "name": "Google Street View"
+        },
+        {
+          "@type": "Thing",
+          "name": "Multimodal large language models"
+        }
+      ]
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://dwipddalal.github.io/AgentNav/#citynav",
+      "name": "CityNav",
+      "description": "CityNav is a benchmark for sparsely grounded visual navigation with 400 navigation tasks across New York, Tokyo, Vienna, and São Paulo. Routes average approximately 2 km, evaluating multimodal large language models on city navigation using street-level visual observations.",
+      "url": "https://dwipddalal.github.io/AgentNav/#citynav",
+      "creator": [
+        {
+          "@type": "Person",
+          "@id": "https://dwipddalal.github.io/#person",
+          "name": "Dwip Dalal",
+          "url": "https://dwipddalal.github.io/",
+          "affiliation": {
+            "@type": "Organization",
+            "name": "University of Illinois Urbana-Champaign"
+          }
+        },
+        {
+          "@type": "Person",
+          "name": "Utkarsh Mishra",
+          "affiliation": {
+            "@type": "Organization",
+            "name": "Texas A&M University"
+          }
+        },
+        {
+          "@type": "Person",
+          "name": "Narendra Ahuja",
+          "affiliation": {
+            "@type": "Organization",
+            "name": "University of Illinois Urbana-Champaign"
+          }
+        },
+        {
+          "@type": "Person",
+          "name": "Nebojsa Jojic",
+          "affiliation": {
+            "@type": "Organization",
+            "name": "Microsoft Research"
+          }
+        }
+      ],
+      "citation": {
+        "@id": "https://dwipddalal.github.io/AgentNav/#article"
+      },
+      "keywords": [
+        "CityNav",
+        "visual navigation",
+        "Google Street View",
+        "multimodal large language models"
+      ],
+      "spatialCoverage": [
+        {
+          "@type": "Place",
+          "name": "New York, United States"
+        },
+        {
+          "@type": "Place",
+          "name": "Tokyo, Japan"
+        },
+        {
+          "@type": "Place",
+          "name": "Vienna, Austria"
+        },
+        {
+          "@type": "Place",
+          "name": "São Paulo, Brazil"
+        }
+      ],
+      "variableMeasured": [
+        "Navigation success",
+        "Success weighted by Path Length (SPL)",
+        "Decision Accuracy"
+      ],
+      "disambiguatingDescription": "The CityNav benchmark introduced by Dalal, Mishra, Ahuja, and Jojic for MLLM navigation using Google Street View in four cities (EACL 2026)."
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://github.com/Utkarsh-Mishra444/Sparsely-Grounded-Long-Range-Navigation#software",
+      "name": "AgentNav",
+      "description": "AgentNav is the implementation of Verbalization of Path for sparsely grounded, long-range visual navigation with multimodal large language models, evaluated on CityNav.",
+      "url": "https://github.com/Utkarsh-Mishra444/Sparsely-Grounded-Long-Range-Navigation",
+      "codeRepository": "https://github.com/Utkarsh-Mishra444/Sparsely-Grounded-Long-Range-Navigation",
+      "programmingLanguage": "Python",
+      "citation": {
+        "@id": "https://dwipddalal.github.io/AgentNav/#article"
+      }
+    }
+  ]
+}
   </script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Can MLLMs Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge | AgentNav (EACL 2026 Oral)</title>
+  <title>CityNav: Can MLLMs Find Their Way in a City? | EACL 2026</title>
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -407,7 +609,7 @@
   <!-- Dataset Section -->
   <section class="section hero is-light">
     <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">CityNav Dataset</h2>
+      <h2 class="title is-3 has-text-centered" id="citynav">CityNav Dataset</h2>
       
       <div class="columns is-centered" style="margin-bottom: 2rem;">
         <div class="column is-3">
@@ -904,4 +1106,3 @@
     color: #3600a2;
   }
 </style>
-

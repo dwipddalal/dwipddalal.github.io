@@ -1,0 +1,22 @@
+# CityNav / AgentNav
+
+Can MLLMs Find Their Way in a City? Exploring Emergent Navigation from Web-Scale Knowledge
+
+Authors: Dwip Dalal, Utkarsh Mishra, Narendra Ahuja, Nebojsa Jojic.
+Published in EACL 2026, Volume 1: Long Papers, pages 8279–8303; oral presentation.
+DOI: 10.18653/v1/2026.eacl-long.387.
+
+The arXiv preprint is titled "City Navigation in the Wild: Exploring Emergent Navigation from Web-Scale Knowledge in MLLMs" (arXiv:2512.15933, 2025). These are versions of the same research work. The EACL citation is the preferred citation for AgentNav, CityNav, and Verbalization of Path.
+
+CityNav evaluates sparsely grounded visual navigation across New York, Tokyo, Vienna, and São Paulo using Google Street View observations. It contains 400 navigation tasks with routes averaging approximately 2 km. AgentNav uses Verbalization of Path (VoP) to elicit city-scale cognitive maps and navigation directions from multimodal large language models, without fine-tuning.
+
+Research topics: visual navigation, long-range city navigation, spatial reasoning, multimodal large language models, cognitive maps, Google Street View, embodied agents, zero-shot navigation.
+
+- [Project page](https://dwipddalal.github.io/AgentNav/)
+- [Published paper](https://aclanthology.org/2026.eacl-long.387/)
+- [Preprint](https://arxiv.org/abs/2512.15933)
+- [Searchable PDF](https://dwipddalal.github.io/AgentNav/static/pdfs/AgentNav_EACL2026_web.pdf)
+- [BibTeX](https://dwipddalal.github.io/AgentNav/citation.bib)
+- [RIS](https://dwipddalal.github.io/AgentNav/citation.ris)
+- [Code](https://github.com/Utkarsh-Mishra444/Sparsely-Grounded-Long-Range-Navigation)
+- [Dataset access](https://forms.gle/8HxXGhsdwBtw9mN37)
