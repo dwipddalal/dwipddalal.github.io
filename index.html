@@ -373,6 +373,173 @@
   "@context": "https://schema.org"
 }
   </script>
+  <!-- MMT: published paper and associated dataset on existing publication entry. -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://doi.org/10.18653/v1/2023.c3nlp-1.6",
+      "name": "MMT: A Multilingual and Multi-Topic Indian Social Media Dataset",
+      "headline": "MMT: A Multilingual and Multi-Topic Indian Social Media Dataset",
+      "url": "https://aclanthology.org/2023.c3nlp-1.6/",
+      "datePublished": "2023-05-05",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "author": [
+        {
+          "@type": "Person",
+          "@id": "https://dwipddalal.github.io/#person",
+          "name": "Dwip Dalal",
+          "url": "https://dwipddalal.github.io/"
+        },
+        {
+          "@type": "Person",
+          "name": "Vivek Srivastava"
+        },
+        {
+          "@type": "Person",
+          "name": "Mayank Singh"
+        }
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "Association for Computational Linguistics"
+      },
+      "isPartOf": {
+        "@type": "PublicationVolume",
+        "name": "Proceedings of the First Workshop on Cross-Cultural Considerations in NLP (C3NLP)"
+      },
+      "pagination": "47-52",
+      "identifier": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "DOI",
+          "value": "10.18653/v1/2023.c3nlp-1.6"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "arXiv",
+          "value": "2304.00634"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "ACL Anthology",
+          "value": "2023.c3nlp-1.6"
+        }
+      ],
+      "sameAs": [
+        "https://aclanthology.org/2023.c3nlp-1.6/",
+        "https://arxiv.org/abs/2304.00634"
+      ],
+      "about": {
+        "@id": "https://huggingface.co/datasets/LingoIITGN/MMT#dataset"
+      },
+      "keywords": [
+        "multilingual NLP",
+        "Indian social media dataset",
+        "Twitter dataset",
+        "code-mixing",
+        "code-switching",
+        "language identification",
+        "topic modeling",
+        "Hinglish",
+        "Hindi-English",
+        "Indian languages",
+        "MMT-LID"
+      ],
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "application/pdf",
+        "contentUrl": "https://aclanthology.org/2023.c3nlp-1.6.pdf"
+      },
+      "mainEntityOfPage": "https://aclanthology.org/2023.c3nlp-1.6/"
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://huggingface.co/datasets/LingoIITGN/MMT#dataset",
+      "name": "MMT: A Multilingual and Multi-Topic Indian Social Media Dataset",
+      "alternateName": "MMT",
+      "description": "MMT is the multilingual and multi-topic Indian social media dataset introduced at C3NLP 2023. The paper describes 1,755,145 tweets spanning 13 coarse-grained topics and 63 subtopics, with 47 language tags assigned automatically by Twitter. MMT-LID is the 5,346-tweet subset with human-annotated language labels, including code-mixed text such as Hindi-English (Hinglish). The work evaluates topic modeling and language identification. Public release files and samples differ from these paper-level collection sizes; see the linked dataset card for current access and terms.",
+      "url": "https://huggingface.co/datasets/LingoIITGN/MMT",
+      "creator": [
+        {
+          "@type": "Person",
+          "@id": "https://dwipddalal.github.io/#person",
+          "name": "Dwip Dalal",
+          "url": "https://dwipddalal.github.io/"
+        },
+        {
+          "@type": "Person",
+          "name": "Vivek Srivastava"
+        },
+        {
+          "@type": "Person",
+          "name": "Mayank Singh"
+        }
+      ],
+      "keywords": [
+        "multilingual NLP",
+        "Indian social media dataset",
+        "Twitter dataset",
+        "code-mixing",
+        "code-switching",
+        "language identification",
+        "topic modeling",
+        "Hinglish",
+        "Hindi-English",
+        "Indian languages",
+        "MMT-LID"
+      ],
+      "spatialCoverage": {
+        "@type": "Place",
+        "name": "India"
+      },
+      "citation": {
+        "@id": "https://doi.org/10.18653/v1/2023.c3nlp-1.6"
+      },
+      "subjectOf": [
+        {
+          "@id": "https://doi.org/10.18653/v1/2023.c3nlp-1.6"
+        },
+        {
+          "@type": "WebPage",
+          "name": "MMT sample repository and paper citation",
+          "url": "https://github.com/dwipddalal/MMT"
+        }
+      ],
+      "includedInDataCatalog": {
+        "@type": "DataCatalog",
+        "name": "Hugging Face Datasets",
+        "url": "https://huggingface.co/datasets"
+      },
+      "hasPart": {
+        "@type": "Dataset",
+        "name": "MMT-LID",
+        "description": "The human-annotated language identification subset of MMT described in the paper, containing 5,346 tweets.",
+        "citation": {
+          "@id": "https://doi.org/10.18653/v1/2023.c3nlp-1.6"
+        }
+      },
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "name": "MMT sample: 630 records",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://raw.githubusercontent.com/dwipddalal/MMT/main/MMT.json"
+        },
+        {
+          "@type": "DataDownload",
+          "name": "MMT-LID sample: 100 records",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://raw.githubusercontent.com/dwipddalal/MMT/main/MMT-LID.json"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 
 <body>
@@ -879,9 +1046,9 @@
 
 
 
-      <tr>
+      <tr id="mmt">
         <td style="padding:2.5%;width:40%;vertical-align:top;min-width:120px">
-          <img src="images/MMT.png" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+          <img src="images/MMT.png" alt="MMT: multilingual Indian social media examples across topics, with 1.7 million tweets, 13 topics, 63 subtopics, and 47 Twitter-assigned language tags" style="width:auto; height:auto; max-width:100%;" />
         </td>
         <td style="padding:2.5%;width:60%;vertical-align:top">
           <h3>MMT: A Multilingual and Multi-Topic Indian Social Media Dataset</h3>
@@ -890,8 +1057,8 @@
           <div style="height: 0.5em;"></div>
           <strong>EACL 2023 workshop - Cross-Cultural Considerations in NLP</strong>
           <br>
-          <a href="https://arxiv.org/pdf/2304.00634">Paper</a> |
-          <a href="https://huggingface.co/datasets/LingoIITGN/MMT">Code & Dataset</a>
+          <a href="https://aclanthology.org/2023.c3nlp-1.6.pdf" aria-label="MMT published paper, C3NLP 2023, searchable PDF">Paper</a> |
+          <a href="https://huggingface.co/datasets/LingoIITGN/MMT" aria-label="MMT multilingual Indian social media dataset on Hugging Face">Code & Dataset</a>
           <br>
 
         </td>
