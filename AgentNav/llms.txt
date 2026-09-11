@@ -15,7 +15,7 @@ Research topics: visual navigation, long-range city navigation, spatial reasonin
 - [Project page](https://dwipddalal.github.io/AgentNav/)
 - [Published paper](https://aclanthology.org/2026.eacl-long.387/)
 - [Preprint](https://arxiv.org/abs/2512.15933)
-- [Searchable PDF](https://dwipddalal.github.io/AgentNav/static/pdfs/AgentNav_EACL2026_web.pdf)
+- [Searchable PDF](https://dwipddalal.github.io/AgentNav/CityNav_EACL2026.pdf)
 - [BibTeX](https://dwipddalal.github.io/AgentNav/citation.bib)
 - [RIS](https://dwipddalal.github.io/AgentNav/citation.ris)
 - [Code](https://github.com/Utkarsh-Mishra444/Sparsely-Grounded-Long-Range-Navigation)

@@ -74,7 +74,7 @@ assert any(n.get('@type') == 'Dataset' and n.get('name') == 'CityNav' for n in p
 assert any(n.get('@type') == 'SoftwareSourceCode' and n.get('name') == 'AgentNav' for n in page.entities)
 
 pdf_url, = page.meta['citation_pdf_url']
-assert pdf_url.startswith(canonical), 'Scholar PDF must be in the page directory or below it.'
+assert pdf_url.rsplit('/', 1)[0] + '/' == canonical, 'Scholar PDF must share the abstract page directory.'
 pdf = root / urlparse(pdf_url).path.lstrip('/')
 assert pdf.suffix == '.pdf' and pdf.read_bytes().startswith(b'%PDF-')
 assert pdf.stat().st_size < 5_000_000, 'Google Scholar requires files below 5 MB.'
