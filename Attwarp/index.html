@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AttWarp | Constructive Distortion: Improving MLLMs with Attention-Guided Image Warping</title>
-  <meta name="description" content="AttWarp (ICLR 2026) warps images using an MLLM's own cross-modal attention, giving query-relevant regions more resolution without retraining. Paper, code, demos.">
-  <meta name="keywords" content="AttWarp, attention warping, constructive distortion, MLLM, multimodal LLM, visual reasoning, image warping, attention maps, vision-language model">
+  <title>AttWarp: Attention-Guided Image Warping for VLMs and MLLMs (ICLR 2026)</title>
+  <meta name="description" content="Training-free fix for VLMs that miss small details: AttWarp uses the model's own attention to warp the image, improving LLaVA, Qwen-VL and InternVL. ICLR 2026.">
+  <meta name="keywords" content="AttWarp, vision-language model, VLM, vision-language models, multimodal large language model, MLLM, large vision-language model, LVLM, attention-guided image warping, attention map, cross-modal attention, VLM attention, small object perception, fine-grained perception, small details, visual question answering, VQA, visual grounding, spatial reasoning, hallucination reduction, training-free, test-time, image warping, adaptive zoom, visual cropping, visual prompting, LLaVA, Qwen-VL, InternVL, InstructBLIP, TextVQA, GQA, DocVQA, POPE, MMMU, MMVP, BLINK, RealWorldQA, MIA-Bench, ICLR 2026">
   <link rel="canonical" href="https://dwipddalal.github.io/Attwarp/">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -29,18 +29,18 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
-  <meta property="og:title" content="AttWarp: Attention-Guided Image Warping for MLLMs (ICLR 2026)">
-  <meta property="og:description" content="AttWarp (ICLR 2026) warps images using an MLLM's own cross-modal attention, giving query-relevant regions more resolution without retraining. Paper, code, demos.">
+  <meta property="og:title" content="AttWarp: Attention-Guided Image Warping for VLMs and MLLMs (ICLR 2026)">
+  <meta property="og:description" content="Training-free fix for VLMs that miss small details: AttWarp uses the model's own attention to warp the image, improving LLaVA, Qwen-VL and InternVL. ICLR 2026.">
   <meta property="og:url" content="https://dwipddalal.github.io/Attwarp/">
   <meta property="og:image" content="https://dwipddalal.github.io/Attwarp/og-image.jpg">
-  <meta property="og:image:alt" content="An image before and after AttWarp's attention-guided warping">
+  <meta property="og:image:alt" content="An image before and after AttWarp's attention-guided warping for a vision-language model">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AttWarp: Attention-Guided Image Warping for MLLMs (ICLR 2026)">
-  <meta name="twitter:description" content="AttWarp (ICLR 2026) warps images using an MLLM's own cross-modal attention, giving query-relevant regions more resolution without retraining. Paper, code, demos.">
+  <meta name="twitter:title" content="AttWarp: Attention-Guided Image Warping for VLMs and MLLMs (ICLR 2026)">
+  <meta name="twitter:description" content="Training-free fix for VLMs that miss small details: AttWarp uses the model's own attention to warp the image, improving LLaVA, Qwen-VL and InternVL. ICLR 2026.">
   <meta name="twitter:image" content="https://dwipddalal.github.io/Attwarp/og-image.jpg">
 
   <!-- Structured Data -->
@@ -48,13 +48,16 @@
   {
     "@context": "https://schema.org",
     "@type": "ScholarlyArticle",
+    "@id": "https://dwipddalal.github.io/Attwarp/#article",
     "name": "Constructive Distortion: Improving MLLMs with Attention-Guided Image Warping",
     "headline": "Constructive Distortion: Improving MLLMs with Attention-Guided Image Warping",
     "alternateName": "AttWarp",
     "author": [
       {
         "@type": "Person",
+        "@id": "https://dwipddalal.github.io/#person",
         "name": "Dwip Dalal",
+        "url": "https://dwipddalal.github.io/",
         "affiliation": "University of Illinois Urbana-Champaign"
       },
       {
@@ -114,17 +117,71 @@
       "propertyID": "arXiv",
       "value": "2510.09741"
     },
+    "codeRepository": "https://github.com/dwipddalal/AttWarp",
     "image": "https://dwipddalal.github.io/Attwarp/og-image.jpg",
-    "description": "AttWarp (ICLR 2026) warps images using an MLLM's own cross-modal attention, giving query-relevant regions more resolution without retraining. Paper, code, demos.",
+    "description": "AttWarp is a training-free, test-time method that helps vision-language models (VLMs) and multimodal large language models (MLLMs) see small details and spatial relations in cluttered images. It uses the model's own cross-modal attention map to warp the input image, giving query-relevant regions more resolution while keeping the global context, with no change to model weights or architecture. Across nine benchmarks (TextVQA, GQA, DocVQA, POPE, MMMU, MIA-Bench, MMVP, RealWorldQA, BLINK) it improves LLaVA, Qwen-VL, InternVL and InstructBLIP, strengthens compositional reasoning, reduces hallucinations, and outperforms visual prompting baselines such as cropping (ViCrop), masking (FGVP), Set-of-Mark (SoM) and alpha blending (API).",
+    "abstract": "Multimodal large language models (MLLMs) often miss small details and spatial relations in cluttered scenes, leading to errors in fine-grained perceptual grounding. We introduce AttWarp, a lightweight method that allocates more resolution to query-relevant content while compressing less informative areas, all while preserving global context. At test time, AttWarp closes a simple self-correction loop: the MLLM first produces cross-modal attention on the original image, which we use to rectilinearly warp the input and re-run the same frozen model, reallocating resolution toward regions it deems important without changing weights or architecture. This attention-guided warping preserves all original image information but redistributes it non-uniformly, so small objects and subtle relationships become easier for the same model to read while the global layout remains intact. Across nine benchmarks (TextVQA, GQA, DocVQA, POPE, MMMU, MIA-Bench, MMVP, RealWorldQA, BLINK) and four MLLMs (LLaVA, Qwen-VL, InternVL, and InstructBLIP), AttWarp consistently improves accuracy, strengthens compositional reasoning, and reduces hallucinations, outperforming four competitive baselines that manipulate raw images at test time. Together, these results show that attention-guided warping prioritizes information relevant to the query while preserving context, and that the same MLLMs perform better when given such warped inputs.",
     "keywords": [
       "AttWarp",
-      "attention-guided image warping",
-      "multimodal large language models",
+      "vision-language model",
+      "VLM",
+      "vision-language models",
+      "multimodal large language model",
       "MLLM",
+      "large vision-language model",
+      "LVLM",
+      "attention-guided image warping",
+      "attention map",
+      "cross-modal attention",
+      "VLM attention",
+      "small object perception",
+      "fine-grained perception",
+      "small details",
       "visual question answering",
-      "test-time adaptation"
+      "VQA",
+      "visual grounding",
+      "spatial reasoning",
+      "hallucination reduction",
+      "training-free",
+      "test-time",
+      "image warping",
+      "adaptive zoom",
+      "visual cropping",
+      "visual prompting",
+      "LLaVA",
+      "Qwen-VL",
+      "InternVL",
+      "InstructBLIP",
+      "TextVQA",
+      "GQA",
+      "DocVQA",
+      "POPE",
+      "MMMU",
+      "MMVP",
+      "BLINK",
+      "RealWorldQA",
+      "MIA-Bench",
+      "ICLR 2026"
     ],
-    "abstract": "Multimodal large language models (MLLMs) often miss small details and spatial relations in cluttered scenes, leading to errors in fine-grained perceptual grounding. We introduce AttWarp, a lightweight method that allocates more resolution to query-relevant content while compressing less informative areas, all while preserving global context. At test time, AttWarp closes a simple self-correction loop: the MLLM first produces cross-modal attention on the original image, which we use to rectilinearly warp the input and re-run the same frozen model, reallocating resolution toward regions it deems important without changing weights or architecture. This attention-guided warping preserves all original image information but redistributes it non-uniformly, so small objects and subtle relationships become easier for the same model to read while the global layout remains intact. Across nine benchmarks (TextVQA, GQA, DocVQA, POPE, MMMU, MIA-Bench, MMVP, RealWorldQA, BLINK) and four MLLMs (LLaVA, Qwen-VL, InternVL, and InstructBLIP), AttWarp consistently improves accuracy, strengthens compositional reasoning, and reduces hallucinations, outperforming four competitive baselines that manipulate raw images at test time. Together, these results show that attention-guided warping prioritizes information relevant to the query while preserving context, and that the same MLLMs perform better when given such warped inputs."
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "Vision-language model",
+        "sameAs": "https://en.wikipedia.org/wiki/Vision-language_model"
+      },
+      {
+        "@type": "Thing",
+        "name": "Attention (machine learning)",
+        "sameAs": "https://en.wikipedia.org/wiki/Attention_(machine_learning)"
+      },
+      {
+        "@type": "Thing",
+        "name": "Image warping",
+        "sameAs": "https://en.wikipedia.org/wiki/Image_warping"
+      }
+    ],
+    "inLanguage": "en",
+    "isAccessibleForFree": true
   }
   </script>
   <style>
@@ -361,7 +418,7 @@
       <h3>Comparison with Other Methods</h3>
       <p class="block-caption">AttWarp (Warping) achieves superior spatial grounding compared to FGVP (Green Masking), SoM (Visual Grounding), API (Alpha Blending), and ViCrop (Cropping). Our method preserves global context while reallocating resolution to query-relevant regions.</p>
       <div class="comparison-image-wrapper">
-        <picture><source type="image/webp" srcset="comparison_baseline_display-800.webp 800w, comparison_baseline_display.webp 1223w" sizes="(max-width: 1000px) 100vw, 960px"><img src="comparison_baseline_display.png" alt="Comparison of AttWarp with baseline methods including FGVP, SoM, API, and ViCrop" width="1223" height="382" loading="lazy" decoding="async"></picture>
+        <picture><source type="image/webp" srcset="comparison_baseline_display-800.webp 800w, comparison_baseline_display.webp 1223w" sizes="(max-width: 1000px) 100vw, 960px"><img src="comparison_baseline_display.png" alt="Question: On the right desk, what is to the left of the laptop? With the AttWarp-warped image the vision-language model answers Lamp correctly; with FGVP, SoM, API and ViCrop inputs it answers Plant, Chair, Books and Printer" width="1223" height="382" loading="lazy" decoding="async"></picture>
       </div>
     </div>
 
@@ -370,7 +427,7 @@
       <h3>AttWarp vs Base MLLM</h3>
       <p class="block-caption">Examples showing how attention-guided warping helps MLLMs correctly answer visual questions. The warped grid visualization shows how AttWarp redistributes spatial resolution toward query-relevant regions, enabling accurate answers where base models fail.</p>
       <div class="comparison-image-wrapper">
-        <picture><source type="image/webp" srcset="results-800.webp 800w, results.webp 1534w" sizes="(max-width: 1000px) 100vw, 960px"><img src="results.png" alt="Examples of AttWarp improving MLLM responses compared to base models" width="1534" height="888" loading="lazy" decoding="async"></picture>
+        <picture><source type="image/webp" srcset="results-800.webp 800w, results.webp 1534w" sizes="(max-width: 1000px) 100vw, 960px"><img src="results.png" alt="Examples where the AttWarp-warped image lets a vision-language model (MLLM) answer visual questions correctly while the base model fails" width="1534" height="888" loading="lazy" decoding="async"></picture>
       </div>
     </div>
   </section>
