@@ -6,7 +6,22 @@
   <title>Constructive Distortion: Improving MLLMs with Attention‑Guided Image Warping</title>
   <meta name="description" content="Constructive Distortion: Improving Multimodal Large Language Models with Attention-Guided Image Warping. We use attention maps to warp images, improving MLLM performance on visual reasoning tasks.">
   <meta name="keywords" content="AttWarp, attention warping, constructive distortion, MLLM, multimodal LLM, visual reasoning, image warping, attention maps, vision-language model">
-  <meta name="author" content="Dwip Dalal, Utkarsh Mishra, Narendra Ahuja, Nebojsa Jojic">
+  <meta name="author" content="Dwip Dalal, Gautam Vashishtha, Utkarsh Mishra, Jeonghwan Kim, Madhav Kanda, Hyeonjeong Ha, Svetlana Lazebnik, Heng Ji, Unnat Jain">
+
+  <!-- Google Scholar (Highwire Press) citation tags -->
+  <meta name="citation_title" content="Constructive Distortion: Improving MLLMs with Attention-Guided Image Warping">
+  <meta name="citation_author" content="Dalal, Dwip">
+  <meta name="citation_author" content="Vashishtha, Gautam">
+  <meta name="citation_author" content="Mishra, Utkarsh">
+  <meta name="citation_author" content="Kim, Jeonghwan">
+  <meta name="citation_author" content="Kanda, Madhav">
+  <meta name="citation_author" content="Ha, Hyeonjeong">
+  <meta name="citation_author" content="Lazebnik, Svetlana">
+  <meta name="citation_author" content="Ji, Heng">
+  <meta name="citation_author" content="Jain, Unnat">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="International Conference on Learning Representations (ICLR)">
+  <meta name="citation_abstract_html_url" content="https://dwipddalal.github.io/Attwarp/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
@@ -32,13 +47,26 @@
     "headline": "Constructive Distortion: Improving MLLMs with Attention-Guided Image Warping",
     "author": [
       {"@type": "Person", "name": "Dwip Dalal", "affiliation": "University of Illinois Urbana-Champaign"},
+      {"@type": "Person", "name": "Gautam Vashishtha", "affiliation": "Skan AI"},
       {"@type": "Person", "name": "Utkarsh Mishra", "affiliation": "Texas A&M University"},
-      {"@type": "Person", "name": "Narendra Ahuja", "affiliation": "University of Illinois Urbana-Champaign"},
-      {"@type": "Person", "name": "Nebojsa Jojic", "affiliation": "Microsoft Research"}
+      {"@type": "Person", "name": "Jeonghwan Kim", "affiliation": "University of Illinois Urbana-Champaign"},
+      {"@type": "Person", "name": "Madhav Kanda", "affiliation": "University of Illinois Urbana-Champaign"},
+      {"@type": "Person", "name": "Hyeonjeong Ha", "affiliation": "University of Illinois Urbana-Champaign"},
+      {"@type": "Person", "name": "Svetlana Lazebnik", "affiliation": "University of Illinois Urbana-Champaign"},
+      {"@type": "Person", "name": "Heng Ji", "affiliation": "University of Illinois Urbana-Champaign"},
+      {"@type": "Person", "name": "Unnat Jain", "affiliation": "University of California, Irvine"}
     ],
+    "datePublished": "2026",
+    "isPartOf": {"@type": "PublicationEvent", "name": "International Conference on Learning Representations (ICLR 2026)"},
     "url": "https://dwipddalal.github.io/Attwarp/",
+    "sameAs": [
+      "https://arxiv.org/abs/2510.09741",
+      "https://openreview.net/forum?id=SRl0xy0UOj"
+    ],
+    "identifier": {"@type": "PropertyValue", "propertyID": "arXiv", "value": "2510.09741"},
     "image": "https://dwipddalal.github.io/images/attwarp.gif",
-    "description": "We use attention maps to warp images, improving MLLM performance on visual reasoning tasks."
+    "description": "We use attention maps to warp images, improving MLLM performance on visual reasoning tasks.",
+    "abstract": "Multimodal large language models (MLLMs) often miss small details and spatial relations in cluttered scenes, leading to errors in fine-grained perceptual grounding. We introduce AttWarp, a lightweight method that allocates more resolution to query-relevant content while compressing less informative areas, all while preserving global context. At test time, the approach uses an MLLM's cross-modal attention to perform rectilinear warping of the input image, reallocating spatial resolution toward regions the model deems important, without changing model weights or architecture. This attention-guided warping preserves all original image information but redistributes it non-uniformly, so small objects and subtle relationships become easier for the same model to read while the global layout remains intact. Across five benchmarks (TextVQA, GQA, DocVQA, POPE, MMMU) and four MLLMs (LLaVA, Qwen-VL, InternVL, and InstructBLIP), AttWarp consistently improves accuracy, strengthens compositional reasoning, and reduces hallucinations, outperforming four competitive baselines that manipulate raw images at test time. Together, these results show that attention-guided warping prioritizes information relevant to the query while preserving context, and that the same MLLMs perform better when given such warped inputs."
   }
   </script>
   <style>
@@ -205,7 +233,7 @@
 <body>
   <h1>Constructive Distortion: Improving MLLMs with Attention-Guided Image Warping</h1>
   <div class="authors">
-    <a href="https://dwipddalal.github.io/">Dwip Dalal</a>¹, <a href="https://scholar.google.com/citations?user=IV17RukAAAAJ&hl=en">Gautam Vashishtha², <a href="https://utkarsh-mishra444.github.io/">Utkarsh Mishra³, <a href="https://wjdghks950.github.io/">Jeonghwan Kim</a>¹, <br>
+    <a href="https://dwipddalal.github.io/">Dwip Dalal</a>¹, <a href="https://scholar.google.com/citations?user=IV17RukAAAAJ&hl=en">Gautam Vashishtha</a>², <a href="https://utkarsh-mishra444.github.io/">Utkarsh Mishra</a>³, <a href="https://wjdghks950.github.io/">Jeonghwan Kim</a>¹, <br>
     <a href="https://madhav-kanda.github.io/">Madhav Kanda</a>¹, <a href="https://hyeonjeongha.github.io/">Hyeonjeong Ha</a>¹, <a href="https://slazebni.cs.illinois.edu/">Svetlana Lazebnik</a>¹, <a href="https://blender.cs.illinois.edu/hengji.html">Heng Ji</a>¹, <a href="https://unnat.github.io/">Unnat Jain</a>⁴
   </div>
   <div class="affiliations">
@@ -226,6 +254,14 @@
     <!-- CHANGED: turn BibTeX into a modal-triggering button -->
     <button id="open-bibtex" class="btn" type="button" aria-haspopup="dialog" aria-controls="bibtex-modal">📚 BibTeX</button>
   </div>
+
+  <!-- ---------- ABSTRACT ---------- -->
+  <section class="abstract">
+    <h2>📝 Abstract</h2>
+    <p>
+      Multimodal large language models (MLLMs) often miss small details and spatial relations in cluttered scenes, leading to errors in fine-grained perceptual grounding. We introduce AttWarp, a lightweight method that allocates more resolution to query-relevant content while compressing less informative areas, all while preserving global context. At test time, the approach uses an MLLM's cross-modal attention to perform rectilinear warping of the input image, reallocating spatial resolution toward regions the model deems important, without changing model weights or architecture. This attention-guided warping preserves all original image information but redistributes it non-uniformly, so small objects and subtle relationships become easier for the same model to read while the global layout remains intact. Across five benchmarks (TextVQA, GQA, DocVQA, POPE, MMMU) and four MLLMs (LLaVA, Qwen-VL, InternVL, and InstructBLIP), AttWarp consistently improves accuracy, strengthens compositional reasoning, and reduces hallucinations, outperforming four competitive baselines that manipulate raw images at test time. Together, these results show that attention-guided warping prioritizes information relevant to the query while preserving context, and that the same MLLMs perform better when given such warped inputs.
+    </p>
+  </section>
 
   <!-- ---------- ANIMATION VIDEO ---------- -->
   <section class="animation-section" id="presentation">
@@ -252,13 +288,6 @@
       <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/201952896_n525029/output_runs/run_0/201952896_n525029_warp_anim.mp4" type="video/mp4"></source></video></div>
       <div class="video-item"><video autoplay muted playsinline preload="auto"><source src="videos_fixed/warp_anim4.mp4" type="video/mp4"></source></video></div>
     </div>
-  </section>
-
-  <!-- ---------- ABSTRACT ---------- -->
-  <section class="abstract">
-    <h2>📝 TLDR</h2>
-    <p>
-      MLLMs often miss small details and spatial relations in cluttered scenes, leading to errors in fine-grained perceptual grounding. We introduce AttWarp, a lightweight method that allocates more resolution to query-relevant content while compressing less informative areas, all while preserving global context. At test time, the approach uses an MLLM's cross-modal attention to perform rectilinear warping of the input image, reallocating spatial resolution toward regions the model deems important, without changing model weights or architecture. This attention-guided warping preserves all original image information but redistributes it non-uniformly, so small objects and subtle relationships become easier for the same model to read while the global layout remains intact. AttWarp consistently improves accuracy, strengthens compositional reasoning, and reduces hallucinations.
   </section>
 
   <!-- ---------- VISUAL COMPARISONS ---------- -->
